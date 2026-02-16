@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "song": {
+    "title": "Imported Song",
+    "author": "",
+    "copyright": "",
+    "ccli_number": "",
+    "notes": ""
+  },
+  "structure": {
+    "sections": [
+      {
+        "id": "lyrics",
+        "label": "Lyrics",
+        "type": "verse",
+        "slides": [
+          {
+            "lines": []
+          }
+        ]
+      }
+    ]
+  },
+  "chords": {
+    "enabled": false,
+    "sections": {}
+  }
+}
