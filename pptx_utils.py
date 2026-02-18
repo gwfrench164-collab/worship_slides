@@ -2,7 +2,7 @@ from copy import deepcopy
 from pptx import Presentation
 from pptx.enum.shapes import PP_PLACEHOLDER_TYPE
 from pptx.opc.constants import RELATIONSHIP_TYPE as RT
-
+from pptx.enum.text import PP_ALIGN
 
 def load_template(path):
     return Presentation(path)
@@ -13,6 +13,16 @@ def _get_layout_by_name(prs, name):
         if layout.name == name:
             return layout
     raise ValueError(f"Slide layout not found: {name}")
+
+def _force_alignment_like_template(p, template_alignment):
+    """
+    Some templates lose alignment after tf.clear(). If the template is left,
+    force left alignment explicitly.
+    """
+    if template_alignment == PP_ALIGN.LEFT:
+        p.alignment = PP_ALIGN.LEFT
+    else:
+        p.alignment = template_alignment
 
 
 # -------------------------
@@ -113,6 +123,37 @@ def remove_slide(prs, index: int):
     slides = list(slide_id_list)
     slide_id_list.remove(slides[index])
 
+def _get_best_font_source(paragraph):
+    """
+    Keynote exports often put the "real" formatting on the first run, not the paragraph.
+    Prefer first run font when available; fall back to paragraph font.
+    """
+    if paragraph.runs:
+        return paragraph.runs[0].font
+    return paragraph.font
+
+def _copy_font_style(dst_font, src_font):
+    """
+    Copy the key style attributes from src_font to dst_font, including theme colors.
+    """
+    dst_font.name = src_font.name
+    dst_font.size = src_font.size
+    dst_font.bold = src_font.bold
+    dst_font.italic = src_font.italic
+
+    # Color: preserve RGB or Theme when available
+    if src_font.color is not None:
+        try:
+            # RGB color
+            if src_font.color.type == 1 and src_font.color.rgb is not None:
+                dst_font.color.rgb = src_font.color.rgb
+            # Theme color
+            elif src_font.color.type == 2 and src_font.color.theme_color is not None:
+                dst_font.color.theme_color = src_font.color.theme_color
+        except Exception:
+            # If python-pptx can't apply it, don't crash
+            pass
+
 def _replace_token_text(slide, token: str, new_text: str) -> bool:
     """
     Replace token text while preserving formatting from the token paragraph.
@@ -135,16 +176,7 @@ def _replace_token_text(slide, token: str, new_text: str) -> bool:
         line_spacing = p0.line_spacing
 
         # Prefer paragraph font (Keynote exports often set formatting here)
-        pf = p0.font
-        font_name = pf.name
-        font_size = pf.size
-        font_bold = pf.bold
-        font_italic = pf.italic
-
-        # Color can be tricky (theme vs RGB). Only keep RGB if set.
-        font_color = None
-        if pf.color is not None and pf.color.type == 1:
-            font_color = pf.color.rgb
+        src_font = _get_best_font_source(p0)
 
         # --- Rewrite text ---
         lines = new_text.split("\n")
@@ -155,19 +187,14 @@ def _replace_token_text(slide, token: str, new_text: str) -> bool:
             p.text = line
 
             # paragraph formatting
-            p.alignment = alignment
+            _force_alignment_like_template(p, alignment)
             p.level = level
             p.space_before = space_before
             p.space_after = space_after
             p.line_spacing = line_spacing
 
             # paragraph font formatting
-            p.font.name = font_name
-            p.font.size = font_size
-            p.font.bold = font_bold
-            p.font.italic = font_italic
-            if font_color is not None:
-                p.font.color.rgb = font_color
+            _copy_font_style(p.font, src_font)
 
         return True
 
@@ -179,8 +206,8 @@ _BRACKET_ITALIC_RE = re.compile(r"\[(.+?)\]")
 
 def _replace_token_text_with_bracket_italics(slide, token: str, new_text: str) -> bool:
     """
-    Replace token text, preserving base formatting, but converting [bracketed] words
-    into italic runs (and removing the brackets).
+    Replace token text, preserving base formatting from the template,
+    converting [bracketed] words into italic runs (and removing the brackets).
     """
     for shape in slide.shapes:
         if not shape.has_text_frame:
@@ -198,15 +225,7 @@ def _replace_token_text_with_bracket_italics(slide, token: str, new_text: str) -
         space_after = p0.space_after
         line_spacing = p0.line_spacing
 
-        pf = p0.font
-        font_name = pf.name
-        font_size = pf.size
-        font_bold = pf.bold
-        font_italic = pf.italic  # base italic (usually False)
-
-        font_color = None
-        if pf.color is not None and pf.color.type == 1:
-            font_color = pf.color.rgb
+        src_font = _get_best_font_source(p0)
 
         # Rewrite text frame
         lines = new_text.split("\n")
@@ -216,7 +235,7 @@ def _replace_token_text_with_bracket_italics(slide, token: str, new_text: str) -
             p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
 
             # paragraph formatting
-            p.alignment = alignment
+            _force_alignment_like_template(p, alignment)
             p.level = level
             p.space_before = space_before
             p.space_after = space_after
@@ -225,44 +244,28 @@ def _replace_token_text_with_bracket_italics(slide, token: str, new_text: str) -
             # Build runs with italics for [bracketed] segments
             p.text = ""  # ensure empty
             pos = 0
+
             for m in _BRACKET_ITALIC_RE.finditer(line):
-                # normal text before bracket
                 before = line[pos:m.start()]
                 if before:
                     r = p.add_run()
                     r.text = before
-                    r.font.name = font_name
-                    r.font.size = font_size
-                    r.font.bold = font_bold
-                    r.font.italic = font_italic
-                    if font_color is not None:
-                        r.font.color.rgb = font_color
+                    _copy_font_style(r.font, src_font)
 
-                # italic segment (without brackets)
                 ital = m.group(1)
                 if ital:
                     r = p.add_run()
                     r.text = ital
-                    r.font.name = font_name
-                    r.font.size = font_size
-                    r.font.bold = font_bold
+                    _copy_font_style(r.font, src_font)
                     r.font.italic = True
-                    if font_color is not None:
-                        r.font.color.rgb = font_color
 
                 pos = m.end()
 
-            # remainder after last bracket
             after = line[pos:]
             if after:
                 r = p.add_run()
                 r.text = after
-                r.font.name = font_name
-                r.font.size = font_size
-                r.font.bold = font_bold
-                r.font.italic = font_italic
-                if font_color is not None:
-                    r.font.color.rgb = font_color
+                _copy_font_style(r.font, src_font)
 
         return True
 
@@ -272,7 +275,6 @@ def add_title_slide_from_template(prs, template_slide_index: int, title_text: st
     slide = duplicate_slide(prs, template_slide_index)
     if not _replace_token_text(slide, "{{TITLE}}", title_text):
         raise RuntimeError("Template title slide missing {{TITLE}} token.")
-
 
 def add_lyrics_slide_from_template(prs, template_slide_index: int, lines: list[str]):
     slide = duplicate_slide(prs, template_slide_index)
@@ -287,7 +289,6 @@ def _slide_text_contains(slide, token: str) -> bool:
         if token in shape.text:
             return True
     return False
-
 
 def find_template_slide_index(prs, required_tokens: list[str]) -> int:
     """
