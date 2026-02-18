@@ -184,3 +184,42 @@ def add_lyrics_slide_from_template(prs, template_slide_index: int, lines: list[s
     lyric_text = "\n".join(lines)
     if not _replace_token_text(slide, "{{LYRICS}}", lyric_text):
         raise RuntimeError("Template lyrics slide missing {{LYRICS}} token.")
+
+def _slide_text_contains(slide, token: str) -> bool:
+    for shape in slide.shapes:
+        if not shape.has_text_frame:
+            continue
+        if token in shape.text:
+            return True
+    return False
+
+
+def find_template_slide_index(prs, required_tokens: list[str]) -> int:
+    """
+    Return the index of the first slide that contains ALL required tokens.
+    """
+    for i, slide in enumerate(prs.slides):
+        if all(_slide_text_contains(slide, tok) for tok in required_tokens):
+            return i
+    raise RuntimeError(f"Template slide not found containing tokens: {required_tokens}")
+
+TOKEN_VERSE_REF = "{{VERSE REF}}"
+TOKEN_VERSE_TXT = "{{VERSE TXT}}"
+
+def add_scripture_slide_from_template(prs, template_slide_index: int, verse_ref: str, verse_lines: list[str]):
+    """
+    Duplicate the scripture template slide and replace {{VERSE REF}} and {{VERSE TXT}}.
+    """
+    slide = duplicate_slide(prs, template_slide_index)
+
+    verse_txt = "\n".join(verse_lines)
+
+    ok1 = _replace_token_text(slide, TOKEN_VERSE_REF, verse_ref)
+    ok2 = _replace_token_text(slide, TOKEN_VERSE_TXT, verse_txt)
+
+    if not ok1:
+        raise RuntimeError("Scripture template slide missing {{VERSE REF}} token.")
+    if not ok2:
+        raise RuntimeError("Scripture template slide missing {{VERSE TXT}} token.")
+
+    return slide

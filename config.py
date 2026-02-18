@@ -4,7 +4,7 @@ import json
 
 CONFIG_FILE = Path.home() / ".worship_slides_config.json"
 
-REQUIRED_FOLDERS = ["songs", "templates", "output", "SongPDFs", "setlists"]
+REQUIRED_FOLDERS = ["songs", "templates", "output", "SongPDFs", "notes_refs"]
 
 def _load_config():
     if not CONFIG_FILE.exists():
@@ -52,3 +52,28 @@ def ensure_data_root_structure(data_root: str | None) -> None:
 
     for name in REQUIRED_FOLDERS:
         (root / name).mkdir(parents=True, exist_ok=True)
+
+from pathlib import Path
+
+def load_bible_json_path():
+    data = _load_config()
+    return data.get("bible_json_path", "")
+
+def save_bible_json_path(path):
+    data = _load_config()
+    data["bible_json_path"] = str(path)
+    _save_config(data)
+
+def auto_find_kjv_json():
+    here = Path(__file__).resolve().parent
+    candidate = here / "kjv.json"
+    if candidate.exists():
+        return str(candidate)
+
+    data_root = load_data_root()
+    if data_root:
+        candidate2 = Path(data_root) / "kjv.json"
+        if candidate2.exists():
+            return str(candidate2)
+
+    return
