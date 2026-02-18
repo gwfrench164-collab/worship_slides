@@ -173,6 +173,101 @@ def _replace_token_text(slide, token: str, new_text: str) -> bool:
 
     return False
 
+import re
+
+_BRACKET_ITALIC_RE = re.compile(r"\[(.+?)\]")
+
+def _replace_token_text_with_bracket_italics(slide, token: str, new_text: str) -> bool:
+    """
+    Replace token text, preserving base formatting, but converting [bracketed] words
+    into italic runs (and removing the brackets).
+    """
+    for shape in slide.shapes:
+        if not shape.has_text_frame:
+            continue
+
+        tf = shape.text_frame
+        if token not in tf.text:
+            continue
+
+        # Capture formatting from existing first paragraph
+        p0 = tf.paragraphs[0]
+        alignment = p0.alignment
+        level = p0.level
+        space_before = p0.space_before
+        space_after = p0.space_after
+        line_spacing = p0.line_spacing
+
+        pf = p0.font
+        font_name = pf.name
+        font_size = pf.size
+        font_bold = pf.bold
+        font_italic = pf.italic  # base italic (usually False)
+
+        font_color = None
+        if pf.color is not None and pf.color.type == 1:
+            font_color = pf.color.rgb
+
+        # Rewrite text frame
+        lines = new_text.split("\n")
+        tf.clear()
+
+        for i, line in enumerate(lines):
+            p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+
+            # paragraph formatting
+            p.alignment = alignment
+            p.level = level
+            p.space_before = space_before
+            p.space_after = space_after
+            p.line_spacing = line_spacing
+
+            # Build runs with italics for [bracketed] segments
+            p.text = ""  # ensure empty
+            pos = 0
+            for m in _BRACKET_ITALIC_RE.finditer(line):
+                # normal text before bracket
+                before = line[pos:m.start()]
+                if before:
+                    r = p.add_run()
+                    r.text = before
+                    r.font.name = font_name
+                    r.font.size = font_size
+                    r.font.bold = font_bold
+                    r.font.italic = font_italic
+                    if font_color is not None:
+                        r.font.color.rgb = font_color
+
+                # italic segment (without brackets)
+                ital = m.group(1)
+                if ital:
+                    r = p.add_run()
+                    r.text = ital
+                    r.font.name = font_name
+                    r.font.size = font_size
+                    r.font.bold = font_bold
+                    r.font.italic = True
+                    if font_color is not None:
+                        r.font.color.rgb = font_color
+
+                pos = m.end()
+
+            # remainder after last bracket
+            after = line[pos:]
+            if after:
+                r = p.add_run()
+                r.text = after
+                r.font.name = font_name
+                r.font.size = font_size
+                r.font.bold = font_bold
+                r.font.italic = font_italic
+                if font_color is not None:
+                    r.font.color.rgb = font_color
+
+        return True
+
+    return False
+
 def add_title_slide_from_template(prs, template_slide_index: int, title_text: str):
     slide = duplicate_slide(prs, template_slide_index)
     if not _replace_token_text(slide, "{{TITLE}}", title_text):
