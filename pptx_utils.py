@@ -310,7 +310,7 @@ def add_scripture_slide_from_template(prs, template_slide_index: int, verse_ref:
     verse_txt = "\n".join(verse_lines)
 
     ok1 = _replace_token_text(slide, TOKEN_VERSE_REF, verse_ref)
-    ok2 = _replace_token_text(slide, TOKEN_VERSE_TXT, verse_txt)
+    ok2 = _replace_token_text_with_bracket_italics(slide, TOKEN_VERSE_TXT, verse_txt)
 
     if not ok1:
         raise RuntimeError("Scripture template slide missing {{VERSE REF}} token.")

@@ -9,11 +9,33 @@ from pptx_utils import (
     TOKEN_VERSE_TXT,
 )
 
+import re
+
+_NBSP = "\u00A0"
+_BRACKET_SPAN_RE = re.compile(r"\[(.+?)\]")
+
+def protect_bracket_spans_for_wrapping(text: str) -> str:
+    """
+    Prevent wrapping from splitting inside [bracketed spans] by converting
+    spaces inside the brackets into NBSP (non-breaking spaces).
+    """
+    def repl(m: re.Match) -> str:
+        inner = m.group(1)
+        # normalize inner spacing, then make inner spaces non-breaking
+        inner = " ".join(inner.split())
+        inner = inner.replace(" ", _NBSP)
+        return f"[{inner}]"
+
+    return _BRACKET_SPAN_RE.sub(repl, text)
 
 def wrap_verse(text: str, width: int = 55) -> list[str]:
     text = " ".join(text.split())
     if not text:
         return []
+
+    # ✅ protect bracketed italics spans so they don't split across slides
+    text = protect_bracket_spans_for_wrapping(text)
+
     return textwrap.wrap(text, width=width)
 
 
@@ -43,6 +65,9 @@ def build_verse_deck(template_path: Path,
             continue
 
         for chunk in chunks(wrapped, max_lines_per_slide):
+            # restore normal spaces (undo NBSP protection)
+            chunk = [line.replace("\u00A0", " ") for line in chunk]
+
             add_scripture_slide_from_template(prs, tpl_idx, ref, chunk)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
