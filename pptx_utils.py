@@ -224,39 +224,77 @@ def add_title_slide_from_template(prs, template_slide_index: int, title_text: st
 
 from pptx.util import Pt
 
-def add_lyrics_slide_from_template(prs, template_slide_index: int, lines: list[str], hanging_indent_pt: float = 0.0):
+def add_lyrics_slide_from_template(
+    prs,
+    template_slide_index: int,
+    lines,
+    lyric_gap_pt: float = 0.0,
+    hanging_indent_pt: float = 0.0,
+):
+    """Create a lyrics slide from template.
+
+    Backward compatible:
+      - If `lines` is list[str], we join with '\n' like before.
+      - If `lines` is list[dict], each dict may contain:
+          {"text": str, "space_before_pt": float (optional)}
+        This allows visual separation via paragraph spacing without consuming a blank display line.
+    """
     slide = duplicate_slide(prs, template_slide_index)
-    lyric_text = "\n".join(lines)
+
+    # Normalize input into (text_lines, meta)
+    text_lines = []
+    meta = []
+    if lines and isinstance(lines[0], dict):
+        for d in lines:
+            t = str(d.get("text", "")).rstrip()
+            text_lines.append(t)
+            meta.append({"space_before_pt": float(d.get("space_before_pt", 0.0) or 0.0)})
+    else:
+        for t in (lines or []):
+            text_lines.append(str(t).rstrip())
+        meta = [{"space_before_pt": 0.0} for _ in text_lines]
+
+    lyric_text = "\n".join(text_lines)
 
     # Replace token
     if not _replace_token_text(slide, TOKEN_LYRICS, lyric_text):
         raise RuntimeError("Template lyrics slide missing {{LYRICS}} token.")
 
-    # Apply a subtle hanging indent so wrapped continuation lines tuck in slightly.
-    # This preserves lyric-line identity (each lyric line is its own paragraph),
-    # while making wrapped lines easier to read.
-    if hanging_indent_pt and hanging_indent_pt > 0:
-        shape = None
-        for sh in slide.shapes:
-            if getattr(sh, "has_text_frame", False):
-                try:
-                    if TOKEN_LYRICS in sh.text:
-                        shape = sh
-                        break
-                except Exception:
-                    pass
-        # NOTE: after replacement, the token text is gone, so the above might fail.
-        # Instead, find the first large text frame on the slide and indent it.
-        if shape is None:
-            for sh in slide.shapes:
-                if getattr(sh, "has_text_frame", False) and sh.text_frame.text.strip():
+    # Find the lyrics textbox after replacement
+    shape = None
+    first_nonempty = next((t for t in text_lines if t.strip()), "")
+    for sh in slide.shapes:
+        if getattr(sh, "has_text_frame", False):
+            try:
+                if first_nonempty and first_nonempty in sh.text:
                     shape = sh
                     break
+            except Exception:
+                pass
+    if shape is None:
+        for sh in slide.shapes:
+            if getattr(sh, "has_text_frame", False) and sh.text_frame.text.strip():
+                shape = sh
+                break
 
-        if shape is not None:
-            tf = shape.text_frame
+    if shape is not None:
+        tf = shape.text_frame
+
+        # Paragraph spacing (preferred: keeps separation without 'blank line' paragraphs)
+        for i, p in enumerate(tf.paragraphs):
+            if i == 0:
+                continue
+            sb = 0.0
+            if i < len(meta):
+                sb = float(meta[i].get("space_before_pt", 0.0) or 0.0)
+            if sb <= 0.0:
+                sb = float(lyric_gap_pt or 0.0)
+            if sb > 0.0:
+                p.space_before = Pt(sb)
+
+        # Optional hanging indent for wrapped continuation lines
+        if hanging_indent_pt and hanging_indent_pt > 0:
             for p in tf.paragraphs:
-                # Hanging indent: first line left, wrapped continuation indented
                 p.left_indent = Pt(hanging_indent_pt)
                 p.first_line_indent = Pt(-hanging_indent_pt)
 

@@ -1,6 +1,9 @@
 import json
-import math
 from pathlib import Path
+from dataclasses import dataclass
+import math
+
+from PIL import ImageFont
 
 from pptx_utils import (
     load_template,
@@ -14,11 +17,14 @@ from pptx_utils import (
 
 EMU_PER_INCH = 914400
 PT_PER_INCH = 72
-
+DEFAULT_FONT_SIZE_PT = 60.0
 
 def _emu_to_pt(emu: int) -> float:
     return (emu / EMU_PER_INCH) * PT_PER_INCH
 
+def _pt_to_px(pt: float, dpi: float = 96.0) -> float:
+    # 1pt = 1/72 inch
+    return (pt / 72.0) * dpi
 
 def _find_token_shape(slide, token: str):
     for shape in slide.shapes:
@@ -31,15 +37,11 @@ def _find_token_shape(slide, token: str):
             continue
     return None
 
-
 def _best_font_size_pts_from_shape(shape) -> float:
-    """
-    Keynote/PowerPoint exports often put the real font size on run[0].
-    """
     try:
         tf = shape.text_frame
         if not tf.paragraphs:
-            return 60.0
+            return DEFAULT_FONT_SIZE_PT
         p0 = tf.paragraphs[0]
         if p0.runs and p0.runs[0].font.size:
             return float(p0.runs[0].font.size.pt)
@@ -47,20 +49,29 @@ def _best_font_size_pts_from_shape(shape) -> float:
             return float(p0.font.size.pt)
     except Exception:
         pass
-    return 60.0
+    return DEFAULT_FONT_SIZE_PT
 
+def _best_font_name_from_shape(shape) -> str:
+    # Try run font name -> paragraph font name -> fall back
+    try:
+        tf = shape.text_frame
+        if tf.paragraphs:
+            p0 = tf.paragraphs[0]
+            if p0.runs and p0.runs[0].font.name:
+                return str(p0.runs[0].font.name)
+            if p0.font and p0.font.name:
+                return str(p0.font.name)
+    except Exception:
+        pass
+    return "DejaVu Sans"
 
 def _line_spacing_factor_from_shape(shape, font_size_pts: float) -> float:
-    """
-    Try to infer line spacing multiplier from the template paragraph.
-    """
     try:
         p0 = shape.text_frame.paragraphs[0]
         ls = p0.line_spacing
         if ls is None:
             return 1.10
         if isinstance(ls, (float, int)):
-            # if it's points, convert to multiplier
             if ls > 3:
                 return float(ls) / max(font_size_pts, 1.0)
             return float(ls)
@@ -70,130 +81,249 @@ def _line_spacing_factor_from_shape(shape, font_size_pts: float) -> float:
         pass
     return 1.10
 
+def _text_frame_margins_pt(shape) -> tuple[float, float, float, float]:
+    # left, right, top, bottom in points
+    try:
+        tf = shape.text_frame
+        ml = _emu_to_pt(int(getattr(tf, "margin_left", 0) or 0))
+        mr = _emu_to_pt(int(getattr(tf, "margin_right", 0) or 0))
+        mt = _emu_to_pt(int(getattr(tf, "margin_top", 0) or 0))
+        mb = _emu_to_pt(int(getattr(tf, "margin_bottom", 0) or 0))
+        return ml, mr, mt, mb
+    except Exception:
+        return 0.0, 0.0, 0.0, 0.0
 
-def _compute_template_capacity(prs, lyrics_tpl_idx: int):
-    """
-    Returns:
-      chars_per_line_est (int),
-      max_visual_lines_in_box (int)
+@dataclass(frozen=True)
+class FitSpec:
+    width_pt: float
+    height_pt: float
+    font_size_pt: float
+    font_name: str
+    line_height_pt: float
+    lyric_gap_pt: float
+    # safety margins (empirically helps match PowerPoint wrapping)
+    width_safety: float = 0.97
+    height_safety: float = 0.98
 
-    This adapts automatically if user changes font size or the textbox size in the template.
-    """
+class _PillowMeasurer:
+    def __init__(self, font_name: str, font_size_pt: float, dpi: float = 96.0):
+        self.dpi = dpi
+        self.font_size_px = max(1, int(round(_pt_to_px(font_size_pt, dpi))))
+        self.font = self._load_font(font_name, self.font_size_px)
+
+    @staticmethod
+    def _load_font(font_name: str, size_px: int):
+        # Best effort: try name directly, else fall back to DejaVuSans which is commonly present
+        # (Exact PowerPoint font matching would require shipping/pointing to the .ttf file.)
+        try:
+            return ImageFont.truetype(font_name, size_px)
+        except Exception:
+            pass
+        try:
+            return ImageFont.truetype("DejaVuSans.ttf", size_px)
+        except Exception:
+            return ImageFont.load_default()
+
+    def text_width_px(self, s: str) -> float:
+        s = s or ""
+        try:
+            # Pillow >= 8
+            return float(self.font.getlength(s))
+        except Exception:
+            try:
+                bbox = self.font.getbbox(s)
+                return float(bbox[2] - bbox[0])
+            except Exception:
+                return float(len(s) * self.font_size_px * 0.55)
+
+def _wrap_line_by_width(line: str, meas: _PillowMeasurer, max_width_px: float) -> list[str]:
+    line = (line or "").strip()
+    if not line:
+        return []
+
+    words = line.split()
+    out: list[str] = []
+    cur = ""
+
+    for w in words:
+        candidate = w if not cur else f"{cur} {w}"
+        if meas.text_width_px(candidate) <= max_width_px:
+            cur = candidate
+            continue
+
+        if cur:
+            out.append(cur)
+            cur = w
+        else:
+            # single word longer than width; hard-split characters
+            chunk = ""
+            for ch in w:
+                cand2 = chunk + ch
+                if meas.text_width_px(cand2) <= max_width_px or not chunk:
+                    chunk = cand2
+                else:
+                    out.append(chunk)
+                    chunk = ch
+            if chunk:
+                cur = chunk
+
+    if cur:
+        out.append(cur)
+
+    # De-orphan last line if it's just 1 short word and can be balanced
+    if len(out) >= 2:
+        last_words = out[-1].split()
+        if len(last_words) == 1 and len(last_words[0]) <= 4:
+            prev_words = out[-2].split()
+            if len(prev_words) >= 3:
+                # try moving 1 word from prev to last
+                moved = prev_words[-1]
+                new_prev = " ".join(prev_words[:-1])
+                new_last = f"{moved} {out[-1]}"
+                if meas.text_width_px(new_prev) <= max_width_px and meas.text_width_px(new_last) <= max_width_px:
+                    out[-2] = new_prev
+                    out[-1] = new_last
+
+    return out
+
+def _compute_fit_spec(prs, lyrics_tpl_idx: int, preset: str = "normal") -> FitSpec:
     slide = prs.slides[lyrics_tpl_idx]
     shape = _find_token_shape(slide, TOKEN_LYRICS)
     if shape is None:
-        # safe fallbacks
-        return 34, 6
+        # fallback
+        font_size_pt = DEFAULT_FONT_SIZE_PT
+        line_height_pt = font_size_pt * 1.10
+        return FitSpec(width_pt=600, height_pt=300, font_size_pt=font_size_pt, font_name="DejaVu Sans",
+                       line_height_pt=line_height_pt, lyric_gap_pt=font_size_pt * 0.35)
 
-    width_pts = _emu_to_pt(int(shape.width))
-    height_pts = _emu_to_pt(int(shape.height))
+    width_pt = _emu_to_pt(int(shape.width))
+    height_pt = _emu_to_pt(int(shape.height))
 
-    font_size_pts = _best_font_size_pts_from_shape(shape)
-    line_factor = _line_spacing_factor_from_shape(shape, font_size_pts)
+    ml, mr, mt, mb = _text_frame_margins_pt(shape)
+    width_pt = max(10.0, width_pt - (ml + mr))
+    height_pt = max(10.0, height_pt - (mt + mb))
 
-    # Heuristic character width in points (works well for big worship fonts)
-    avg_char_w = font_size_pts * 0.43
-    chars_per_line = max(10, int(width_pts / max(avg_char_w, 1.0)))
+    font_size_pt = _best_font_size_pts_from_shape(shape)
+    font_name = _best_font_name_from_shape(shape)
+    line_factor = _line_spacing_factor_from_shape(shape, font_size_pt)
 
-    # Visual lines the box can hold
-    line_height_pts = font_size_pts * line_factor
-    max_visual_lines = max(1, int(height_pts / max(line_height_pts, 1.0)))
+    preset = (preset or "normal").lower().strip()
+    if preset == "tight":
+        line_factor = max(line_factor, 1.05)
+        lyric_gap_pt = font_size_pt * 0.25
+        width_safety = 0.965
+        height_safety = 0.975
+    elif preset == "loose":
+        lyric_gap_pt = font_size_pt * 0.40
+        width_safety = 0.98
+        height_safety = 0.985
+    else:
+        lyric_gap_pt = font_size_pt * 0.33
+        width_safety = 0.97
+        height_safety = 0.98
 
-    # Guardrails (prevents extreme weirdness)
-    chars_per_line = max(16, min(chars_per_line, 90))
-    max_visual_lines = max(3, min(max_visual_lines, 10))
+    line_height_pt = max(font_size_pt * line_factor, font_size_pt * 1.05)
 
-    # Safety margin so we don't hit the very bottom
-    max_visual_lines = max(1, int(max_visual_lines * 0.90))
+    return FitSpec(
+        width_pt=width_pt,
+        height_pt=height_pt,
+        font_size_pt=font_size_pt,
+        font_name=font_name,
+        line_height_pt=line_height_pt,
+        lyric_gap_pt=lyric_gap_pt,
+        width_safety=width_safety,
+        height_safety=height_safety,
+    )
 
-    return chars_per_line, max_visual_lines
+def _wrap_lyrics(lyric_lines: list[str], fit: FitSpec) -> list[list[dict]]:
+    # Returns list of blocks; each block is a lyric line wrapped into display lines with metadata
+    meas = _PillowMeasurer(fit.font_name, fit.font_size_pt)
+    max_width_px = _pt_to_px(fit.width_pt * fit.width_safety, meas.dpi)
 
-
-def _estimate_visual_lines_for_lyric_line(text: str, chars_per_line: int) -> int:
-    """
-    Rough estimate of how many wrapped *visual* lines a single lyric line will occupy.
-    We do NOT actually wrap here; PowerPoint will wrap naturally.
-    This is just to avoid overcrowding.
-    """
-    t = " ".join((text or "").split())
-    if not t:
-        return 0
-    # +0.15 accounts for punctuation/spacing differences vs pure length
-    return max(1, math.ceil((len(t) * 1.15) / max(chars_per_line, 1)))
-
-
-def _pack_lyric_lines_adaptive(raw_lines: list[str],
-                              chars_per_line: int,
-                              max_visual_lines: int,
-                              max_lyric_lines_cap: int | None = None) -> list[list[str]]:
-    """
-    Groups ORIGINAL lyric lines into slide-sized chunks based on estimated visual lines.
-    Keeps lyric-line identity intact (each original line remains its own paragraph).
-    """
-    slides: list[list[str]] = []
-    cur: list[str] = []
-    cur_visual = 0
-
-    for line in raw_lines:
-        line = (line or "").rstrip()
-        if not line.strip():
+    blocks: list[list[dict]] = []
+    for lyric in lyric_lines:
+        wrapped = _wrap_line_by_width(lyric, meas, max_width_px)
+        if not wrapped:
             continue
+        block: list[dict] = []
+        for i, t in enumerate(wrapped):
+            block.append({"text": t, "is_lyric_start": i == 0})
+        blocks.append(block)
+    return blocks
 
-        need = _estimate_visual_lines_for_lyric_line(line, chars_per_line)
+def _pack_blocks_into_slides(blocks: list[list[dict]], fit: FitSpec) -> list[list[dict]]:
+    max_height_pt = fit.height_pt * fit.height_safety
+    line_h = fit.line_height_pt
+    gap = fit.lyric_gap_pt
 
-        # If empty slide, always take at least one line (even if it "overflows" estimate)
-        if not cur:
-            cur = [line]
-            cur_visual = need
-            continue
+    slides: list[list[dict]] = []
+    cur: list[dict] = []
+    used_h = 0.0
+    at_top = True
 
-        # Would adding this line overflow capacity?
-        too_many_visual = (cur_visual + need) > max_visual_lines
-        too_many_lyric = (max_lyric_lines_cap is not None and (len(cur) + 1) > max_lyric_lines_cap)
-
-        if too_many_visual or too_many_lyric:
+    def flush():
+        nonlocal cur, used_h, at_top
+        if cur:
             slides.append(cur)
-            cur = [line]
-            cur_visual = need
-        else:
-            cur.append(line)
-            cur_visual += need
+        cur = []
+        used_h = 0.0
+        at_top = True
+
+    for block in blocks:
+        block_lines = block
+        block_h = len(block_lines) * line_h
+        add_gap = (0.0 if at_top else gap)
+
+        if (used_h + add_gap + block_h) <= max_height_pt:
+            if not at_top and gap > 0:
+                # mark first line of the block as needing spacing (pptx_utils will translate to paragraph.space_before)
+                block_lines = [dict(block_lines[0], space_before_pt=gap)] + block_lines[1:]
+            cur.extend(block_lines)
+            used_h += add_gap + block_h
+            at_top = False
+            continue
+
+        # doesn't fit as a whole
+        if not at_top:
+            flush()
+            # retry on empty slide
+            add_gap = 0.0
+
+        # if block still too tall for an empty slide, split by lines
+        i = 0
+        while i < len(block):
+            remaining = len(block) - i
+            # capacity lines on empty slide
+            cap = int(max(1, math.floor(max_height_pt / line_h)))
+            chunk = block[i:i + cap]
+            # On continuation chunks (i>0), do NOT treat as new lyric start spacing at top
+            if i == 0:
+                # no space_before at very top
+                pass
+            else:
+                # ensure no lyric-start spacing on first line of continuation
+                chunk = [dict(chunk[0], is_lyric_start=False)] + chunk[1:]
+            slides.append(chunk)
+            i += cap
+
+        # after splitting, start fresh
+        cur = []
+        used_h = 0.0
+        at_top = True
 
     if cur:
         slides.append(cur)
 
-    # Optional tiny polish: avoid last slide with only 1 line if we can steal from previous
-    if len(slides) >= 2 and len(slides[-1]) == 1 and len(slides[-2]) >= 3:
-        # move one line from end of previous to start of last
-        moved = slides[-2].pop()
-        slides[-1].insert(0, moved)
-
     return slides
 
-
 class SlideBuilder:
-    def __init__(self, template_path: Path, max_lines: int | None = None, hanging_indent_pt: float = 10.0):
-        """
-        Token-only templates.
-
-        max_lines:
-          - If None: fully adaptive (recommended).
-          - If set (e.g., 3): acts as a HARD CAP on lyric lines per slide.
-            Useful if someone wants a consistent look.
-
-        hanging_indent_pt:
-          subtle indent for wrapped continuation lines (PowerPoint does the wrap).
-        """
+    def __init__(self, template_path: Path, song_fit_preset: str = "normal"):
         self.template_path = template_path
-        self.max_lines = None if max_lines is None else max(1, int(max_lines))
-        self.hanging_indent_pt = float(hanging_indent_pt)
+        self.song_fit_preset = song_fit_preset
 
     def _section_lines(self, section: dict) -> list[str]:
-        # New format
         if isinstance(section.get("lines"), list):
             return [str(x).rstrip() for x in section.get("lines", []) if str(x).strip()]
-
-        # Legacy format
         out: list[str] = []
         for s in section.get("slides", []):
             for line in s.get("lines", []):
@@ -208,7 +338,7 @@ class SlideBuilder:
         title_tpl_idx = find_template_slide_index(prs, [TOKEN_TITLE])
         lyrics_tpl_idx = find_template_slide_index(prs, [TOKEN_LYRICS])
 
-        chars_per_line, max_visual_lines = _compute_template_capacity(prs, lyrics_tpl_idx)
+        fit = _compute_fit_spec(prs, lyrics_tpl_idx, preset=self.song_fit_preset)
 
         for song_file in song_files:
             with open(song_file, "r", encoding="utf-8") as f:
@@ -222,24 +352,21 @@ class SlideBuilder:
                 if not raw_lines:
                     continue
 
-                slide_chunks = _pack_lyric_lines_adaptive(
-                    raw_lines=raw_lines,
-                    chars_per_line=chars_per_line,
-                    max_visual_lines=max_visual_lines,
-                    max_lyric_lines_cap=self.max_lines,  # None = adaptive-only
-                )
+                blocks = _wrap_lyrics(raw_lines, fit)
+                slide_bodies = _pack_blocks_into_slides(blocks, fit)
 
-                for chunk in slide_chunks:
+                for body in slide_bodies:
+                    # pptx_utils handles spacing using space_before_pt metadata
                     add_lyrics_slide_from_template(
                         prs,
                         lyrics_tpl_idx,
-                        chunk,
-                        hanging_indent_pt=self.hanging_indent_pt,
+                        body,
+                        lyric_gap_pt=fit.lyric_gap_pt,
+                        hanging_indent_pt=0.0,
                     )
 
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # Remove the original template slides (remove higher index first)
         for idx in sorted({title_tpl_idx, lyrics_tpl_idx}, reverse=True):
             remove_slide(prs, idx)
 
