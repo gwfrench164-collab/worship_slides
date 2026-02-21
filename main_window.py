@@ -222,8 +222,7 @@ class MainWindow(tk.Tk):
                 Path(template_file),
                 refs_and_texts,
                 Path(output_file),
-                max_lines_per_slide=max_lines,
-                wrap_width=55
+                fit_preset="loose",  # or "normal" / "loose"
             )
 
             messagebox.showinfo("Done", f"Created:\n{Path(output_file).name}")

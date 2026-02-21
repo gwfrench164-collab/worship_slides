@@ -16,14 +16,13 @@ def _get_layout_by_name(prs, name):
 
 def _force_alignment_like_template(p, template_alignment):
     """
-    Some templates lose alignment after tf.clear(). If the template is left,
-    force left alignment explicitly.
+    If alignment is None (inherit/default), force LEFT.
+    Otherwise follow the template.
     """
-    if template_alignment == PP_ALIGN.LEFT:
+    if template_alignment is None or template_alignment == PP_ALIGN.LEFT:
         p.alignment = PP_ALIGN.LEFT
     else:
         p.alignment = template_alignment
-
 
 # -------------------------
 # Layout/placeholder approach (PowerPoint-authored templates)
@@ -302,13 +301,13 @@ def find_template_slide_index(prs, required_tokens: list[str]) -> int:
 TOKEN_VERSE_REF = "{{VERSE REF}}"
 TOKEN_VERSE_TXT = "{{VERSE TXT}}"
 
-def add_scripture_slide_from_template(prs, template_slide_index: int, verse_ref: str, verse_lines: list[str]):
+def add_scripture_slide_from_template(prs, template_slide_index: int, verse_ref: str, verse_text: str):
     """
     Duplicate the scripture template slide and replace {{VERSE REF}} and {{VERSE TXT}}.
     """
     slide = duplicate_slide(prs, template_slide_index)
 
-    verse_txt = "\n".join(verse_lines)
+    verse_txt = verse_text
 
     ok1 = _replace_token_text(slide, TOKEN_VERSE_REF, verse_ref)
     ok2 = _replace_token_text_with_bracket_italics(slide, TOKEN_VERSE_TXT, verse_txt)
