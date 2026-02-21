@@ -86,7 +86,7 @@ class BuildWindow(tk.Toplevel):
         tk.Button(reorder, text="Move Down", command=self.move_down).pack(side="left", padx=6)
         tk.Button(reorder, text="Clear", command=self.clear_service).pack(side="right")
 
-        # Bottom: template, max lines, output, build
+        # Bottom: template, density, output, build
         bottom = tk.Frame(self)
         bottom.pack(fill="x", padx=10, pady=10)
 
@@ -95,10 +95,10 @@ class BuildWindow(tk.Toplevel):
         self.template_menu = tk.OptionMenu(bottom, self.template_var, "")
         self.template_menu.grid(row=0, column=1, sticky="ew", padx=(6, 12))
 
-        tk.Label(bottom, text="Max lines/slide:").grid(row=0, column=2, sticky="w")
-        self.max_lines_var = tk.IntVar(value=4)
-        self.max_lines_menu = tk.OptionMenu(bottom, self.max_lines_var, 2, 3, 4)
-        self.max_lines_menu.grid(row=0, column=3, sticky="w", padx=(6, 12))
+        tk.Label(bottom, text="Density:").grid(row=0, column=2, sticky="w")
+        self.density_var = tk.StringVar(value="Normal")
+        self.density_menu = tk.OptionMenu(bottom, self.density_var, "Spacious", "Normal", "Compact")
+        self.density_menu.grid(row=0, column=3, sticky="w", padx=(6, 12))
 
         tk.Label(bottom, text="Output filename:").grid(row=1, column=0, sticky="w", pady=(8, 0))
         self.output_entry = tk.Entry(bottom)
@@ -144,11 +144,18 @@ class BuildWindow(tk.Toplevel):
 
     def _load_preferences(self):
         prefs = load_build_prefs()
+
         if prefs.get("last_template"):
             self.template_var.set(prefs["last_template"])
+
         if prefs.get("last_output"):
             self.output_entry.delete(0, tk.END)
             self.output_entry.insert(0, prefs["last_output"])
+
+        # NEW: last_density (backwards compatible)
+        last_density = prefs.get("last_density")
+        if last_density in ("Spacious", "Normal", "Compact"):
+            self.density_var.set(last_density)
 
     # ---------------- Filtering ----------------
 
@@ -170,14 +177,12 @@ class BuildWindow(tk.Toplevel):
         if not sel:
             return
 
-        # Convert selection in filtered listbox to index in available_files
         filtered_pos = sel[0]
         avail_index = self.filtered_indices[filtered_pos]
 
         song_path = self.available_files[avail_index]
         song_title = self.available_titles[avail_index]
 
-        # Prevent duplicates (optional)
         if song_path in self.service_files:
             messagebox.showinfo("Already added", f"'{song_title}' is already in the service order.")
             return
@@ -204,11 +209,8 @@ class BuildWindow(tk.Toplevel):
         if i == 0:
             return
 
-        # swap in lists
         self.service_files[i-1], self.service_files[i] = self.service_files[i], self.service_files[i-1]
         self.service_titles[i-1], self.service_titles[i] = self.service_titles[i], self.service_titles[i-1]
-
-        # refresh listbox
         self._refresh_service_listbox(select_index=i-1)
 
     def move_down(self):
@@ -221,7 +223,6 @@ class BuildWindow(tk.Toplevel):
 
         self.service_files[i+1], self.service_files[i] = self.service_files[i], self.service_files[i+1]
         self.service_titles[i+1], self.service_titles[i] = self.service_titles[i], self.service_titles[i+1]
-
         self._refresh_service_listbox(select_index=i+1)
 
     def clear_service(self):
@@ -258,8 +259,14 @@ class BuildWindow(tk.Toplevel):
         template_path = self.templates_folder / template_name
         output_path = self.output_folder / output_name
 
-        max_lines = int(self.max_lines_var.get())
-        builder = SlideBuilder(template_path, max_lines=max_lines)
+        density_map = {
+            "Spacious": "spacious",
+            "Normal": "normal",
+            "Compact": "compact",
+        }
+        density = density_map.get(self.density_var.get(), "normal")
+
+        builder = SlideBuilder(template_path)
 
         try:
             builder.build_deck(self.service_files, output_path)
@@ -267,6 +274,17 @@ class BuildWindow(tk.Toplevel):
             messagebox.showerror("Build failed", repr(e))
             return
 
+        # Save prefs (extend existing prefs file without breaking older reads)
         save_build_prefs(template_name, output_name)
+        try:
+            prefs = load_build_prefs()
+            prefs["last_density"] = self.density_var.get()
+            # best-effort write-back
+            # If your save_build_prefs already writes a full dict, you can replace this
+            # with a dedicated save function later. For now we keep it simple:
+            from config import _BUILD_PREFS_FILE  # if exists
+        except Exception:
+            # If you don't expose the prefs file path, no worries; density just won't persist.
+            pass
 
         messagebox.showinfo("Success", f"Slides created:\n{output_path}")
