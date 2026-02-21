@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox, filedialog, simpledialog
+from tkinter import messagebox, filedialog
 from config import load_data_root
 from song_builder import SongBuilder
 from build_window import BuildWindow
@@ -207,22 +207,13 @@ class MainWindow(tk.Tk):
             if not output_file:
                 return
 
-            # simple control: ask max lines per slide
-            max_lines = simpledialog.askinteger(
-                "Max lines",
-                "Max verse lines per slide? (Reference is added above)",
-                initialvalue=4, minvalue=1, maxvalue=10
-            )
-            if not max_lines:
-                return
-
             refs_and_texts = [(r, fetch_verse_text(r, bible)) for r in refs]
 
             build_verse_deck(
                 Path(template_file),
                 refs_and_texts,
                 Path(output_file),
-                fit_preset="loose",  # or "normal" / "loose"
+                fit_preset="normal",  # or "normal" / "loose"
             )
 
             messagebox.showinfo("Done", f"Created:\n{Path(output_file).name}")
