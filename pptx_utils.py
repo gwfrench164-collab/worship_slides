@@ -1,7 +1,7 @@
 from copy import deepcopy
 from pptx import Presentation
 from pptx.opc.constants import RELATIONSHIP_TYPE as RT
-from pptx.enum.text import PP_ALIGN
+from pptx.enum.text import PP_ALIGN, MSO_AUTO_SIZE
 import re
 
 
@@ -223,78 +223,78 @@ def add_title_slide_from_template(prs, template_slide_index: int, title_text: st
     return slide
 
 from pptx.util import Pt
+from pptx.enum.shapes import MSO_SHAPE
+from pptx.dml.color import RGBColor
+from pptx.util import Inches
+
 
 def add_lyrics_slide_from_template(
     prs,
     template_slide_index: int,
-    lines,
+    lines: list[str],
+    *,
+    lyric_starts: list[bool] | None = None,
     lyric_gap_pt: float = 0.0,
     hanging_indent_pt: float = 0.0,
 ):
-    """Create a lyrics slide from template.
+    """
+    Adds a lyrics slide from the template.
 
-    Backward compatible:
-      - If `lines` is list[str], we join with '\n' like before.
-      - If `lines` is list[dict], each dict may contain:
-          {"text": str, "space_before_pt": float (optional)}
-        This allows visual separation via paragraph spacing without consuming a blank display line.
+    `lines` are DISPLAY lines (already wrapped). We keep each display line as its own paragraph.
+    `lyric_starts[i] == True` means lines[i] is the first display line of a NEW lyric line,
+    so we add `space_before` (instead of inserting a blank paragraph that wastes a whole line).
+
+    This keeps visual separation between lyric lines while allowing better slide packing.
     """
     slide = duplicate_slide(prs, template_slide_index)
-
-    # Normalize input into (text_lines, meta)
-    text_lines = []
-    meta = []
-    if lines and isinstance(lines[0], dict):
-        for d in lines:
-            t = str(d.get("text", "")).rstrip()
-            text_lines.append(t)
-            meta.append({"space_before_pt": float(d.get("space_before_pt", 0.0) or 0.0)})
-    else:
-        for t in (lines or []):
-            text_lines.append(str(t).rstrip())
-        meta = [{"space_before_pt": 0.0} for _ in text_lines]
-
-    lyric_text = "\n".join(text_lines)
+    lyric_text = "\n".join(lines)
 
     # Replace token
     if not _replace_token_text(slide, TOKEN_LYRICS, lyric_text):
         raise RuntimeError("Template lyrics slide missing {{LYRICS}} token.")
 
-    # Find the lyrics textbox after replacement
-    shape = None
-    first_nonempty = next((t for t in text_lines if t.strip()), "")
+    # Find the lyrics shape (prefer exact name, then best-effort fallback)
+    lyrics_shape = None
     for sh in slide.shapes:
-        if getattr(sh, "has_text_frame", False):
-            try:
-                if first_nonempty and first_nonempty in sh.text:
-                    shape = sh
-                    break
-            except Exception:
-                pass
-    if shape is None:
-        for sh in slide.shapes:
-            if getattr(sh, "has_text_frame", False) and sh.text_frame.text.strip():
-                shape = sh
+        try:
+            if getattr(sh, "name", None) == TOKEN_LYRICS:
+                lyrics_shape = sh
                 break
+        except Exception:
+            pass
 
-    if shape is not None:
-        tf = shape.text_frame
+    if lyrics_shape is None:
+        # Fallback: first non-empty text frame
+        for sh in slide.shapes:
+            if getattr(sh, "has_text_frame", False):
+                try:
+                    if sh.text_frame and sh.text_frame.text.strip():
+                        lyrics_shape = sh
+                        break
+                except Exception:
+                    pass
 
-        # Paragraph spacing (preferred: keeps separation without 'blank line' paragraphs)
+    # Apply paragraph spacing + optional hanging indent
+    if lyrics_shape is not None and getattr(lyrics_shape, "has_text_frame", False):
+        tf = lyrics_shape.text_frame
+
+    # Ensure PowerPoint does NOT re-wrap our manually wrapped lines
+    tf.word_wrap = False
+    # Prevent auto-sizing from changing our layout
+    try:
+        tf.auto_size = MSO_AUTO_SIZE.NONE
+    except Exception:
+        tf.auto_size = None
+        # Ensure we have a flag per paragraph
+        flags = lyric_starts if (lyric_starts and len(lyric_starts) == len(tf.paragraphs)) else None
+
         for i, p in enumerate(tf.paragraphs):
-            if i == 0:
-                continue
-            sb = 0.0
-            if i < len(meta):
-                sb = float(meta[i].get("space_before_pt", 0.0) or 0.0)
-            if sb <= 0.0:
-                sb = float(lyric_gap_pt or 0.0)
-            if sb > 0.0:
-                p.space_before = Pt(sb)
+            # Paragraph spacing for lyric separation (no blank lines)
+            if flags and i > 0 and flags[i] and lyric_gap_pt and lyric_gap_pt > 0:
+                p.space_before = Pt(float(lyric_gap_pt))
 
-        # Optional hanging indent for wrapped continuation lines
-        if hanging_indent_pt and hanging_indent_pt > 0:
-            for p in tf.paragraphs:
+            # Optional hanging indent (kept for compatibility)
+            if hanging_indent_pt and hanging_indent_pt > 0:
                 p.left_indent = Pt(hanging_indent_pt)
                 p.first_line_indent = Pt(-hanging_indent_pt)
 
@@ -311,3 +311,33 @@ def add_scripture_slide_from_template(prs, template_slide_index: int, verse_ref:
     if not ok2:
         raise RuntimeError("Scripture template slide missing {{VERSE TXT}} token.")
     return slide
+
+def add_debug_guides(slide, target_shape, *, usable_rect_emu=None, caption: str = ""):
+    """Draw debug overlays.
+
+    usable_rect_emu: (left, top, width, height) in EMU of the usable text area
+    (textbox minus margins). If None, uses target_shape's box.
+    """
+    try:
+        if usable_rect_emu is None:
+            l, t, w, h = int(target_shape.left), int(target_shape.top), int(target_shape.width), int(target_shape.height)
+        else:
+            l, t, w, h = map(int, usable_rect_emu)
+        # Outline rectangle, no fill
+        rect = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, l, t, w, h)
+        rect.fill.background()  # transparent
+        rect.line.width = Pt(1)
+        # Keep default line color (don't force theme colors)
+    except Exception:
+        pass
+    if caption:
+        try:
+            # small textbox in top-left corner
+            cap = slide.shapes.add_textbox(int(target_shape.left), int(target_shape.top) - int(0.35 * 914400), int(target_shape.width), int(0.35 * 914400))
+            tf = cap.text_frame
+            tf.clear()
+            p = tf.paragraphs[0]
+            p.text = caption
+            p.font.size = Pt(10)
+        except Exception:
+            pass

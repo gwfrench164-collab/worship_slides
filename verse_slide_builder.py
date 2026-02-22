@@ -1,6 +1,8 @@
 from pathlib import Path
 import re
 
+from debug_tools import DebugSettings, DebugRecorder
+
 from pptx_utils import (
     load_template,
     find_template_slide_index,
@@ -8,6 +10,8 @@ from pptx_utils import (
     TOKEN_VERSE_REF,
     TOKEN_VERSE_TXT,
 )
+
+DEBUG_SETTINGS = DebugSettings.from_env()
 
 # --- constants ---
 EMU_PER_PT = 12700  # 1 point = 12700 EMU
@@ -172,6 +176,9 @@ def build_verse_deck(
     output_path: Path,
     fit_preset: str = "normal",  # tight / normal / loose
 ):
+    dbg = DebugRecorder(DEBUG_SETTINGS)
+    if DEBUG_SETTINGS.enabled:
+        dbg.start_run('verses', str(template_path), str(output_path))
     prs = load_template(template_path)
 
     # Find the scripture template slide by tokens (user can move it anywhere)
@@ -183,6 +190,19 @@ def build_verse_deck(
         raise RuntimeError("Could not find verse text box containing {{VERSE TXT}} on template slide.")
 
     max_chars = estimate_max_chars_for_box(verse_shape, preset=fit_preset)
+
+    if DEBUG_SETTINGS.enabled:
+        dbg.log(f"[VERSE] max_chars={max_chars} fit_preset={fit_preset!r}")
+        try:
+            tf = verse_shape.text_frame
+            ml = int(getattr(tf, 'margin_left', 0) or 0)
+            mr = int(getattr(tf, 'margin_right', 0) or 0)
+            mt = int(getattr(tf, 'margin_top', 0) or 0)
+            mb = int(getattr(tf, 'margin_bottom', 0) or 0)
+        except Exception:
+            ml = mr = mt = mb = 0
+        dbg.log(f"[MARGINS] left={ml} right={mr} top={mt} bottom={mb} (EMU)")
+
 
     for ref, verse_text in refs_and_texts:
         verse_text = " ".join((verse_text or "").split())
@@ -198,7 +218,11 @@ def build_verse_deck(
 
         for chunk in raw_chunks:
             chunk = restore_bracket_spaces(chunk)
-            add_scripture_slide_from_template(prs, tpl_idx, ref, chunk)
+            slide = add_scripture_slide_from_template(prs, tpl_idx, ref, chunk)
+            if DEBUG_SETTINGS.enabled:
+                dbg.add_slide_record({'type': 'verse', 'ref': ref, 'chunk': chunk, 'max_chars': max_chars})
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     prs.save(output_path)
+    if DEBUG_SETTINGS.enabled:
+        dbg.flush()
