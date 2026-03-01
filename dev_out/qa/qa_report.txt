@@ -1,0 +1,10 @@
+== SONGS ==
+slides: 205
+flags: sparse=21 tail=23 orphan=5 crowded=0 tiny_text=0
+  SPARSE slides: 4, 21, 26, 31, 36, 39, 40, 52, 67, 86, 102, 114, 120, 125, 130, 132, 135, 138, 152, 173
+  TAIL slides: 4, 21, 26, 31, 36, 39, 40, 52, 67, 86, 102, 114, 120, 123, 130, 138, 152, 158, 164, 170
+  ORPHAN_START slides: 28, 167, 179, 183, 191
+
+== VERSES ==
+slides: 0
+flags: sparse=0 tail=0 orphan=0 crowded=0 tiny_text=0

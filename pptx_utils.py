@@ -149,6 +149,14 @@ _BRACKET_ITALIC_RE = re.compile(r"\[(.+?)\]")
 
 
 def _replace_token_text_with_bracket_italics(slide, token: str, new_text: str) -> bool:
+    """
+    Replace token text while italicizing bracketed spans like [this].
+    Brackets are removed from the final slide text.
+
+    This implementation is *streaming* across the whole text so bracket spans
+    remain italicized even if wrapping/splitting introduces newlines inside a
+    bracketed span.
+    """
     for shape in slide.shapes:
         if not shape.has_text_frame:
             continue
@@ -165,42 +173,73 @@ def _replace_token_text_with_bracket_italics(slide, token: str, new_text: str) -
         line_spacing = p0.line_spacing
         src_font = _get_best_font_source(p0)
 
-        lines = (new_text or "").split("\n")
+        text = new_text or ""
+
+        # Clear and rebuild paragraphs/runs, copying style from the template run/font.
         tf.clear()
 
-        for i, line in enumerate(lines):
-            p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-
+        def setup_paragraph(p):
             _force_alignment_like_template(p, alignment)
             p.level = level
             p.space_before = space_before
             p.space_after = space_after
             p.line_spacing = line_spacing
 
-            p.text = ""
-            pos = 0
-            for m in _BRACKET_ITALIC_RE.finditer(line):
-                before = line[pos:m.start()]
-                if before:
-                    r = p.add_run()
-                    r.text = before
-                    _copy_font_style(r.font, src_font)
+        # Streaming parse: remove '[' and ']' and toggle italic state.
+        italic = False
+        cur_para = tf.paragraphs[0]
+        setup_paragraph(cur_para)
+        cur_para.text = ""  # ensure empty
 
-                ital = m.group(1)
-                if ital:
-                    r = p.add_run()
-                    r.text = ital
-                    _copy_font_style(r.font, src_font)
-                    r.font.italic = True
+        def add_run(p, s, ital):
+            if not s:
+                return
+            r = p.add_run()
+            r.text = s
+            _copy_font_style(r.font, src_font)
+            r.font.italic = bool(ital)
 
-                pos = m.end()
+        buf = []
+        buf_ital = False
 
-            after = line[pos:]
-            if after:
-                r = p.add_run()
-                r.text = after
-                _copy_font_style(r.font, src_font)
+        def flush_buf(p):
+            nonlocal buf, buf_ital
+            if buf:
+                add_run(p, "".join(buf), buf_ital)
+                buf = []
 
+        # Initialize buffer state
+        buf_ital = italic
+
+        for ch in text:
+            if ch == "[":
+                # Flush current buffer before toggling
+                flush_buf(cur_para)
+                italic = True
+                buf_ital = italic
+                continue
+            if ch == "]":
+                flush_buf(cur_para)
+                italic = False
+                buf_ital = italic
+                continue
+            if ch == "\n":
+                flush_buf(cur_para)
+                # New paragraph
+                cur_para = tf.add_paragraph()
+                setup_paragraph(cur_para)
+                cur_para.text = ""
+                buf_ital = italic
+                continue
+
+            # Normal character
+            # If italic state changes mid-buffer (shouldn't happen), flush
+            if italic != buf_ital:
+                flush_buf(cur_para)
+                buf_ital = italic
+            buf.append(ch)
+
+        flush_buf(cur_para)
         return True
 
     return False
@@ -274,34 +313,57 @@ def add_lyrics_slide_from_template(
                 except Exception:
                     pass
 
-    # Apply paragraph spacing + optional hanging indent
-    if lyrics_shape is not None and getattr(lyrics_shape, "has_text_frame", False):
-        tf = lyrics_shape.text_frame
+    if lyrics_shape is None or not getattr(lyrics_shape, "has_text_frame", False):
+        return slide
+
+    tf = lyrics_shape.text_frame
 
     # Ensure PowerPoint does NOT re-wrap our manually wrapped lines
-    tf.word_wrap = False
+    try:
+        tf.word_wrap = False
+    except Exception:
+        pass
+
     # Prevent auto-sizing from changing our layout
     try:
         tf.auto_size = MSO_AUTO_SIZE.NONE
     except Exception:
-        tf.auto_size = None
-        # Ensure we have a flag per paragraph
-        flags = lyric_starts if (lyric_starts and len(lyric_starts) == len(tf.paragraphs)) else None
+        try:
+            tf.auto_size = None
+        except Exception:
+            pass
 
-        for i, p in enumerate(tf.paragraphs):
-            # Paragraph spacing for lyric separation (no blank lines)
-            if flags and i > 0 and flags[i] and lyric_gap_pt and lyric_gap_pt > 0:
-                p.space_before = Pt(float(lyric_gap_pt))
+    # Apply paragraph spacing + optional hanging indent
+    flags = lyric_starts if (lyric_starts and len(lyric_starts) == len(tf.paragraphs)) else None
+    for i, p in enumerate(tf.paragraphs):
+        # Paragraph spacing for lyric separation (no blank lines)
+        if flags and i > 0 and flags[i] and lyric_gap_pt and lyric_gap_pt > 0:
+            p.space_before = Pt(float(lyric_gap_pt))
 
-            # Optional hanging indent (kept for compatibility)
-            if hanging_indent_pt and hanging_indent_pt > 0:
-                p.left_indent = Pt(hanging_indent_pt)
-                p.first_line_indent = Pt(-hanging_indent_pt)
+        # Optional hanging indent (kept for compatibility)
+        if hanging_indent_pt and hanging_indent_pt > 0:
+            p.left_indent = Pt(hanging_indent_pt)
+            p.first_line_indent = Pt(-hanging_indent_pt)
 
     return slide
-
 def add_scripture_slide_from_template(prs, template_slide_index: int, verse_ref: str, verse_text: str):
     slide = duplicate_slide(prs, template_slide_index)
+
+    # Capture the verse textbox shape BEFORE replacement so we can apply guardrails reliably.
+    verse_shape = None
+    ref_shape = None
+    for shape in slide.shapes:
+        if not getattr(shape, "has_text_frame", False):
+            continue
+        tf = shape.text_frame
+        try:
+            txt = tf.text or ""
+        except Exception:
+            txt = ""
+        if TOKEN_VERSE_TXT in txt:
+            verse_shape = shape
+        if TOKEN_VERSE_REF in txt:
+            ref_shape = shape
 
     ok1 = _replace_token_text(slide, TOKEN_VERSE_REF, verse_ref)
     ok2 = _replace_token_text_with_bracket_italics(slide, TOKEN_VERSE_TXT, verse_text)
@@ -310,7 +372,40 @@ def add_scripture_slide_from_template(prs, template_slide_index: int, verse_ref:
         raise RuntimeError("Scripture template slide missing {{VERSE REF}} token.")
     if not ok2:
         raise RuntimeError("Scripture template slide missing {{VERSE TXT}} token.")
+
+    # --- Guardrails: prevent PowerPoint from 'helping' in surprising ways ---
+    # We do manual line breaks for verses; avoid autoshrink and unintended reflow.
+    if verse_shape is not None and getattr(verse_shape, "has_text_frame", False):
+        tf = verse_shape.text_frame
+        try:
+            tf.word_wrap = False
+        except Exception:
+            pass
+        try:
+            tf.auto_size = MSO_AUTO_SIZE.NONE
+        except Exception:
+            try:
+                tf.auto_size = None
+            except Exception:
+                pass
+
+    # Keep the reference stable too (no autoshrink surprises).
+    if ref_shape is not None and getattr(ref_shape, "has_text_frame", False):
+        tf = ref_shape.text_frame
+        try:
+            tf.word_wrap = False
+        except Exception:
+            pass
+        try:
+            tf.auto_size = MSO_AUTO_SIZE.NONE
+        except Exception:
+            try:
+                tf.auto_size = None
+            except Exception:
+                pass
+
     return slide
+
 
 def add_debug_guides(slide, target_shape, *, usable_rect_emu=None, caption: str = ""):
     """Draw debug overlays.

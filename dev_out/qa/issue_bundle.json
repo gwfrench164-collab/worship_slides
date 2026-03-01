@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "thresholds": {
+    "songs": {
+      "CROWDED": 0,
+      "TINY_TEXT": 0,
+      "SPARSE": 25,
+      "TAIL": 999,
+      "ORPHAN_START": 999
+    },
+    "verses": {
+      "CROWDED": 0,
+      "TINY_TEXT": 0,
+      "SPARSE": 6,
+      "TAIL": 3,
+      "ORPHAN_START": 3
+    }
+  },
+  "details": {
+    "songs": {
+      "slide_count": 205,
+      "counts": {
+        "CROWDED": 0,
+        "TINY_TEXT": 0,
+        "SPARSE": 21,
+        "TAIL": 23,
+        "ORPHAN_START": 5
+      },
+      "fails": {}
+    },
+    "verses": {
+      "slide_count": 0,
+      "counts": {
+        "CROWDED": 0,
+        "TINY_TEXT": 0,
+        "SPARSE": 0,
+        "TAIL": 0,
+        "ORPHAN_START": 0
+      },
+      "fails": {}
+    }
+  },
+  "paths": {
+    "songs_pptx": "/Users/george/Church_Slide_Builder/worship_slides/dev_out/decks/songs_test.pptx",
+    "verses_pptx": "/Users/george/Church_Slide_Builder/worship_slides/dev_out/decks/verses_test.pptx",
+    "qa_json": "/Users/george/Church_Slide_Builder/worship_slides/dev_out/qa/qa_report.json"
+  },
+  "slides": {
+    "songs": {},
+    "verses": {}
+  }
+}

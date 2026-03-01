@@ -420,13 +420,20 @@ def _rebalance_single_lyric_slides(
     packed: List[Tuple[List[str], List[bool]]],
     *,
     min_lyrics_per_slide: int = 2,
-    min_lyrics_left_on_prev: int = 2,
+    # If previous slide has >= this many lyric groups, we can borrow from it.
+    # We allow borrowing even when prev has exactly 2 groups, as long as the
+    # remaining content on prev is not "too sparse" (see heuristic below).
+    min_prev_groups_to_borrow: int = 2,
+    # Consider a slide "lonely" when it has <= this many DISPLAY lines.
+    lonely_max_display_lines: int = 2,
     dbg: DebugRecorder | None = None,
 ) -> List[Tuple[List[str], List[bool]]]:
-    """Heuristic: avoid a slide that contains only one lyric group.
+    """Heuristic: avoid a slide that ends up with only one short lyric group.
 
-    Moves the *last* lyric group from the previous slide to the *front* of the
-    current slide, while preserving wrapped continuations.
+    Sometimes packing by height produces a slide with a single short lyric line
+    (e.g., "Oh is free indeed"). This post-pass shifts one lyric group from the
+    end of the previous slide to the *front* of the lonely slide, but only when
+    doing so doesn't make the previous slide look sparse.
     """
     if len(packed) < 2:
         return packed
@@ -440,23 +447,38 @@ def _rebalance_single_lyric_slides(
         cur_groups = _split_into_lyric_groups(cur_lines, cur_flags)
         prev_groups = _split_into_lyric_groups(prev_lines, prev_flags)
 
+        # Only worry about slides that have < min_lyrics_per_slide AND are short in display lines.
         if len(cur_groups) >= min_lyrics_per_slide:
             continue
-        if len(prev_groups) <= min_lyrics_left_on_prev:
+        if len(cur_lines) > lonely_max_display_lines:
             continue
 
-        moved = prev_groups.pop(-1)
-        cur_groups.insert(0, moved)
+        # Need something to borrow
+        if len(prev_groups) < min_prev_groups_to_borrow:
+            continue
 
-        out[i - 1] = _join_lyric_groups(prev_groups)
-        out[i] = _join_lyric_groups(cur_groups)
+        # Try moving the last group from prev onto current
+        moved = prev_groups[-1]
+        new_prev_groups = prev_groups[:-1]
+        new_cur_groups = [moved] + cur_groups
+
+        # Don't create an empty prev slide
+        if not new_prev_groups:
+            continue
+
+        # Heuristic: don't make prev "lonely".
+        prev_remaining_lines = sum(len(gl) for (gl, _gf) in new_prev_groups)
+        if prev_remaining_lines <= lonely_max_display_lines and len(new_prev_groups) < min_lyrics_per_slide:
+            continue
+
+        # Apply move
+        out[i - 1] = _join_lyric_groups(new_prev_groups)
+        out[i] = _join_lyric_groups(new_cur_groups)
 
         if dbg and dbg.settings.enabled:
-            dbg.log(f"[REBALANCE] moved 1 lyric group from slide {i} to slide {i+1} (within section)")
+            dbg.log(f"[REBALANCE] moved 1 lyric group from slide {i} -> {i+1} to avoid a lonely slide")
 
     return out
-
-
 class SlideBuilder:
     def __init__(
         self,
@@ -531,8 +553,13 @@ class SlideBuilder:
         lyric_gap_pt = (line_h_px / PX_PER_PT) * self.lyric_gap_em
 
         for song_file in song_files:
-            with open(song_file, "r", encoding="utf-8") as f:
-                song = json.load(f)
+            try:
+                with open(song_file, "r", encoding="utf-8", errors="replace") as f:
+                    song = json.load(f)
+            except Exception as e:
+                if dbg_settings.enabled:
+                    dbg.log(f"[SONG] Skipping unreadable song file: {song_file} ({e})")
+                continue
 
             title = song["song"]["title"]
             add_title_slide_from_template(prs, title_tpl_idx, title)
@@ -559,7 +586,7 @@ class SlideBuilder:
                 packed = _rebalance_single_lyric_slides(
                     packed,
                     min_lyrics_per_slide=2,
-                    min_lyrics_left_on_prev=2,
+                    min_prev_groups_to_borrow=2,
                     dbg=dbg if dbg_settings.enabled else None,
                 )
 

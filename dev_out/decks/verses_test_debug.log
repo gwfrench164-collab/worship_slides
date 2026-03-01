@@ -1,0 +1,6 @@
+[2026-02-28 23:56:44] DEBUG ENABLED (verses)
+[2026-02-28 23:56:44] Template: /Users/george/Church_Slide_Builder/worship_slides/templates/template_from_service.pptx
+[2026-02-28 23:56:44] Output:   /Users/george/Church_Slide_Builder/worship_slides/dev_out/decks/verses_test.pptx
+[2026-02-28 23:56:44] [VERSE] chars_per_line=34 lines_fit=4 max_line_chars=34 max_lines=4 fit_preset='normal'
+[2026-02-28 23:56:44] [MARGINS] left=91440 right=91440 top=45720 bottom=45720 (EMU)
+[2026-02-28 23:56:44] [CLEANUP] removed 3 template placeholder slide(s) containing '{{' tokens

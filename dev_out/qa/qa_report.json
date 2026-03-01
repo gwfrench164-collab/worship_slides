@@ -1,0 +1,1312 @@
+{
+  "songs": {
+    "pptx": "/Users/george/Church_Slide_Builder/worship_slides/dev_out/decks/songs_test.pptx",
+    "slide_count": 205,
+    "flags": {
+      "SPARSE": [
+        4,
+        21,
+        26,
+        31,
+        36,
+        39,
+        40,
+        52,
+        67,
+        86,
+        102,
+        114,
+        120,
+        125,
+        130,
+        132,
+        135,
+        138,
+        152,
+        173,
+        191
+      ],
+      "TAIL": [
+        4,
+        21,
+        26,
+        31,
+        36,
+        39,
+        40,
+        52,
+        67,
+        86,
+        102,
+        114,
+        120,
+        123,
+        130,
+        138,
+        152,
+        158,
+        164,
+        170,
+        172,
+        173,
+        191
+      ],
+      "ORPHAN_START": [
+        28,
+        167,
+        179,
+        183,
+        191
+      ],
+      "CROWDED": [],
+      "TINY_TEXT": []
+    },
+    "slides": [
+      {
+        "slide": 1,
+        "ignored": true,
+        "chars": 0,
+        "lines": 0,
+        "min_font_pt": 72.0
+      },
+      {
+        "slide": 2,
+        "ignored": true,
+        "chars": 0,
+        "lines": 0,
+        "min_font_pt": null
+      },
+      {
+        "slide": 3,
+        "ignored": true,
+        "chars": 0,
+        "lines": 0,
+        "min_font_pt": null
+      },
+      {
+        "slide": 4,
+        "chars": 10,
+        "lines": 1,
+        "min_font_pt": null
+      },
+      {
+        "slide": 5,
+        "chars": 66,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 6,
+        "chars": 47,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 7,
+        "chars": 75,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 8,
+        "chars": 50,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 9,
+        "chars": 77,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 10,
+        "chars": 50,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 11,
+        "chars": 75,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 12,
+        "chars": 50,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 13,
+        "chars": 66,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 14,
+        "chars": 48,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 15,
+        "chars": 75,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 16,
+        "chars": 50,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 17,
+        "chars": 79,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 18,
+        "chars": 50,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 19,
+        "chars": 75,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 20,
+        "chars": 50,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 21,
+        "chars": 15,
+        "lines": 1,
+        "min_font_pt": null
+      },
+      {
+        "slide": 22,
+        "chars": 76,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 23,
+        "chars": 83,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 24,
+        "chars": 108,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 25,
+        "chars": 87,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 26,
+        "chars": 35,
+        "lines": 2,
+        "min_font_pt": null
+      },
+      {
+        "slide": 27,
+        "chars": 107,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 28,
+        "chars": 74,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 29,
+        "chars": 108,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 30,
+        "chars": 87,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 31,
+        "chars": 35,
+        "lines": 2,
+        "min_font_pt": null
+      },
+      {
+        "slide": 32,
+        "chars": 119,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 33,
+        "chars": 67,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 34,
+        "chars": 108,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 35,
+        "chars": 87,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 36,
+        "chars": 35,
+        "lines": 2,
+        "min_font_pt": null
+      },
+      {
+        "slide": 37,
+        "chars": 108,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 38,
+        "chars": 87,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 39,
+        "chars": 35,
+        "lines": 2,
+        "min_font_pt": null
+      },
+      {
+        "slide": 40,
+        "chars": 33,
+        "lines": 1,
+        "min_font_pt": null
+      },
+      {
+        "slide": 41,
+        "chars": 66,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 42,
+        "chars": 65,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 43,
+        "chars": 62,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 44,
+        "chars": 64,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 45,
+        "chars": 114,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 46,
+        "chars": 74,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 47,
+        "chars": 60,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 48,
+        "chars": 91,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 49,
+        "chars": 66,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 50,
+        "chars": 96,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 51,
+        "chars": 65,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 52,
+        "chars": 25,
+        "lines": 1,
+        "min_font_pt": null
+      },
+      {
+        "slide": 53,
+        "chars": 82,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 54,
+        "chars": 87,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 55,
+        "chars": 90,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 56,
+        "chars": 81,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 57,
+        "chars": 87,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 58,
+        "chars": 82,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 59,
+        "chars": 90,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 60,
+        "chars": 81,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 61,
+        "chars": 84,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 62,
+        "chars": 91,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 63,
+        "chars": 90,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 64,
+        "chars": 81,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 65,
+        "chars": 90,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 66,
+        "chars": 81,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 67,
+        "chars": 13,
+        "lines": 1,
+        "min_font_pt": null
+      },
+      {
+        "slide": 68,
+        "chars": 64,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 69,
+        "chars": 73,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 70,
+        "chars": 65,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 71,
+        "chars": 70,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 72,
+        "chars": 66,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 73,
+        "chars": 74,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 74,
+        "chars": 65,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 75,
+        "chars": 70,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 76,
+        "chars": 66,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 77,
+        "chars": 75,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 78,
+        "chars": 65,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 79,
+        "chars": 70,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 80,
+        "chars": 67,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 81,
+        "chars": 79,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 82,
+        "chars": 65,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 83,
+        "chars": 70,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 84,
+        "chars": 65,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 85,
+        "chars": 70,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 86,
+        "chars": 20,
+        "lines": 1,
+        "min_font_pt": null
+      },
+      {
+        "slide": 87,
+        "chars": 83,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 88,
+        "chars": 85,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 89,
+        "chars": 68,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 90,
+        "chars": 60,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 91,
+        "chars": 84,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 92,
+        "chars": 82,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 93,
+        "chars": 68,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 94,
+        "chars": 60,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 95,
+        "chars": 81,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 96,
+        "chars": 78,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 97,
+        "chars": 68,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 98,
+        "chars": 60,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 99,
+        "chars": 68,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 100,
+        "chars": 60,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 101,
+        "chars": 60,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 102,
+        "chars": 15,
+        "lines": 1,
+        "min_font_pt": null
+      },
+      {
+        "slide": 103,
+        "chars": 72,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 104,
+        "chars": 81,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 105,
+        "chars": 89,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 106,
+        "chars": 65,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 107,
+        "chars": 68,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 108,
+        "chars": 73,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 109,
+        "chars": 66,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 110,
+        "chars": 67,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 111,
+        "chars": 72,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 112,
+        "chars": 99,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 113,
+        "chars": 66,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 114,
+        "chars": 41,
+        "lines": 2,
+        "min_font_pt": null
+      },
+      {
+        "slide": 115,
+        "chars": 70,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 116,
+        "chars": 66,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 117,
+        "chars": 68,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 118,
+        "chars": 74,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 119,
+        "chars": 74,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 120,
+        "chars": 14,
+        "lines": 1,
+        "min_font_pt": null
+      },
+      {
+        "slide": 121,
+        "chars": 78,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 122,
+        "chars": 75,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 123,
+        "chars": 53,
+        "lines": 2,
+        "min_font_pt": null
+      },
+      {
+        "slide": 124,
+        "chars": 90,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 125,
+        "chars": 38,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 126,
+        "chars": 107,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 127,
+        "chars": 90,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 128,
+        "chars": 77,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 129,
+        "chars": 82,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 130,
+        "chars": 40,
+        "lines": 2,
+        "min_font_pt": null
+      },
+      {
+        "slide": 131,
+        "chars": 90,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 132,
+        "chars": 38,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 133,
+        "chars": 102,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 134,
+        "chars": 90,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 135,
+        "chars": 38,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 136,
+        "chars": 90,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 137,
+        "chars": 66,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 138,
+        "chars": 22,
+        "lines": 1,
+        "min_font_pt": null
+      },
+      {
+        "slide": 139,
+        "chars": 90,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 140,
+        "chars": 88,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 141,
+        "chars": 88,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 142,
+        "chars": 93,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 143,
+        "chars": 100,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 144,
+        "chars": 98,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 145,
+        "chars": 99,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 146,
+        "chars": 93,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 147,
+        "chars": 100,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 148,
+        "chars": 93,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 149,
+        "chars": 89,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 150,
+        "chars": 93,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 151,
+        "chars": 93,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 152,
+        "chars": 30,
+        "lines": 1,
+        "min_font_pt": null
+      },
+      {
+        "slide": 153,
+        "chars": 63,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 154,
+        "chars": 62,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 155,
+        "chars": 61,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 156,
+        "chars": 56,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 157,
+        "chars": 61,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 158,
+        "chars": 56,
+        "lines": 2,
+        "min_font_pt": null
+      },
+      {
+        "slide": 159,
+        "chars": 69,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 160,
+        "chars": 70,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 161,
+        "chars": 65,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 162,
+        "chars": 59,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 163,
+        "chars": 61,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 164,
+        "chars": 56,
+        "lines": 2,
+        "min_font_pt": null
+      },
+      {
+        "slide": 165,
+        "chars": 69,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 166,
+        "chars": 66,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 167,
+        "chars": 56,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 168,
+        "chars": 71,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 169,
+        "chars": 61,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 170,
+        "chars": 56,
+        "lines": 2,
+        "min_font_pt": null
+      },
+      {
+        "slide": 171,
+        "chars": 61,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 172,
+        "chars": 56,
+        "lines": 2,
+        "min_font_pt": null
+      },
+      {
+        "slide": 173,
+        "chars": 20,
+        "lines": 1,
+        "min_font_pt": null
+      },
+      {
+        "slide": 174,
+        "chars": 78,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 175,
+        "chars": 90,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 176,
+        "chars": 72,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 177,
+        "chars": 73,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 178,
+        "chars": 83,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 179,
+        "chars": 72,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 180,
+        "chars": 72,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 181,
+        "chars": 73,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 182,
+        "chars": 79,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 183,
+        "chars": 78,
+        "lines": 3,
+        "min_font_pt": null
+      },
+      {
+        "slide": 184,
+        "chars": 72,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 185,
+        "chars": 73,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 186,
+        "chars": 78,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 187,
+        "chars": 82,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 188,
+        "chars": 73,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 189,
+        "chars": 73,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 190,
+        "chars": 73,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 191,
+        "chars": 19,
+        "lines": 1,
+        "min_font_pt": null
+      },
+      {
+        "slide": 192,
+        "chars": 94,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 193,
+        "chars": 86,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 194,
+        "chars": 121,
+        "lines": 6,
+        "min_font_pt": null
+      },
+      {
+        "slide": 195,
+        "chars": 96,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 196,
+        "chars": 84,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 197,
+        "chars": 80,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 198,
+        "chars": 121,
+        "lines": 6,
+        "min_font_pt": null
+      },
+      {
+        "slide": 199,
+        "chars": 96,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 200,
+        "chars": 105,
+        "lines": 5,
+        "min_font_pt": null
+      },
+      {
+        "slide": 201,
+        "chars": 87,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 202,
+        "chars": 121,
+        "lines": 6,
+        "min_font_pt": null
+      },
+      {
+        "slide": 203,
+        "chars": 96,
+        "lines": 4,
+        "min_font_pt": null
+      },
+      {
+        "slide": 204,
+        "chars": 121,
+        "lines": 6,
+        "min_font_pt": null
+      },
+      {
+        "slide": 205,
+        "chars": 96,
+        "lines": 4,
+        "min_font_pt": null
+      }
+    ]
+  },
+  "verses": {
+    "pptx": "/Users/george/Church_Slide_Builder/worship_slides/dev_out/decks/verses_test.pptx",
+    "slide_count": 0,
+    "flags": {
+      "SPARSE": [],
+      "TAIL": [],
+      "ORPHAN_START": [],
+      "CROWDED": [],
+      "TINY_TEXT": []
+    },
+    "slides": []
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "runs": [
+    {
+      "kind": "verses",
+      "template_path": "/Users/george/Church_Slide_Builder/worship_slides/templates/template_from_service.pptx",
+      "output_path": "/Users/george/Church_Slide_Builder/worship_slides/dev_out/decks/verses_test.pptx",
+      "started_at": "2026-02-28 23:56:44",
+      "slides": []
+    }
+  ]
+}
