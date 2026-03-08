@@ -9,6 +9,7 @@ from library_window import LibraryWindow
 from notes_reader import read_notes_text
 from bible_extractor import extract_ordered_refs, load_bible_json, fetch_verse_text
 from verse_slide_builder import build_verse_deck
+from pptx_utils import merge_presentations
 from config import load_bible_json_path, save_bible_json_path, auto_find_kjv_json
 
 class MainWindow(tk.Tk):
@@ -28,11 +29,13 @@ class MainWindow(tk.Tk):
         file_menu.add_command(label="Open Song", command=self.open_existing_song)
         file_menu.add_command(label="Import Song from PDF", command=self.import_song_from_pdf)
         file_menu.add_separator()
-        file_menu.add_command(label="Exit", command=self.quit)
         file_menu.add_command(label="Build Slides", command=self.open_build_window)
         file_menu.add_separator()
         file_menu.add_command(label="Build Verse Slides from Notes", command=self.build_verse_slides_from_notes)
         file_menu.add_command(label="Extract Verse List from Notes", command=self.extract_verse_list_from_notes)
+        file_menu.add_command(label="Merge Song + Verse Decks", command=self.merge_song_and_verse_decks)
+        file_menu.add_separator()
+        file_menu.add_command(label="Exit", command=self.quit)
 
 
         menubar.add_cascade(label="File", menu=file_menu)
@@ -59,6 +62,7 @@ class MainWindow(tk.Tk):
         tk.Button(frame, text="Build Slides", width=25, command=self.open_build_window).pack(pady=5)
         tk.Button(frame, text="Extract Verse List from Notes", width=25, command=self.extract_verse_list_from_notes).pack(pady=5)
         tk.Button(frame, text="Build Verse Slides from Notes", width=25, command=self.build_verse_slides_from_notes).pack(pady=5)
+        tk.Button(frame, text="Merge Song + Verse Decks", width=25, command=self.merge_song_and_verse_decks).pack(pady=5)
 
     def not_implemented(self):
         messagebox.showinfo("Not implemented", "This feature is not implemented yet.")
@@ -107,6 +111,50 @@ class MainWindow(tk.Tk):
 
     def open_build_window(self):
         BuildWindow(self)
+
+    def merge_song_and_verse_decks(self):
+        data_root = load_data_root()
+        if not data_root:
+            messagebox.showerror("Error", "Data folder not set.")
+            return
+
+        output_folder = Path(data_root) / "output"
+        output_folder.mkdir(parents=True, exist_ok=True)
+
+        song_deck = filedialog.askopenfilename(
+            title="Select Song Slide Deck",
+            initialdir=output_folder,
+            filetypes=[("PowerPoint", "*.pptx")]
+        )
+        if not song_deck:
+            return
+
+        verse_deck = filedialog.askopenfilename(
+            title="Select Verse Slide Deck",
+            initialdir=output_folder,
+            filetypes=[("PowerPoint", "*.pptx")]
+        )
+        if not verse_deck:
+            return
+
+        default_name = f"{Path(song_deck).stem}_with_verses.pptx"
+        output_path = filedialog.asksaveasfilename(
+            title="Save Merged Deck As",
+            initialdir=output_folder,
+            defaultextension=".pptx",
+            initialfile=default_name,
+            filetypes=[("PowerPoint", "*.pptx")]
+        )
+        if not output_path:
+            return
+
+        try:
+            merge_presentations(song_deck, verse_deck, output_path)
+        except Exception as e:
+            messagebox.showerror("Merge failed", str(e))
+            return
+
+        messagebox.showinfo("Merge complete", f"Created:\n{Path(output_path).name}")
 
     def _get_bible(self):
         # 1) from config

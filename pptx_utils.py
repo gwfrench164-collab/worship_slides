@@ -1,8 +1,14 @@
 from copy import deepcopy
+from pathlib import Path
 from pptx import Presentation
 from pptx.opc.constants import RELATIONSHIP_TYPE as RT
 from pptx.enum.text import PP_ALIGN, MSO_AUTO_SIZE
 import re
+import posixpath
+import shutil
+import tempfile
+import zipfile
+import xml.etree.ElementTree as ET
 
 
 def load_template(path):
@@ -49,6 +55,242 @@ def duplicate_slide(prs, slide_index: int):
     _copy_relationships(src, dst)
     return dst
 
+
+# ---- ZIP/XML-based cross-presentation merge helpers ----
+
+P_NS = "http://schemas.openxmlformats.org/presentationml/2006/main"
+R_NS = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+REL_NS = "http://schemas.openxmlformats.org/package/2006/relationships"
+CT_NS = "http://schemas.openxmlformats.org/package/2006/content-types"
+
+ET.register_namespace("", P_NS)
+ET.register_namespace("a", "http://schemas.openxmlformats.org/drawingml/2006/main")
+ET.register_namespace("r", R_NS)
+
+
+def _ns(tag, namespace):
+    return f"{{{namespace}}}{tag}"
+
+
+def _slide_rel_path(slide_num: int) -> str:
+    return f"ppt/slides/_rels/slide{slide_num}.xml.rels"
+
+
+def _slide_xml_path(slide_num: int) -> str:
+    return f"ppt/slides/slide{slide_num}.xml"
+
+
+def _next_part_number(names: list[str], prefix: str, suffix: str) -> int:
+    max_num = 0
+    for name in names:
+        if name.startswith(prefix) and name.endswith(suffix):
+            middle = name[len(prefix):-len(suffix)]
+            if middle.isdigit():
+                max_num = max(max_num, int(middle))
+    return max_num + 1
+
+
+def _copy_tree(src: Path, dst: Path):
+    if dst.exists():
+        shutil.rmtree(dst)
+    shutil.copytree(src, dst)
+
+
+def _unzip_to_dir(pptx_path: Path, out_dir: Path):
+    with zipfile.ZipFile(pptx_path, "r") as zf:
+        zf.extractall(out_dir)
+
+
+def _zip_dir_to_pptx(src_dir: Path, pptx_path: Path):
+    with zipfile.ZipFile(pptx_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        for file_path in sorted(src_dir.rglob("*")):
+            if file_path.is_file():
+                arcname = file_path.relative_to(src_dir).as_posix()
+                zf.write(file_path, arcname)
+
+
+def _read_xml(path: Path) -> ET.ElementTree:
+    return ET.parse(path)
+
+
+def _write_xml(tree: ET.ElementTree, path: Path):
+    tree.write(path, encoding="UTF-8", xml_declaration=True)
+
+
+def _collect_slide_numbers(root_dir: Path) -> list[int]:
+    slides_dir = root_dir / "ppt" / "slides"
+    nums = []
+    for path in slides_dir.glob("slide*.xml"):
+        stem = path.stem
+        num = stem.replace("slide", "")
+        if num.isdigit():
+            nums.append(int(num))
+    return sorted(nums)
+
+
+def _collect_media_names(root_dir: Path) -> list[str]:
+    media_dir = root_dir / "ppt" / "media"
+    if not media_dir.exists():
+        return []
+    return sorted(p.name for p in media_dir.iterdir() if p.is_file())
+
+
+def _ensure_content_type_override(content_types_root: ET.Element, part_name: str, content_type: str):
+    for child in content_types_root.findall(_ns("Override", CT_NS)):
+        if child.attrib.get("PartName") == part_name:
+            return
+    ET.SubElement(
+        content_types_root,
+        _ns("Override", CT_NS),
+        {"PartName": part_name, "ContentType": content_type},
+    )
+
+
+def _add_slide_to_presentation_xml(presentation_root: ET.Element, slide_rid: str):
+    sld_id_lst = presentation_root.find(_ns("sldIdLst", P_NS))
+    if sld_id_lst is None:
+        sld_id_lst = ET.SubElement(presentation_root, _ns("sldIdLst", P_NS))
+
+    existing_ids = []
+    for child in sld_id_lst.findall(_ns("sldId", P_NS)):
+        try:
+            existing_ids.append(int(child.attrib.get("id", "0")))
+        except ValueError:
+            pass
+
+    next_id = max(existing_ids, default=255) + 1
+    ET.SubElement(
+        sld_id_lst,
+        _ns("sldId", P_NS),
+        {"id": str(next_id), _ns("id", R_NS): slide_rid},
+    )
+
+
+def _add_relationship(rel_root: ET.Element, rel_type: str, target: str) -> str:
+    existing = []
+    for rel in rel_root.findall(_ns("Relationship", REL_NS)):
+        rid = rel.attrib.get("Id", "")
+        if rid.startswith("rId") and rid[3:].isdigit():
+            existing.append(int(rid[3:]))
+
+    next_rid = f"rId{max(existing, default=0) + 1}"
+    ET.SubElement(
+        rel_root,
+        _ns("Relationship", REL_NS),
+        {"Id": next_rid, "Type": rel_type, "Target": target},
+    )
+    return next_rid
+
+
+def _remap_slide_relationship_targets(src_root: Path, dst_root: Path, src_rel_path: str, dst_rel_path: str):
+    src_rel_full = src_root / src_rel_path
+    if not src_rel_full.exists():
+        return
+
+    dst_rel_full = dst_root / dst_rel_path
+    dst_rel_full.parent.mkdir(parents=True, exist_ok=True)
+
+    rel_tree = _read_xml(src_rel_full)
+    rel_root = rel_tree.getroot()
+
+    dst_media_dir = dst_root / "ppt" / "media"
+    dst_media_dir.mkdir(parents=True, exist_ok=True)
+
+    existing_media = _collect_media_names(dst_root)
+
+    for rel in rel_root.findall(_ns("Relationship", REL_NS)):
+        target = rel.attrib.get("Target", "")
+        if not target.startswith("../media/"):
+            continue
+
+        old_name = posixpath.basename(target)
+        prefix, dot, ext = old_name.partition(".")
+        if not dot:
+            continue
+
+        next_num = _next_part_number(existing_media, prefix.rstrip("0123456789") or "image", f".{ext}")
+        base_prefix = re.sub(r"\d+$", "", prefix) or "image"
+        new_name = f"{base_prefix}{next_num}.{ext}"
+
+        shutil.copy2(src_root / "ppt" / "media" / old_name, dst_media_dir / new_name)
+        existing_media.append(new_name)
+        rel.set("Target", f"../media/{new_name}")
+
+    _write_xml(rel_tree, dst_rel_full)
+
+
+def merge_presentations(song_deck_path, verse_deck_path, output_path):
+    song_deck_path = Path(song_deck_path)
+    verse_deck_path = Path(verse_deck_path)
+    output_path = Path(output_path)
+
+    song_prs = Presentation(song_deck_path)
+    verse_prs = Presentation(verse_deck_path)
+
+    if (
+        song_prs.slide_width != verse_prs.slide_width
+        or song_prs.slide_height != verse_prs.slide_height
+    ):
+        raise RuntimeError(
+            "The song deck and verse deck do not use the same slide size. Build both decks from templates with matching dimensions before merging."
+        )
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmpdir = Path(tmpdir)
+        song_dir = tmpdir / "song"
+        verse_dir = tmpdir / "verse"
+        merged_dir = tmpdir / "merged"
+
+        _unzip_to_dir(song_deck_path, song_dir)
+        _unzip_to_dir(verse_deck_path, verse_dir)
+        _copy_tree(song_dir, merged_dir)
+
+        merged_slide_nums = _collect_slide_numbers(merged_dir)
+        next_slide_num = max(merged_slide_nums, default=0) + 1
+
+        presentation_tree = _read_xml(merged_dir / "ppt" / "presentation.xml")
+        presentation_root = presentation_tree.getroot()
+
+        pres_rels_tree = _read_xml(merged_dir / "ppt" / "_rels" / "presentation.xml.rels")
+        pres_rels_root = pres_rels_tree.getroot()
+
+        content_types_tree = _read_xml(merged_dir / "[Content_Types].xml")
+        content_types_root = content_types_tree.getroot()
+
+        for verse_slide_num in _collect_slide_numbers(verse_dir):
+            new_slide_num = next_slide_num
+            next_slide_num += 1
+
+            src_slide_xml = verse_dir / _slide_xml_path(verse_slide_num)
+            dst_slide_xml = merged_dir / _slide_xml_path(new_slide_num)
+            dst_slide_xml.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src_slide_xml, dst_slide_xml)
+
+            _remap_slide_relationship_targets(
+                verse_dir,
+                merged_dir,
+                _slide_rel_path(verse_slide_num),
+                _slide_rel_path(new_slide_num),
+            )
+
+            new_rid = _add_relationship(
+                pres_rels_root,
+                "http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide",
+                f"slides/slide{new_slide_num}.xml",
+            )
+            _add_slide_to_presentation_xml(presentation_root, new_rid)
+            _ensure_content_type_override(
+                content_types_root,
+                f"/ppt/slides/slide{new_slide_num}.xml",
+                "application/vnd.openxmlformats-officedocument.presentationml.slide+xml",
+            )
+
+        _write_xml(presentation_tree, merged_dir / "ppt" / "presentation.xml")
+        _write_xml(pres_rels_tree, merged_dir / "ppt" / "_rels" / "presentation.xml.rels")
+        _write_xml(content_types_tree, merged_dir / "[Content_Types].xml")
+
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        _zip_dir_to_pptx(merged_dir, output_path)
 
 def remove_slide(prs, index: int):
     slide_id_list = prs.slides._sldIdLst  # pylint: disable=protected-access

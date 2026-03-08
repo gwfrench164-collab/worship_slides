@@ -9,6 +9,7 @@ from pptx_utils import (
     add_title_slide_from_template,
     add_lyrics_slide_from_template,
     add_debug_guides,
+    remove_slide,
     TOKEN_TITLE,
     TOKEN_LYRICS,
 )
@@ -52,6 +53,29 @@ def _find_token_shape(slide, token: str):
         except Exception:
             continue
     return None
+
+
+def _slide_contains_token(slide, token_substring: str = "{{") -> bool:
+    """Return True if any text on the slide contains token_substring."""
+    for shape in slide.shapes:
+        if getattr(shape, "has_text_frame", False):
+            try:
+                if token_substring in (shape.text or ""):
+                    return True
+            except Exception:
+                pass
+    return False
+
+
+def remove_template_placeholder_slides(prs) -> int:
+    """
+    Remove any slides that still contain template tokens like {{TITLE}}, {{LYRICS}},
+    {{VERSE REF}}, or {{VERSE TXT}}. Returns number removed.
+    """
+    to_remove = [i for i, s in enumerate(prs.slides) if _slide_contains_token(s, "{{")]
+    for i in reversed(to_remove):
+        remove_slide(prs, i)
+    return len(to_remove)
 
 
 def _best_font_size_pts_from_shape(shape) -> float:
@@ -559,6 +583,7 @@ class SlideBuilder:
                                 'wrap_pack_ctx': ctx,
                             })
 
+        remove_template_placeholder_slides(prs)
         prs.save(output_path)
         if dbg_settings.enabled:
             dbg.flush()
