@@ -5,8 +5,1185 @@
       "kind": "verses",
       "template_path": "/Users/george/Church_Slide_Builder/worship_slides/templates/template_from_service.pptx",
       "output_path": "/Users/george/Church_Slide_Builder/worship_slides/dev_out/decks/verses_test.pptx",
-      "started_at": "2026-02-28 23:56:44",
-      "slides": []
+      "started_at": "2026-03-01 15:31:36",
+      "slides": [
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:15-19",
+          "chunk": "So the wall was finished in the\ntwenty and fifth [day] of\n[the month] Elul, in fifty and two\ndays. And it came to pass,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:15-19",
+          "chunk": "that when all our enemies heard\n[thereof], and all the heathen\nthat [were] about us saw\n[these things],",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:15-19",
+          "chunk": "they were much cast down in their\nown eyes: for they perceived that\nthis work was wrought of our God.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:15-19",
+          "chunk": "Moreover in those days the nobles\nof Judah sent many letters unto\nTobiah, and [the letters] of\nTobiah came unto them.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:15-19",
+          "chunk": "For [there were] many in Judah\nsworn unto him, because he [was]\nthe son in law of Shechaniah the\nson of Arah;",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:15-19",
+          "chunk": "and his son Johanan had taken the\ndaughter of Meshullam the son of\nBerechiah. Also they reported his\ngood deeds before me,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:15-19",
+          "chunk": "and uttered my words to him. [And]\nTobiah sent letters to put me in\nfear.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 2:4",
+          "chunk": "Then the king said unto me, For\nwhat dost thou make request? So I\nprayed to the God of heaven.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 2:6",
+          "chunk": "And the king said unto me, (the\nqueen also sitting by him,) For\nhow long shall thy journey be?",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 2:6",
+          "chunk": "and when wilt thou return? So it\npleased the king to send me; and I\nset him a time.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 2:11",
+          "chunk": "So I came to Jerusalem, and was\nthere three days.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 2:18",
+          "chunk": "Then I told them of the hand of my\nGod which was good upon me; as\nalso the king's words that he had\nspoken unto me. And they said,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 2:18",
+          "chunk": "Let us rise up and build. So they\nstrengthened their hands for\n[this] good [work].",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 4:6",
+          "chunk": "So built we the wall; and all the\nwall was joined together unto the\nhalf thereof: for the people had a\nmind to work.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 4:21",
+          "chunk": "So we laboured in the work: and\nhalf of them held the spears from\nthe rising of the morning till the\nstars appeared.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:15",
+          "chunk": "So the wall was finished in the\ntwenty and fifth [day] of\n[the month] Elul, in fifty and two\ndays.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Daniel 9:24",
+          "chunk": "Seventy weeks are determined upon\nthy people and upon thy holy city,\nto finish the transgression, and\nto make an end of sins,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Daniel 9:24",
+          "chunk": "and to make reconciliation for\niniquity, and to bring in\neverlasting righteousness,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Daniel 9:24",
+          "chunk": "and to seal up the vision and\nprophecy, and to anoint the most\nHoly.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Daniel 9:25",
+          "chunk": "Know therefore and understand,\n[that] from the going forth of the",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Daniel 9:25",
+          "chunk": "commandment to restore and to\nbuild Jerusalem unto the Messiah\nthe Prince [shall be] seven weeks,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Daniel 9:25",
+          "chunk": "and threescore and two weeks: the\nstreet shall be built again, and\nthe wall, even in troublous times.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 4:19",
+          "chunk": "And I said unto the nobles, and to\nthe rulers, and to the rest of the\npeople,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 4:19",
+          "chunk": "The work [is] great and large, and\nwe are separated upon the wall,\none far from another.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 4:2",
+          "chunk": "And he spake before his brethren\nand the army of Samaria, and said,\nWhat do these feeble Jews? will\nthey fortify themselves?",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 4:2",
+          "chunk": "will they sacrifice? will they\nmake an end in a day? will they\nrevive the stones out of the heaps\nof the rubbish which are burned?",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Psalms 127:1",
+          "chunk": "A Song of degrees for Solomon.\nExcept the LORD build the house,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Psalms 127:1",
+          "chunk": "they labour in vain that build it:\nexcept the LORD keep the city, the\nwatchman waketh [but] in vain.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "2 Corinthians 12:9-10",
+          "chunk": "And he said unto me, My grace is\nsufficient for thee: for my\nstrength is made perfect in\nweakness.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "2 Corinthians 12:9-10",
+          "chunk": "Most gladly therefore will I\nrather glory in my infirmities,\nthat the power of Christ may rest\nupon me.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "2 Corinthians 12:9-10",
+          "chunk": "Therefore I take pleasure in\ninfirmities, in reproaches, in\nnecessities, in persecutions,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "2 Corinthians 12:9-10",
+          "chunk": "in distresses for Christ's sake:\nfor when I am weak, then am I\nstrong.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Matthew 28:18",
+          "chunk": "And Jesus came and spake unto\nthem, saying, All power is given\nunto me in heaven and in earth.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Matthew 28:19-20",
+          "chunk": "Go ye therefore, and teach all\nnations, baptizing them in the\nname of the Father, and of the\nSon, and of the Holy Ghost:",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Matthew 28:19-20",
+          "chunk": "Teaching them to observe all\nthings whatsoever I have commanded\nyou:",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Matthew 28:19-20",
+          "chunk": "and, lo, I am with you alway,\n[even] unto the end of the world.\nAmen.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:16",
+          "chunk": "And it came to pass, that when all\nour enemies heard [thereof], and\nall the heathen that [were] about\nus saw [these things],",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:16",
+          "chunk": "they were much cast down in their\nown eyes: for they perceived that\nthis work was wrought of our God.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:17-19",
+          "chunk": "Moreover in those days the nobles\nof Judah sent many letters unto\nTobiah, and [the letters] of\nTobiah came unto them.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:17-19",
+          "chunk": "For [there were] many in Judah\nsworn unto him, because he [was]\nthe son in law of Shechaniah the\nson of Arah;",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:17-19",
+          "chunk": "and his son Johanan had taken the\ndaughter of Meshullam the son of\nBerechiah. Also they reported his\ngood deeds before me,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 6:17-19",
+          "chunk": "and uttered my words to him. [And]\nTobiah sent letters to put me in\nfear.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Ezra 9:1",
+          "chunk": "Now when these things were done,\nthe princes came to me, saying,\nThe people of Israel, and the\npriests, and the Levites,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Ezra 9:1",
+          "chunk": "have not separated themselves from\nthe people of the lands, [doing]\naccording to their abominations,\n[even] of the Canaanites,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Ezra 9:1",
+          "chunk": "the Hittites, the Perizzites, the\nJebusites, the Ammonites, the\nMoabites, the Egyptians, and the\nAmorites.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "2 Corinthians 6:14",
+          "chunk": "Be ye not unequally yoked together\nwith unbelievers: for what\nfellowship hath righteousness with\nunrighteousness?",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "2 Corinthians 6:14",
+          "chunk": "and what communion hath light with\ndarkness?",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:1-4",
+          "chunk": "Now it came to pass, when the wall\nwas built, and I had set up the\ndoors,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:1-4",
+          "chunk": "and the porters and the singers\nand the Levites were appointed,\nThat I gave my brother Hanani, and\nHananiah the ruler of the palace,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:1-4",
+          "chunk": "charge over Jerusalem: for he\n[was] a faithful man, and feared\nGod above many. And I said unto\nthem,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:1-4",
+          "chunk": "Let not the gates of Jerusalem be\nopened until the sun be hot; and\nwhile they stand by, let them shut\nthe doors, and bar [them]:",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:1-4",
+          "chunk": "and appoint watches of the\ninhabitants of Jerusalem, every\none in his watch, and every one\n[to be] over against his house.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:1-4",
+          "chunk": "Now the city [was] large and\ngreat: but the people [were] few\ntherein, and the houses [were] not\nbuilded.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Romans 15:4",
+          "chunk": "For whatsoever things were written\naforetime were written for our\nlearning,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Romans 15:4",
+          "chunk": "that we through patience and\ncomfort of the scriptures might\nhave hope.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Numbers 3:11-12",
+          "chunk": "And the LORD spake unto Moses,\nsaying, And I, behold, I have\ntaken the Levites from",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Numbers 3:11-12",
+          "chunk": "among the children of Israel\ninstead of all the firstborn that\nopeneth the matrix among the",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Numbers 3:11-12",
+          "chunk": "children of Israel: therefore the\nLevites shall be mine;",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Numbers 8:11",
+          "chunk": "And Aaron shall offer the Levites\nbefore the LORD [for] an offering\nof the children of Israel,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Numbers 8:11",
+          "chunk": "that they may execute the service\nof the LORD.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "1 Peter 2:9",
+          "chunk": "But ye [are] a chosen generation,\na royal priesthood, an holy\nnation, a peculiar people;",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "1 Peter 2:9",
+          "chunk": "that ye should shew forth the\npraises of him who hath called you\nout of darkness into his\nmarvellous light:",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "2 Chronicles 23:4",
+          "chunk": "This [is] the thing that ye shall\ndo;",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "2 Chronicles 23:4",
+          "chunk": "A third part of you entering on\nthe sabbath, of the priests and of\nthe Levites, [shall be] porters of\nthe doors;",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "1 Chronicles 9:22",
+          "chunk": "All these [which were] chosen to\nbe porters in the gates [were] two\nhundred and twelve.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "1 Chronicles 9:22",
+          "chunk": "These were reckoned by their\ngenealogy in their villages, whom\nDavid and Samuel the seer did\nordain in their set office.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "2 Chronicles 23:19",
+          "chunk": "And he set the porters at the\ngates of the house of the LORD,\nthat none [which was] unclean in\nany thing should enter in.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "1 Chronicles 6:31-32",
+          "chunk": "And these [are they] whom David\nset over the service of song in\nthe house of the LORD, after that\nthe ark had rest.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "1 Chronicles 6:31-32",
+          "chunk": "And they ministered before the\ndwelling place of the tabernacle\nof the congregation with singing,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "1 Chronicles 6:31-32",
+          "chunk": "until Solomon had built the house\nof the LORD in Jerusalem: and\n[then] they waited on their office\naccording to their order.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "John 4:23",
+          "chunk": "But the hour cometh, and now is,\nwhen the true worshippers shall",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "John 4:23",
+          "chunk": "worship the Father in spirit and\nin truth: for the Father seeketh\nsuch to worship him.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Luke 10:41-42",
+          "chunk": "And Jesus answered and said unto\nher, Martha, Martha, thou art\ncareful and troubled about many\nthings: But one thing is needful:",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Luke 10:41-42",
+          "chunk": "and Mary hath chosen that good\npart, which shall not be taken\naway from her.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Revelation 17:14",
+          "chunk": "These shall make war with the\nLamb, and the Lamb shall overcome\nthem: for he is Lord of lords,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Revelation 17:14",
+          "chunk": "and King of kings: and they that\nare with him [are] called, and\nchosen, and faithful.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Matthew 22:14",
+          "chunk": "For many are called, but few [are]\nchosen.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Proverbs 20:6",
+          "chunk": "Most men will proclaim every one\nhis own goodness: but a faithful\nman who can find?",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "1 Corinthians 4:1-2",
+          "chunk": "Let a man so account of us, as of\nthe ministers of Christ, and\nstewards of the mysteries of God.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "1 Corinthians 4:1-2",
+          "chunk": "Moreover it is required in\nstewards, that a man be found\nfaithful.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Luke 16:10",
+          "chunk": "He that is faithful in that which\nis least is faithful also in much:\nand he that is unjust in the least\nis unjust also in much.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "1 Corinthians 10:31",
+          "chunk": "Whether therefore ye eat, or\ndrink, or whatsoever ye do, do all\nto the glory of God.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "And my God put into mine heart to\ngather together the nobles, and\nthe rulers, and the people,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "that they might be reckoned by\ngenealogy. And I found a register\nof the genealogy of them which\ncame up at the first,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "and found written therein, These\n[are] the children of the\nprovince, that went up out of the\ncaptivity,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "of those that had been carried\naway, whom Nebuchadnezzar the king\nof Babylon had carried away,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "and came again to Jerusalem and to\nJudah, every one unto his city;\nWho came with Zerubbabel, Jeshua,\nNehemiah, Azariah, Raamiah,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "Nahamani, Mordecai, Bilshan,\nMispereth, Bigvai, Nehum, Baanah.\nThe number, [I say], of the men of\nthe people of Israel [was this];",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "The children of Parosh, two\nthousand an hundred seventy and\ntwo. The children of Shephatiah,\nthree hundred seventy and two.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "The children of Arah, six hundred\nfifty and two. The children of\nPahathmoab, of the children of\nJeshua and Joab,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "two thousand and eight hundred\n[and] eighteen. The children of\nElam, a thousand two hundred fifty\nand four. The children of Zattu,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "eight hundred forty and five. The\nchildren of Zaccai, seven hundred\nand threescore. The children of\nBinnui,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "six hundred forty and eight. The\nchildren of Bebai, six hundred\ntwenty and eight. The children of\nAzgad,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "two thousand three hundred twenty\nand two. The children of Adonikam,\nsix hundred threescore and seven.\nThe children of Bigvai,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "two thousand threescore and seven.\nThe children of Adin, six hundred\nfifty and five. The children of\nAter of Hezekiah,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "ninety and eight. The children of\nHashum, three hundred twenty and\neight. The children of Bezai,\nthree hundred twenty and four.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "The children of Hariph, an hundred\nand twelve. The children of\nGibeon, ninety and five. The men\nof Bethlehem and Netophah,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "an hundred fourscore and eight.\nThe men of Anathoth, an hundred\ntwenty and eight. The men of\nBethazmaveth, forty and two.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "The men of Kirjathjearim,\nChephirah, and Beeroth, seven\nhundred forty and three. The men\nof Ramah and Geba,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "six hundred twenty and one. The\nmen of Michmas, an hundred and\ntwenty and two. The men of Bethel\nand Ai,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "an hundred twenty and three. The\nmen of the other Nebo, fifty and\ntwo. The children of the other\nElam,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "a thousand two hundred fifty and\nfour. The children of Harim, three\nhundred and twenty. The children\nof Jericho,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "three hundred forty and five. The\nchildren of Lod, Hadid, and Ono,\nseven hundred twenty and one. The\nchildren of Senaah,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "three thousand nine hundred and\nthirty. The priests: the children\nof Jedaiah, of the house of\nJeshua,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "nine hundred seventy and three.\nThe children of Immer, a thousand\nfifty and two. The children of\nPashur,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "a thousand two hundred forty and\nseven. The children of Harim, a\nthousand and seventeen. The\nLevites: the children of Jeshua,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "of Kadmiel, [and] of the children\nof Hodevah, seventy and four. The\nsingers: the children of Asaph, an\nhundred forty and eight.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "The porters: the children of\nShallum, the children of Ater, the\nchildren of Talmon, the children\nof Akkub, the children of Hatita,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "the children of Shobai, an hundred\nthirty and eight. The Nethinims:\nthe children of Ziha, the children\nof Hashupha,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "the children of Tabbaoth, The\nchildren of Keros, the children of\nSia, the children of Padon, The\nchildren of Lebana,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "the children of Hagaba, the\nchildren of Shalmai, The children\nof Hanan, the children of Giddel,\nthe children of Gahar,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "The children of Reaiah, the\nchildren of Rezin, the children of\nNekoda, The children of Gazzam,\nthe children of Uzza,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "the children of Phaseah, The\nchildren of Besai, the children of\nMeunim, the children of\nNephishesim,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "The children of Bakbuk, the\nchildren of Hakupha, the children\nof Harhur, The children of\nBazlith, the children of Mehida,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "the children of Harsha, The\nchildren of Barkos, the children\nof Sisera, the children of Tamah,\nThe children of Neziah,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "the children of Hatipha. The\nchildren of Solomon's servants:\nthe children of Sotai, the\nchildren of Sophereth,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "the children of Perida, The\nchildren of Jaala, the children of\nDarkon, the children of Giddel,\nThe children of Shephatiah,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "the children of Hattil, the\nchildren of Pochereth of Zebaim,\nthe children of Amon. All the\nNethinims,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "and the children of Solomon's\nservants, [were] three hundred\nninety and two.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "And these [were] they which went\nup [also] from Telmelah,\nTelharesha, Cherub, Addon, and\nImmer:",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "but they could not shew their\nfather's house, nor their seed,\nwhether they [were] of Israel. The\nchildren of Delaiah,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "the children of Tobiah, the\nchildren of Nekoda, six hundred\nforty and two. And of the priests:\nthe children of Habaiah,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "the children of Koz, the children\nof Barzillai, which took [one] of\nthe daughters of Barzillai the\nGileadite to wife,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "and was called after their name.\nThese sought their register\n[among] those that were reckoned\nby genealogy,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "but it was not found: therefore\nwere they, as polluted, put from\nthe priesthood. And the Tirshatha\nsaid unto them,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "that they should not eat of the\nmost holy things, till there stood\n[up] a priest with Urim and\nThummim.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "The whole congregation together\n[was] forty and two thousand three\nhundred and threescore,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "Beside their manservants and their\nmaidservants, of whom [there were]\nseven thousand three hundred\nthirty and seven:",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "and they had two hundred forty and\nfive singing men and singing\nwomen. Their horses, seven hundred\nthirty and six: their mules,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "two hundred forty and five:\n[Their] camels, four hundred\nthirty and five:",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "six thousand seven hundred and\ntwenty asses. And some of the\nchief of the fathers gave unto the\nwork.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "The Tirshatha gave to the treasure\na thousand drams of gold, fifty\nbasons, five hundred and thirty\npriests' garments.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "And [some] of the chief of the\nfathers gave to the treasure of\nthe work twenty thousand drams of\ngold,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "and two thousand and two hundred\npound of silver. And [that] which\nthe rest of the people gave [was]\ntwenty thousand drams of gold,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "and two thousand pound of silver,\nand threescore and seven priests'\ngarments. So the priests, and the\nLevites, and the porters,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "and the singers, and [some] of the\npeople, and the Nethinims, and all\nIsrael, dwelt in their cities;",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-73",
+          "chunk": "and when the seventh month came,\nthe children of Israel [were] in\ntheir cities.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Genesis 1:1",
+          "chunk": "In the beginning God created the\nheaven and the earth.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Genesis 1:2",
+          "chunk": "And the earth was without form,\nand void;",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Genesis 1:2",
+          "chunk": "and darkness [was] upon the face\nof the deep. And the Spirit of God\nmoved upon the face of the waters.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "2 Peter 1:5-7",
+          "chunk": "And beside this, giving all\ndiligence, add to your faith\nvirtue; and to virtue knowledge;\nAnd to knowledge temperance;",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "2 Peter 1:5-7",
+          "chunk": "and to temperance patience; and to\npatience godliness; And to\ngodliness brotherly kindness; and\nto brotherly kindness charity.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "2 Peter 1:8",
+          "chunk": "For if these things be in you, and\nabound,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "2 Peter 1:8",
+          "chunk": "they make [you that ye shall]\nneither [be] barren nor unfruitful\nin the knowledge of our Lord Jesus\nChrist.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "John 15:8",
+          "chunk": "Herein is my Father glorified,\nthat ye bear much fruit; so shall\nye be my disciples.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-7",
+          "chunk": "And my God put into mine heart to\ngather together the nobles, and\nthe rulers, and the people,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-7",
+          "chunk": "that they might be reckoned by\ngenealogy. And I found a register\nof the genealogy of them which\ncame up at the first,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-7",
+          "chunk": "and found written therein, These\n[are] the children of the\nprovince, that went up out of the\ncaptivity,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-7",
+          "chunk": "of those that had been carried\naway, whom Nebuchadnezzar the king\nof Babylon had carried away,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-7",
+          "chunk": "and came again to Jerusalem and to\nJudah, every one unto his city;\nWho came with Zerubbabel, Jeshua,\nNehemiah, Azariah, Raamiah,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:5-7",
+          "chunk": "Nahamani, Mordecai, Bilshan,\nMispereth, Bigvai, Nehum, Baanah.\nThe number, [I say], of the men of\nthe people of Israel [was this];",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:61-65",
+          "chunk": "And these [were] they which went\nup [also] from Telmelah,\nTelharesha, Cherub, Addon, and\nImmer:",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:61-65",
+          "chunk": "but they could not shew their\nfather's house, nor their seed,\nwhether they [were] of Israel. The\nchildren of Delaiah,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:61-65",
+          "chunk": "the children of Tobiah, the\nchildren of Nekoda, six hundred\nforty and two. And of the priests:\nthe children of Habaiah,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:61-65",
+          "chunk": "the children of Koz, the children\nof Barzillai, which took [one] of\nthe daughters of Barzillai the\nGileadite to wife,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:61-65",
+          "chunk": "and was called after their name.\nThese sought their register\n[among] those that were reckoned\nby genealogy,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:61-65",
+          "chunk": "but it was not found: therefore\nwere they, as polluted, put from\nthe priesthood. And the Tirshatha\nsaid unto them,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Nehemiah 7:61-65",
+          "chunk": "that they should not eat of the\nmost holy things, till there stood\n[up] a priest with Urim and\nThummim.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Matthew 13:24-25",
+          "chunk": "Another parable put he forth unto\nthem, saying, The kingdom of\nheaven is likened unto a man which\nsowed good seed in his field:",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Matthew 13:24-25",
+          "chunk": "But while men slept, his enemy\ncame and sowed tares among the\nwheat, and went his way.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "Romans 5:12",
+          "chunk": "Wherefore, as by one man sin\nentered into the world, and death\nby sin; and so death passed upon\nall men, for that all have sinned:",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "John 3:3-6",
+          "chunk": "Jesus answered and said unto him,\nVerily, verily, I say unto thee,\nExcept a man be born again, he\ncannot see the kingdom of God.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "John 3:3-6",
+          "chunk": "Nicodemus saith unto him, How can\na man be born when he is old? can\nhe enter the second time into his\nmother's womb, and be born?",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "John 3:3-6",
+          "chunk": "Jesus answered, Verily, verily, I\nsay unto thee, Except a man be\nborn of water and [of] the Spirit,",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "John 3:3-6",
+          "chunk": "he cannot enter into the kingdom\nof God. That which is born of the\nflesh is flesh; and that which is\nborn of the Spirit is spirit.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "John 1:12",
+          "chunk": "But as many as received him, to\nthem gave he power to become the\nsons of God, [even] to them that\nbelieve on his name:",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "1 John 5:13",
+          "chunk": "These things have I written unto\nyou that believe on the name of\nthe Son of God;",
+          "max_line_chars": 34,
+          "max_lines": 4
+        },
+        {
+          "type": "verse",
+          "ref": "1 John 5:13",
+          "chunk": "that ye may know that ye have\neternal life, and that ye may\nbelieve on the name of the Son of\nGod.",
+          "max_line_chars": 34,
+          "max_lines": 4
+        }
+      ]
     }
   ]
 }

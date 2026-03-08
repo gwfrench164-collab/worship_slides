@@ -15,7 +15,7 @@ class MainWindow(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Worship Slides")
-        self.geometry("400x300")
+        self.geometry("400x380")
 
         self._build_menu()
         self._build_main_buttons()
@@ -31,8 +31,9 @@ class MainWindow(tk.Tk):
         file_menu.add_command(label="Exit", command=self.quit)
         file_menu.add_command(label="Build Slides", command=self.open_build_window)
         file_menu.add_separator()
-        file_menu.add_command(label="Extract Verse List from Notes", command=self.extract_verse_list_from_notes)
         file_menu.add_command(label="Build Verse Slides from Notes", command=self.build_verse_slides_from_notes)
+        file_menu.add_command(label="Extract Verse List from Notes", command=self.extract_verse_list_from_notes)
+
 
         menubar.add_cascade(label="File", menu=file_menu)
 
@@ -54,8 +55,10 @@ class MainWindow(tk.Tk):
         tk.Button(frame, text="Create New Song", width=25, command=self.open_song_builder).pack(pady=5)
         tk.Button(frame, text="Open Existing Song", width=25, command=self.open_existing_song).pack(pady=5)
         tk.Button(frame, text="Import Song from PDF", width=25, command=self.import_song_from_pdf).pack(pady=5)
-        tk.Button(frame, text="Build Slides", width=25, command=self.open_build_window).pack(pady=5)
         tk.Button(frame, text="Manage Library", width=25, command=self.open_library_window).pack(pady=5)
+        tk.Button(frame, text="Build Slides", width=25, command=self.open_build_window).pack(pady=5)
+        tk.Button(frame, text="Extract Verse List from Notes", width=25, command=self.extract_verse_list_from_notes).pack(pady=5)
+        tk.Button(frame, text="Build Verse Slides from Notes", width=25, command=self.build_verse_slides_from_notes).pack(pady=5)
 
     def not_implemented(self):
         messagebox.showinfo("Not implemented", "This feature is not implemented yet.")
@@ -238,18 +241,15 @@ class MainWindow(tk.Tk):
         songs_folder = Path(data_root) / "songs"
 
         try:
-            song_json = import_song_from_pdf(
-                Path(pdf_path),
-                songs_folder
-            )
+            song_data = import_song_from_pdf(Path(pdf_path))
         except Exception as e:
             messagebox.showerror("Import failed", str(e))
             return
 
         messagebox.showinfo(
             "Import complete",
-            f"Song imported:\n{song_json.name}"
+            "OCR import complete. Review the draft and click Save Song when ready."
         )
 
-        # Open the Song Builder with the new song
-        SongBuilder(self, songs_folder, open_song=song_json)
+        # Open the Song Builder with the unsaved draft song
+        SongBuilder(self, songs_folder, draft_song=song_data)

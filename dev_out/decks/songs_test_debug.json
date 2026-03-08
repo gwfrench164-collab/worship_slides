@@ -5,7 +5,7 @@
       "kind": "songs",
       "template_path": "/Users/george/Church_Slide_Builder/worship_slides/templates/template_from_service.pptx",
       "output_path": "/Users/george/Church_Slide_Builder/worship_slides/dev_out/decks/songs_test.pptx",
-      "started_at": "2026-02-28 23:56:43",
+      "started_at": "2026-03-01 15:31:35",
       "slides": [
         {
           "type": "lyrics",
@@ -3113,17 +3113,302 @@
           "type": "lyrics",
           "lines": [
             "Come, Jesus, come",
-            "We've been waiting so long",
+            "We've been waiting so long"
+          ],
+          "lyric_starts": [
+            true,
+            true
+          ],
+          "geom": {
+            "box_w_px": 1055.6611023622045,
+            "box_h_px": 671.8804199475065,
+            "line_h_px": 99.00000000000001
+          },
+          "wrap_pack_ctx": {
+            "wrap": [
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "We've been waiting so long",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "We've been",
+                    "w": 422.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting",
+                    "w": 695.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting so",
+                    "w": 802.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting so long",
+                    "w": 977.984375,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "For the day You return to heal every hurt and right every wrong",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "For the",
+                    "w": 255.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day",
+                    "w": 407.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You",
+                    "w": 571.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return",
+                    "w": 804.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return to",
+                    "w": 893.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return to heal",
+                    "w": 1068.875,
+                    "ok": false
+                  },
+                  {
+                    "try": "to heal",
+                    "w": 242.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every",
+                    "w": 461.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt",
+                    "w": 622.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and",
+                    "w": 779.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and right",
+                    "w": 958.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and right every",
+                    "w": 1177.0,
+                    "ok": false
+                  },
+                  {
+                    "try": "every wrong",
+                    "w": 439.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "We need You right now",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "We need",
+                    "w": 322.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You",
+                    "w": 487.859375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You right",
+                    "w": 666.859375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You right now",
+                    "w": 836.859375,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come and turn this around",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come and",
+                    "w": 372.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn",
+                    "w": 533.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn this",
+                    "w": 680.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn this around",
+                    "w": 954.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Deep down I know, this world isn't home",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Deep down",
+                    "w": 408.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I",
+                    "w": 452.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know,",
+                    "w": 683.9375,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know, this",
+                    "w": 830.9375,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know, this world",
+                    "w": 1045.9375,
+                    "ok": false
+                  },
+                  {
+                    "try": "this world",
+                    "w": 340.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "this world isn't",
+                    "w": 502.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "this world isn't home",
+                    "w": 726.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              }
+            ],
+            "pack": [
+              {
+                "event": "break",
+                "used_h": 564.3000000000002,
+                "needed_h": 133.65000000000003,
+                "box_height_px": 671.8804199475065
+              },
+              {
+                "event": "break",
+                "used_h": 598.95,
+                "needed_h": 133.65000000000003,
+                "box_height_px": 671.8804199475065
+              }
+            ]
+          }
+        },
+        {
+          "type": "lyrics",
+          "lines": [
             "For the day You return",
             "to heal every hurt and right",
-            "every wrong"
+            "every wrong",
+            "We need You right now",
+            "Come and turn this around"
           ],
           "lyric_starts": [
-            true,
-            true,
             true,
             false,
-            false
+            false,
+            true,
+            true
           ],
           "geom": {
             "box_w_px": 1055.6611023622045,
@@ -3403,299 +3688,14 @@
         {
           "type": "lyrics",
           "lines": [
-            "We need You right now",
-            "Come and turn this around",
             "Deep down I know,",
-            "this world isn't home"
-          ],
-          "lyric_starts": [
-            true,
-            true,
-            true,
-            false
-          ],
-          "geom": {
-            "box_w_px": 1055.6611023622045,
-            "box_h_px": 671.8804199475065,
-            "line_h_px": 99.00000000000001
-          },
-          "wrap_pack_ctx": {
-            "wrap": [
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "We've been waiting so long",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "We've been",
-                    "w": 422.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting",
-                    "w": 695.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting so",
-                    "w": 802.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting so long",
-                    "w": 977.984375,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "For the day You return to heal every hurt and right every wrong",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "For the",
-                    "w": 255.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day",
-                    "w": 407.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You",
-                    "w": 571.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return",
-                    "w": 804.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return to",
-                    "w": 893.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return to heal",
-                    "w": 1068.875,
-                    "ok": false
-                  },
-                  {
-                    "try": "to heal",
-                    "w": 242.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every",
-                    "w": 461.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt",
-                    "w": 622.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and",
-                    "w": 779.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and right",
-                    "w": 958.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and right every",
-                    "w": 1177.0,
-                    "ok": false
-                  },
-                  {
-                    "try": "every wrong",
-                    "w": 439.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "We need You right now",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "We need",
-                    "w": 322.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You",
-                    "w": 487.859375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You right",
-                    "w": 666.859375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You right now",
-                    "w": 836.859375,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come and turn this around",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come and",
-                    "w": 372.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn",
-                    "w": 533.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn this",
-                    "w": 680.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn this around",
-                    "w": 954.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Deep down I know, this world isn't home",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Deep down",
-                    "w": 408.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I",
-                    "w": 452.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know,",
-                    "w": 683.9375,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know, this",
-                    "w": 830.9375,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know, this world",
-                    "w": 1045.9375,
-                    "ok": false
-                  },
-                  {
-                    "try": "this world",
-                    "w": 340.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "this world isn't",
-                    "w": 502.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "this world isn't home",
-                    "w": 726.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              }
-            ],
-            "pack": [
-              {
-                "event": "break",
-                "used_h": 564.3000000000002,
-                "needed_h": 133.65000000000003,
-                "box_height_px": 671.8804199475065
-              },
-              {
-                "event": "break",
-                "used_h": 598.95,
-                "needed_h": 133.65000000000003,
-                "box_height_px": 671.8804199475065
-              }
-            ]
-          }
-        },
-        {
-          "type": "lyrics",
-          "lines": [
+            "this world isn't home",
             "Come, Jesus, come",
             "Come, Jesus, come"
           ],
           "lyric_starts": [
+            true,
+            false,
             true,
             true
           ],
@@ -4460,17 +4460,302 @@
           "type": "lyrics",
           "lines": [
             "Come, Jesus, come",
-            "We've been waiting so long",
+            "We've been waiting so long"
+          ],
+          "lyric_starts": [
+            true,
+            true
+          ],
+          "geom": {
+            "box_w_px": 1055.6611023622045,
+            "box_h_px": 671.8804199475065,
+            "line_h_px": 99.00000000000001
+          },
+          "wrap_pack_ctx": {
+            "wrap": [
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "We've been waiting so long",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "We've been",
+                    "w": 422.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting",
+                    "w": 695.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting so",
+                    "w": 802.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting so long",
+                    "w": 977.984375,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "For the day You return to heal every hurt and right every wrong",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "For the",
+                    "w": 255.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day",
+                    "w": 407.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You",
+                    "w": 571.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return",
+                    "w": 804.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return to",
+                    "w": 893.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return to heal",
+                    "w": 1068.875,
+                    "ok": false
+                  },
+                  {
+                    "try": "to heal",
+                    "w": 242.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every",
+                    "w": 461.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt",
+                    "w": 622.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and",
+                    "w": 779.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and right",
+                    "w": 958.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and right every",
+                    "w": 1177.0,
+                    "ok": false
+                  },
+                  {
+                    "try": "every wrong",
+                    "w": 439.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "We need You right now",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "We need",
+                    "w": 322.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You",
+                    "w": 487.859375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You right",
+                    "w": 666.859375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You right now",
+                    "w": 836.859375,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come and turn this around",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come and",
+                    "w": 372.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn",
+                    "w": 533.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn this",
+                    "w": 680.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn this around",
+                    "w": 954.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Deep down I know, this world isn't home",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Deep down",
+                    "w": 408.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I",
+                    "w": 452.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know,",
+                    "w": 683.9375,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know, this",
+                    "w": 830.9375,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know, this world",
+                    "w": 1045.9375,
+                    "ok": false
+                  },
+                  {
+                    "try": "this world",
+                    "w": 340.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "this world isn't",
+                    "w": 502.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "this world isn't home",
+                    "w": 726.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              }
+            ],
+            "pack": [
+              {
+                "event": "break",
+                "used_h": 564.3000000000002,
+                "needed_h": 133.65000000000003,
+                "box_height_px": 671.8804199475065
+              },
+              {
+                "event": "break",
+                "used_h": 598.95,
+                "needed_h": 133.65000000000003,
+                "box_height_px": 671.8804199475065
+              }
+            ]
+          }
+        },
+        {
+          "type": "lyrics",
+          "lines": [
             "For the day You return",
             "to heal every hurt and right",
-            "every wrong"
+            "every wrong",
+            "We need You right now",
+            "Come and turn this around"
           ],
           "lyric_starts": [
-            true,
-            true,
             true,
             false,
-            false
+            false,
+            true,
+            true
           ],
           "geom": {
             "box_w_px": 1055.6611023622045,
@@ -4750,299 +5035,14 @@
         {
           "type": "lyrics",
           "lines": [
-            "We need You right now",
-            "Come and turn this around",
             "Deep down I know,",
-            "this world isn't home"
-          ],
-          "lyric_starts": [
-            true,
-            true,
-            true,
-            false
-          ],
-          "geom": {
-            "box_w_px": 1055.6611023622045,
-            "box_h_px": 671.8804199475065,
-            "line_h_px": 99.00000000000001
-          },
-          "wrap_pack_ctx": {
-            "wrap": [
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "We've been waiting so long",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "We've been",
-                    "w": 422.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting",
-                    "w": 695.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting so",
-                    "w": 802.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting so long",
-                    "w": 977.984375,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "For the day You return to heal every hurt and right every wrong",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "For the",
-                    "w": 255.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day",
-                    "w": 407.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You",
-                    "w": 571.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return",
-                    "w": 804.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return to",
-                    "w": 893.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return to heal",
-                    "w": 1068.875,
-                    "ok": false
-                  },
-                  {
-                    "try": "to heal",
-                    "w": 242.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every",
-                    "w": 461.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt",
-                    "w": 622.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and",
-                    "w": 779.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and right",
-                    "w": 958.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and right every",
-                    "w": 1177.0,
-                    "ok": false
-                  },
-                  {
-                    "try": "every wrong",
-                    "w": 439.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "We need You right now",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "We need",
-                    "w": 322.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You",
-                    "w": 487.859375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You right",
-                    "w": 666.859375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You right now",
-                    "w": 836.859375,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come and turn this around",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come and",
-                    "w": 372.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn",
-                    "w": 533.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn this",
-                    "w": 680.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn this around",
-                    "w": 954.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Deep down I know, this world isn't home",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Deep down",
-                    "w": 408.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I",
-                    "w": 452.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know,",
-                    "w": 683.9375,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know, this",
-                    "w": 830.9375,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know, this world",
-                    "w": 1045.9375,
-                    "ok": false
-                  },
-                  {
-                    "try": "this world",
-                    "w": 340.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "this world isn't",
-                    "w": 502.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "this world isn't home",
-                    "w": 726.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              }
-            ],
-            "pack": [
-              {
-                "event": "break",
-                "used_h": 564.3000000000002,
-                "needed_h": 133.65000000000003,
-                "box_height_px": 671.8804199475065
-              },
-              {
-                "event": "break",
-                "used_h": 598.95,
-                "needed_h": 133.65000000000003,
-                "box_height_px": 671.8804199475065
-              }
-            ]
-          }
-        },
-        {
-          "type": "lyrics",
-          "lines": [
+            "this world isn't home",
             "Come, Jesus, come",
             "Come, Jesus, come"
           ],
           "lyric_starts": [
+            true,
+            false,
             true,
             true
           ],
@@ -5821,587 +5821,7 @@
           "type": "lyrics",
           "lines": [
             "Come, Jesus, come",
-            "We've been waiting so long",
-            "For the day You return",
-            "to heal every hurt and right",
-            "every wrong"
-          ],
-          "lyric_starts": [
-            true,
-            true,
-            true,
-            false,
-            false
-          ],
-          "geom": {
-            "box_w_px": 1055.6611023622045,
-            "box_h_px": 671.8804199475065,
-            "line_h_px": 99.00000000000001
-          },
-          "wrap_pack_ctx": {
-            "wrap": [
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "We've been waiting so long",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "We've been",
-                    "w": 422.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting",
-                    "w": 695.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting so",
-                    "w": 802.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting so long",
-                    "w": 977.984375,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "For the day You return to heal every hurt and right every wrong",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "For the",
-                    "w": 255.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day",
-                    "w": 407.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You",
-                    "w": 571.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return",
-                    "w": 804.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return to",
-                    "w": 893.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return to heal",
-                    "w": 1068.875,
-                    "ok": false
-                  },
-                  {
-                    "try": "to heal",
-                    "w": 242.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every",
-                    "w": 461.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt",
-                    "w": 622.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and",
-                    "w": 779.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and right",
-                    "w": 958.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and right every",
-                    "w": 1177.0,
-                    "ok": false
-                  },
-                  {
-                    "try": "every wrong",
-                    "w": 439.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "We need You right now",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "We need",
-                    "w": 322.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You",
-                    "w": 487.859375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You right",
-                    "w": 666.859375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You right now",
-                    "w": 836.859375,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come and turn this around",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come and",
-                    "w": 372.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn",
-                    "w": 533.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn this",
-                    "w": 680.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn this around",
-                    "w": 954.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Deep down I know, this world isn't home",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Deep down",
-                    "w": 408.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I",
-                    "w": 452.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know,",
-                    "w": 683.9375,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know, this",
-                    "w": 830.9375,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know, this world",
-                    "w": 1045.9375,
-                    "ok": false
-                  },
-                  {
-                    "try": "this world",
-                    "w": 340.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "this world isn't",
-                    "w": 502.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "this world isn't home",
-                    "w": 726.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              }
-            ],
-            "pack": [
-              {
-                "event": "break",
-                "used_h": 564.3000000000002,
-                "needed_h": 133.65000000000003,
-                "box_height_px": 671.8804199475065
-              },
-              {
-                "event": "break",
-                "used_h": 598.95,
-                "needed_h": 133.65000000000003,
-                "box_height_px": 671.8804199475065
-              }
-            ]
-          }
-        },
-        {
-          "type": "lyrics",
-          "lines": [
-            "We need You right now",
-            "Come and turn this around",
-            "Deep down I know,",
-            "this world isn't home"
-          ],
-          "lyric_starts": [
-            true,
-            true,
-            true,
-            false
-          ],
-          "geom": {
-            "box_w_px": 1055.6611023622045,
-            "box_h_px": 671.8804199475065,
-            "line_h_px": 99.00000000000001
-          },
-          "wrap_pack_ctx": {
-            "wrap": [
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "We've been waiting so long",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "We've been",
-                    "w": 422.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting",
-                    "w": 695.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting so",
-                    "w": 802.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting so long",
-                    "w": 977.984375,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "For the day You return to heal every hurt and right every wrong",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "For the",
-                    "w": 255.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day",
-                    "w": 407.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You",
-                    "w": 571.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return",
-                    "w": 804.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return to",
-                    "w": 893.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return to heal",
-                    "w": 1068.875,
-                    "ok": false
-                  },
-                  {
-                    "try": "to heal",
-                    "w": 242.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every",
-                    "w": 461.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt",
-                    "w": 622.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and",
-                    "w": 779.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and right",
-                    "w": 958.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and right every",
-                    "w": 1177.0,
-                    "ok": false
-                  },
-                  {
-                    "try": "every wrong",
-                    "w": 439.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "We need You right now",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "We need",
-                    "w": 322.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You",
-                    "w": 487.859375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You right",
-                    "w": 666.859375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You right now",
-                    "w": 836.859375,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come and turn this around",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come and",
-                    "w": 372.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn",
-                    "w": 533.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn this",
-                    "w": 680.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn this around",
-                    "w": 954.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Deep down I know, this world isn't home",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Deep down",
-                    "w": 408.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I",
-                    "w": 452.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know,",
-                    "w": 683.9375,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know, this",
-                    "w": 830.9375,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know, this world",
-                    "w": 1045.9375,
-                    "ok": false
-                  },
-                  {
-                    "try": "this world",
-                    "w": 340.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "this world isn't",
-                    "w": 502.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "this world isn't home",
-                    "w": 726.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              }
-            ],
-            "pack": [
-              {
-                "event": "break",
-                "used_h": 564.3000000000002,
-                "needed_h": 133.65000000000003,
-                "box_height_px": 671.8804199475065
-              },
-              {
-                "event": "break",
-                "used_h": 598.95,
-                "needed_h": 133.65000000000003,
-                "box_height_px": 671.8804199475065
-              }
-            ]
-          }
-        },
-        {
-          "type": "lyrics",
-          "lines": [
-            "Come, Jesus, come",
-            "Come, Jesus, come"
+            "We've been waiting so long"
           ],
           "lyric_starts": [
             true,
@@ -6685,18 +6105,18 @@
         {
           "type": "lyrics",
           "lines": [
-            "Come, Jesus, come",
-            "We've been waiting so long",
             "For the day You return",
             "to heal every hurt and right",
-            "every wrong"
+            "every wrong",
+            "We need You right now",
+            "Come and turn this around"
           ],
           "lyric_starts": [
-            true,
-            true,
             true,
             false,
-            false
+            false,
+            true,
+            true
           ],
           "geom": {
             "box_w_px": 1055.6611023622045,
@@ -6976,299 +6396,879 @@
         {
           "type": "lyrics",
           "lines": [
-            "We need You right now",
-            "Come and turn this around",
             "Deep down I know,",
-            "this world isn't home"
-          ],
-          "lyric_starts": [
-            true,
-            true,
-            true,
-            false
-          ],
-          "geom": {
-            "box_w_px": 1055.6611023622045,
-            "box_h_px": 671.8804199475065,
-            "line_h_px": 99.00000000000001
-          },
-          "wrap_pack_ctx": {
-            "wrap": [
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "We've been waiting so long",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "We've been",
-                    "w": 422.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting",
-                    "w": 695.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting so",
-                    "w": 802.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We've been waiting so long",
-                    "w": 977.984375,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "For the day You return to heal every hurt and right every wrong",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "For the",
-                    "w": 255.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day",
-                    "w": 407.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You",
-                    "w": 571.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return",
-                    "w": 804.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return to",
-                    "w": 893.875,
-                    "ok": true
-                  },
-                  {
-                    "try": "For the day You return to heal",
-                    "w": 1068.875,
-                    "ok": false
-                  },
-                  {
-                    "try": "to heal",
-                    "w": 242.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every",
-                    "w": 461.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt",
-                    "w": 622.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and",
-                    "w": 779.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and right",
-                    "w": 958.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "to heal every hurt and right every",
-                    "w": 1177.0,
-                    "ok": false
-                  },
-                  {
-                    "try": "every wrong",
-                    "w": 439.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "We need You right now",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "We need",
-                    "w": 322.984375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You",
-                    "w": 487.859375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You right",
-                    "w": 666.859375,
-                    "ok": true
-                  },
-                  {
-                    "try": "We need You right now",
-                    "w": 836.859375,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come and turn this around",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come and",
-                    "w": 372.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn",
-                    "w": 533.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn this",
-                    "w": 680.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come and turn this around",
-                    "w": 954.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Deep down I know, this world isn't home",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Deep down",
-                    "w": 408.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I",
-                    "w": 452.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know,",
-                    "w": 683.9375,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know, this",
-                    "w": 830.9375,
-                    "ok": true
-                  },
-                  {
-                    "try": "Deep down I know, this world",
-                    "w": 1045.9375,
-                    "ok": false
-                  },
-                  {
-                    "try": "this world",
-                    "w": 340.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "this world isn't",
-                    "w": 502.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "this world isn't home",
-                    "w": 726.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Come, Jesus, come",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Come, Jesus,",
-                    "w": 491.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Come, Jesus, come",
-                    "w": 710.0,
-                    "ok": true
-                  }
-                ]
-              }
-            ],
-            "pack": [
-              {
-                "event": "break",
-                "used_h": 564.3000000000002,
-                "needed_h": 133.65000000000003,
-                "box_height_px": 671.8804199475065
-              },
-              {
-                "event": "break",
-                "used_h": 598.95,
-                "needed_h": 133.65000000000003,
-                "box_height_px": 671.8804199475065
-              }
-            ]
-          }
-        },
-        {
-          "type": "lyrics",
-          "lines": [
+            "this world isn't home",
             "Come, Jesus, come",
             "Come, Jesus, come"
           ],
           "lyric_starts": [
+            true,
+            false,
+            true,
+            true
+          ],
+          "geom": {
+            "box_w_px": 1055.6611023622045,
+            "box_h_px": 671.8804199475065,
+            "line_h_px": 99.00000000000001
+          },
+          "wrap_pack_ctx": {
+            "wrap": [
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "We've been waiting so long",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "We've been",
+                    "w": 422.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting",
+                    "w": 695.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting so",
+                    "w": 802.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting so long",
+                    "w": 977.984375,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "For the day You return to heal every hurt and right every wrong",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "For the",
+                    "w": 255.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day",
+                    "w": 407.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You",
+                    "w": 571.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return",
+                    "w": 804.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return to",
+                    "w": 893.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return to heal",
+                    "w": 1068.875,
+                    "ok": false
+                  },
+                  {
+                    "try": "to heal",
+                    "w": 242.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every",
+                    "w": 461.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt",
+                    "w": 622.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and",
+                    "w": 779.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and right",
+                    "w": 958.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and right every",
+                    "w": 1177.0,
+                    "ok": false
+                  },
+                  {
+                    "try": "every wrong",
+                    "w": 439.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "We need You right now",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "We need",
+                    "w": 322.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You",
+                    "w": 487.859375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You right",
+                    "w": 666.859375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You right now",
+                    "w": 836.859375,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come and turn this around",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come and",
+                    "w": 372.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn",
+                    "w": 533.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn this",
+                    "w": 680.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn this around",
+                    "w": 954.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Deep down I know, this world isn't home",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Deep down",
+                    "w": 408.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I",
+                    "w": 452.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know,",
+                    "w": 683.9375,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know, this",
+                    "w": 830.9375,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know, this world",
+                    "w": 1045.9375,
+                    "ok": false
+                  },
+                  {
+                    "try": "this world",
+                    "w": 340.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "this world isn't",
+                    "w": 502.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "this world isn't home",
+                    "w": 726.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              }
+            ],
+            "pack": [
+              {
+                "event": "break",
+                "used_h": 564.3000000000002,
+                "needed_h": 133.65000000000003,
+                "box_height_px": 671.8804199475065
+              },
+              {
+                "event": "break",
+                "used_h": 598.95,
+                "needed_h": 133.65000000000003,
+                "box_height_px": 671.8804199475065
+              }
+            ]
+          }
+        },
+        {
+          "type": "lyrics",
+          "lines": [
+            "Come, Jesus, come",
+            "We've been waiting so long"
+          ],
+          "lyric_starts": [
+            true,
+            true
+          ],
+          "geom": {
+            "box_w_px": 1055.6611023622045,
+            "box_h_px": 671.8804199475065,
+            "line_h_px": 99.00000000000001
+          },
+          "wrap_pack_ctx": {
+            "wrap": [
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "We've been waiting so long",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "We've been",
+                    "w": 422.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting",
+                    "w": 695.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting so",
+                    "w": 802.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting so long",
+                    "w": 977.984375,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "For the day You return to heal every hurt and right every wrong",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "For the",
+                    "w": 255.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day",
+                    "w": 407.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You",
+                    "w": 571.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return",
+                    "w": 804.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return to",
+                    "w": 893.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return to heal",
+                    "w": 1068.875,
+                    "ok": false
+                  },
+                  {
+                    "try": "to heal",
+                    "w": 242.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every",
+                    "w": 461.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt",
+                    "w": 622.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and",
+                    "w": 779.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and right",
+                    "w": 958.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and right every",
+                    "w": 1177.0,
+                    "ok": false
+                  },
+                  {
+                    "try": "every wrong",
+                    "w": 439.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "We need You right now",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "We need",
+                    "w": 322.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You",
+                    "w": 487.859375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You right",
+                    "w": 666.859375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You right now",
+                    "w": 836.859375,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come and turn this around",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come and",
+                    "w": 372.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn",
+                    "w": 533.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn this",
+                    "w": 680.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn this around",
+                    "w": 954.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Deep down I know, this world isn't home",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Deep down",
+                    "w": 408.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I",
+                    "w": 452.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know,",
+                    "w": 683.9375,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know, this",
+                    "w": 830.9375,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know, this world",
+                    "w": 1045.9375,
+                    "ok": false
+                  },
+                  {
+                    "try": "this world",
+                    "w": 340.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "this world isn't",
+                    "w": 502.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "this world isn't home",
+                    "w": 726.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              }
+            ],
+            "pack": [
+              {
+                "event": "break",
+                "used_h": 564.3000000000002,
+                "needed_h": 133.65000000000003,
+                "box_height_px": 671.8804199475065
+              },
+              {
+                "event": "break",
+                "used_h": 598.95,
+                "needed_h": 133.65000000000003,
+                "box_height_px": 671.8804199475065
+              }
+            ]
+          }
+        },
+        {
+          "type": "lyrics",
+          "lines": [
+            "For the day You return",
+            "to heal every hurt and right",
+            "every wrong",
+            "We need You right now",
+            "Come and turn this around"
+          ],
+          "lyric_starts": [
+            true,
+            false,
+            false,
+            true,
+            true
+          ],
+          "geom": {
+            "box_w_px": 1055.6611023622045,
+            "box_h_px": 671.8804199475065,
+            "line_h_px": 99.00000000000001
+          },
+          "wrap_pack_ctx": {
+            "wrap": [
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "We've been waiting so long",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "We've been",
+                    "w": 422.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting",
+                    "w": 695.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting so",
+                    "w": 802.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We've been waiting so long",
+                    "w": 977.984375,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "For the day You return to heal every hurt and right every wrong",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "For the",
+                    "w": 255.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day",
+                    "w": 407.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You",
+                    "w": 571.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return",
+                    "w": 804.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return to",
+                    "w": 893.875,
+                    "ok": true
+                  },
+                  {
+                    "try": "For the day You return to heal",
+                    "w": 1068.875,
+                    "ok": false
+                  },
+                  {
+                    "try": "to heal",
+                    "w": 242.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every",
+                    "w": 461.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt",
+                    "w": 622.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and",
+                    "w": 779.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and right",
+                    "w": 958.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "to heal every hurt and right every",
+                    "w": 1177.0,
+                    "ok": false
+                  },
+                  {
+                    "try": "every wrong",
+                    "w": 439.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "We need You right now",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "We need",
+                    "w": 322.984375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You",
+                    "w": 487.859375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You right",
+                    "w": 666.859375,
+                    "ok": true
+                  },
+                  {
+                    "try": "We need You right now",
+                    "w": 836.859375,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come and turn this around",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come and",
+                    "w": 372.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn",
+                    "w": 533.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn this",
+                    "w": 680.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come and turn this around",
+                    "w": 954.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Deep down I know, this world isn't home",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Deep down",
+                    "w": 408.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I",
+                    "w": 452.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know,",
+                    "w": 683.9375,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know, this",
+                    "w": 830.9375,
+                    "ok": true
+                  },
+                  {
+                    "try": "Deep down I know, this world",
+                    "w": 1045.9375,
+                    "ok": false
+                  },
+                  {
+                    "try": "this world",
+                    "w": 340.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "this world isn't",
+                    "w": 502.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "this world isn't home",
+                    "w": 726.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Come, Jesus, come",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Come, Jesus,",
+                    "w": 491.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Come, Jesus, come",
+                    "w": 710.0,
+                    "ok": true
+                  }
+                ]
+              }
+            ],
+            "pack": [
+              {
+                "event": "break",
+                "used_h": 564.3000000000002,
+                "needed_h": 133.65000000000003,
+                "box_height_px": 671.8804199475065
+              },
+              {
+                "event": "break",
+                "used_h": 598.95,
+                "needed_h": 133.65000000000003,
+                "box_height_px": 671.8804199475065
+              }
+            ]
+          }
+        },
+        {
+          "type": "lyrics",
+          "lines": [
+            "Deep down I know,",
+            "this world isn't home",
+            "Come, Jesus, come",
+            "Come, Jesus, come"
+          ],
+          "lyric_starts": [
+            true,
+            false,
             true,
             true
           ],
@@ -26055,16 +26055,296 @@
           "lines": [
             "Man of sorrows Lamb",
             "of God",
-            "By His own betrayed",
+            "By His own betrayed"
+          ],
+          "lyric_starts": [
+            true,
+            false,
+            true
+          ],
+          "geom": {
+            "box_w_px": 1055.6611023622045,
+            "box_h_px": 671.8804199475065,
+            "line_h_px": 99.00000000000001
+          },
+          "wrap_pack_ctx": {
+            "wrap": [
+              {
+                "input": "Man of sorrows Lamb of God",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Man of",
+                    "w": 246.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Man of sorrows",
+                    "w": 550.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Man of sorrows Lamb",
+                    "w": 774.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Man of sorrows Lamb of",
+                    "w": 863.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Man of sorrows Lamb of God",
+                    "w": 1037.0,
+                    "ok": false
+                  },
+                  {
+                    "try": "of God",
+                    "w": 241.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "By His own betrayed",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "By His",
+                    "w": 231.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "By His own",
+                    "w": 401.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "By His own betrayed",
+                    "w": 737.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "The sin of man and wrath of God",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "The sin",
+                    "w": 264.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "The sin of",
+                    "w": 353.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "The sin of man",
+                    "w": 532.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "The sin of man and",
+                    "w": 689.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "The sin of man and wrath",
+                    "w": 908.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "The sin of man and wrath of",
+                    "w": 997.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "The sin of man and wrath of God",
+                    "w": 1171.0,
+                    "ok": false
+                  },
+                  {
+                    "try": "of God",
+                    "w": 241.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Has been on Jesus laid",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Has been",
+                    "w": 345.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Has been on",
+                    "w": 457.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Has been on Jesus",
+                    "w": 689.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Has been on Jesus laid",
+                    "w": 837.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Silent as He stood accused",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Silent as",
+                    "w": 308.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Silent as He",
+                    "w": 433.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Silent as He stood",
+                    "w": 652.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Silent as He stood accused",
+                    "w": 974.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Beaten mocked and scorned",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Beaten mocked",
+                    "w": 559.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Beaten mocked and",
+                    "w": 716.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Beaten mocked and scorned",
+                    "w": 1025.0,
+                    "ok": false
+                  },
+                  {
+                    "try": "and scorned",
+                    "w": 444.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "Bowing to the Father's will",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "Bowing to",
+                    "w": 353.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Bowing to the",
+                    "w": 487.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Bowing to the Father's",
+                    "w": 797.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "Bowing to the Father's will",
+                    "w": 931.0,
+                    "ok": true
+                  }
+                ]
+              },
+              {
+                "input": "He took a crown of thorns",
+                "max_width_px": 1055.6611023622045,
+                "max_w": 1023.9912692913383,
+                "steps": [
+                  {
+                    "try": "He took",
+                    "w": 277.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "He took a",
+                    "w": 344.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "He took a crown",
+                    "w": 581.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "He took a crown of",
+                    "w": 670.0,
+                    "ok": true
+                  },
+                  {
+                    "try": "He took a crown of thorns",
+                    "w": 916.0,
+                    "ok": true
+                  }
+                ]
+              }
+            ],
+            "pack": [
+              {
+                "event": "break",
+                "used_h": 564.3000000000002,
+                "needed_h": 133.65000000000003,
+                "box_height_px": 671.8804199475065
+              },
+              {
+                "event": "break",
+                "used_h": 598.95,
+                "needed_h": 133.65000000000003,
+                "box_height_px": 671.8804199475065
+              }
+            ]
+          }
+        },
+        {
+          "type": "lyrics",
+          "lines": [
             "The sin of man and wrath",
-            "of God"
+            "of God",
+            "Has been on Jesus laid",
+            "Silent as He stood accused"
           ],
           "lyric_starts": [
             true,
             false,
             true,
-            true,
-            false
+            true
           ],
           "geom": {
             "box_w_px": 1055.6611023622045,
@@ -26339,294 +26619,14 @@
         {
           "type": "lyrics",
           "lines": [
-            "Has been on Jesus laid",
-            "Silent as He stood accused",
             "Beaten mocked",
-            "and scorned"
-          ],
-          "lyric_starts": [
-            true,
-            true,
-            true,
-            false
-          ],
-          "geom": {
-            "box_w_px": 1055.6611023622045,
-            "box_h_px": 671.8804199475065,
-            "line_h_px": 99.00000000000001
-          },
-          "wrap_pack_ctx": {
-            "wrap": [
-              {
-                "input": "Man of sorrows Lamb of God",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Man of",
-                    "w": 246.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Man of sorrows",
-                    "w": 550.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Man of sorrows Lamb",
-                    "w": 774.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Man of sorrows Lamb of",
-                    "w": 863.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Man of sorrows Lamb of God",
-                    "w": 1037.0,
-                    "ok": false
-                  },
-                  {
-                    "try": "of God",
-                    "w": 241.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "By His own betrayed",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "By His",
-                    "w": 231.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "By His own",
-                    "w": 401.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "By His own betrayed",
-                    "w": 737.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "The sin of man and wrath of God",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "The sin",
-                    "w": 264.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "The sin of",
-                    "w": 353.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "The sin of man",
-                    "w": 532.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "The sin of man and",
-                    "w": 689.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "The sin of man and wrath",
-                    "w": 908.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "The sin of man and wrath of",
-                    "w": 997.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "The sin of man and wrath of God",
-                    "w": 1171.0,
-                    "ok": false
-                  },
-                  {
-                    "try": "of God",
-                    "w": 241.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Has been on Jesus laid",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Has been",
-                    "w": 345.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Has been on",
-                    "w": 457.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Has been on Jesus",
-                    "w": 689.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Has been on Jesus laid",
-                    "w": 837.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Silent as He stood accused",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Silent as",
-                    "w": 308.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Silent as He",
-                    "w": 433.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Silent as He stood",
-                    "w": 652.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Silent as He stood accused",
-                    "w": 974.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Beaten mocked and scorned",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Beaten mocked",
-                    "w": 559.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Beaten mocked and",
-                    "w": 716.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Beaten mocked and scorned",
-                    "w": 1025.0,
-                    "ok": false
-                  },
-                  {
-                    "try": "and scorned",
-                    "w": 444.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "Bowing to the Father's will",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "Bowing to",
-                    "w": 353.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Bowing to the",
-                    "w": 487.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Bowing to the Father's",
-                    "w": 797.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "Bowing to the Father's will",
-                    "w": 931.0,
-                    "ok": true
-                  }
-                ]
-              },
-              {
-                "input": "He took a crown of thorns",
-                "max_width_px": 1055.6611023622045,
-                "max_w": 1023.9912692913383,
-                "steps": [
-                  {
-                    "try": "He took",
-                    "w": 277.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "He took a",
-                    "w": 344.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "He took a crown",
-                    "w": 581.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "He took a crown of",
-                    "w": 670.0,
-                    "ok": true
-                  },
-                  {
-                    "try": "He took a crown of thorns",
-                    "w": 916.0,
-                    "ok": true
-                  }
-                ]
-              }
-            ],
-            "pack": [
-              {
-                "event": "break",
-                "used_h": 564.3000000000002,
-                "needed_h": 133.65000000000003,
-                "box_height_px": 671.8804199475065
-              },
-              {
-                "event": "break",
-                "used_h": 598.95,
-                "needed_h": 133.65000000000003,
-                "box_height_px": 671.8804199475065
-              }
-            ]
-          }
-        },
-        {
-          "type": "lyrics",
-          "lines": [
+            "and scorned",
             "Bowing to the Father's will",
             "He took a crown of thorns"
           ],
           "lyric_starts": [
+            true,
+            false,
             true,
             true
           ],
@@ -28126,11 +28126,9 @@
           "lines": [
             "By the precious blood",
             "That my Jesus spilled",
-            "Now the curse of sin",
-            "Has no hold on me"
+            "Now the curse of sin"
           ],
           "lyric_starts": [
-            true,
             true,
             true,
             true
@@ -28500,10 +28498,12 @@
         {
           "type": "lyrics",
           "lines": [
+            "Has no hold on me",
             "Whom the Son sets free",
             "Oh is free indeed"
           ],
           "lyric_starts": [
+            true,
             true,
             true
           ],

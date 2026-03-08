@@ -6,6 +6,49 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from pptx import Presentation
 
+EMU_PER_PT = 12700
+
+_CONJ_START_RE = re.compile(r"^(and|but|so|for|yet|or|nor)\b", re.IGNORECASE)
+
+def _iter_text_shapes(slide):
+    for sh in slide.shapes:
+        if getattr(sh, "has_text_frame", False):
+            try:
+                txt = sh.text_frame.text
+            except Exception:
+                txt = ""
+            if txt is not None:
+                yield sh, txt
+
+def _norm(s: str) -> str:
+    return " ".join((s or "").replace("\r", "\n").split())
+
+def _split_lines(s: str) -> List[str]:
+    return [ln.strip() for ln in (s or "").replace("\r", "\n").split("\n") if ln.strip()]
+
+def _ends_sentence(s: str) -> bool:
+    s = (s or "").strip()
+    return bool(s) and s[-1] in ".!?:;\"”’)"  # commas don't count as "done"
+
+def _is_token_slide(full_text: str) -> bool:
+    return ("{{" in full_text) and ("}}" in full_text)
+
+def _min_font_pt(slide) -> Optional[float]:
+    m: Optional[float] = None
+    for sh, _ in _iter_text_shapes(slide):
+        try:
+            for p in sh.text_frame.paragraphs:
+                # first run is usually representative
+                if p.runs and p.runs[0].font.size:
+                    pt = float(p.runs[0].font.size.pt)
+                elif p.font and p.font.size:
+                    pt = float(p.font.size.pt)
+                else:
+                    continue
+                m = pt if m is None else min(m, pt)
+        except Exception:
+            continue
+    return m
 
 @dataclass
 class SlideText:
@@ -19,72 +62,31 @@ class SlideText:
     song_title: Optional[str]
     min_font_pt: Optional[float]
 
-
-def _iter_text_shapes(slide):
-    for sh in slide.shapes:
-        if getattr(sh, "has_text_frame", False):
-            try:
-                txt = sh.text_frame.text
-            except Exception:
-                txt = ""
-            if txt is not None:
-                yield sh, txt
-
-
-def _norm(s: str) -> str:
-    return " ".join((s or "").replace("\r", "\n").split())
-
-
-def _split_lines(s: str) -> List[str]:
-    return [ln.strip() for ln in (s or "").replace("\r", "\n").split("\n") if ln.strip()]
-
-
-def _is_token_slide(full_text: str) -> bool:
-    return ("{{" in full_text) and ("}}" in full_text)
-
-
-def _min_font_pt(slide) -> Optional[float]:
-    m: Optional[float] = None
-    for sh, _ in _iter_text_shapes(slide):
-        try:
-            for p in sh.text_frame.paragraphs:
-                if p.runs and p.runs[0].font.size:
-                    pt = float(p.runs[0].font.size.pt)
-                elif p.font and p.font.size:
-                    pt = float(p.font.size.pt)
-                else:
-                    continue
-                m = pt if m is None else min(m, pt)
-        except Exception:
-            continue
-    return m
-
-
-def _classify_song_title(texts: List[str]) -> Tuple[bool, Optional[str]]:
+def _classify_song_title(slide: int, texts: List[str]) -> Tuple[bool, Optional[str]]:
     """
-    Heuristic: a title slide usually has one short text block and no lyric body.
+    Heuristic: Title slide usually has exactly one non-empty text shape (title),
+    and no multi-line lyric block.
     """
     cleaned = [t.strip() for t in texts if t and t.strip()]
     if not cleaned:
         return False, None
-
+    # If there's one block and it's relatively short, treat as title.
     if len(cleaned) == 1:
         t = _norm(cleaned[0])
+        # Titles are usually short; allow punctuation/numbers.
         if 0 < len(t) <= 80 and len(t.split()) <= 10:
             return True, t
-
+    # If there are two blocks and one is very short (title) and the other is empty-ish, also title.
     if len(cleaned) == 2:
         a, b = map(_norm, cleaned)
         short = a if len(a) <= len(b) else b
         long = b if short == a else a
         if len(short) <= 80 and len(short.split()) <= 10 and len(long) <= 5:
             return True, short
-
     return False, None
 
-
 def _extract_slide_text(prs: Presentation, idx: int, current_song: Optional[str]) -> SlideText:
-    slide = prs.slides[idx - 1]
+    slide = prs.slides[idx-1]
     texts: List[str] = []
     for _, txt in _iter_text_shapes(slide):
         t = (txt or "").strip()
@@ -95,7 +97,7 @@ def _extract_slide_text(prs: Presentation, idx: int, current_song: Optional[str]
     is_token = _is_token_slide(full)
     lines = _split_lines(full)
     chars = len(_norm(full))
-    is_title, title = _classify_song_title(texts)
+    is_title, title = _classify_song_title(idx, texts)
 
     song_title = current_song
     if is_title and title:
@@ -113,13 +115,14 @@ def _extract_slide_text(prs: Presentation, idx: int, current_song: Optional[str]
         min_font_pt=_min_font_pt(slide),
     )
 
-
 def analyze_pptx(pptx_path: Path) -> dict:
     """
     QA heuristics for quickly spotting bad slides.
 
-    ORPHAN_START is intentionally disabled because it creates too many false
-    positives for both songs and KJV verses.
+    This returns:
+      - flags: SPARSE/CROWDED/TINY_TEXT and (for song decks) TAIL/ORPHAN_START
+      - slides: per-slide metrics
+      - issues: rich issue bundle (slide text + prev/next + song title)
     """
     prs = Presentation(str(pptx_path))
 
@@ -132,29 +135,28 @@ def analyze_pptx(pptx_path: Path) -> dict:
     slide_stats: List[Dict[str, Any]] = []
     issues: List[Dict[str, Any]] = []
 
+    # Track current song based on detected title slides
     current_song: Optional[str] = None
-    slides: List[SlideText] = []
 
+    # Pre-extract all slide texts so we can look at prev/next easily
+    slides: List[SlideText] = []
     for i in range(1, len(prs.slides) + 1):
         st = _extract_slide_text(prs, i, current_song)
         if st.is_title and st.song_title:
             current_song = st.song_title
+            # refresh with the updated current_song (title itself)
             st.song_title = current_song
         slides.append(st)
 
+    # Determine if this looks like a song deck: multiple title slides detected
     title_count = sum(1 for s in slides if s.is_title and not s.is_token)
     looks_like_song_deck = title_count >= 2
 
     for st in slides:
+        # Ignore token-only template slides
         if st.is_token:
             slide_stats.append(
-                {
-                    "slide": st.slide,
-                    "ignored": True,
-                    "chars": 0,
-                    "lines": 0,
-                    "min_font_pt": st.min_font_pt,
-                }
+                {"slide": st.slide, "ignored": True, "chars": 0, "lines": 0, "min_font_pt": st.min_font_pt}
             )
             continue
 
@@ -169,65 +171,58 @@ def analyze_pptx(pptx_path: Path) -> dict:
             }
         )
 
-        # Skip title slides from sparse/tail checks.
+        # Skip title slides from sparse/tail/orphan checks (titles are expected to be sparse).
         if st.is_title and looks_like_song_deck:
             continue
 
-        # Crowded: too much text or too many rendered lines.
+        # Conservative crowded
         if st.chars > 380 or len(st.lines) > 9:
             crowded.append(st.slide)
 
-        # Sparse: little content left on a slide.
+        # Sparse heuristic
         if st.chars > 0 and (st.chars < 45 or len(st.lines) < 2):
             sparse.append(st.slide)
 
-        # Tiny text: probable autoshrink happened.
+        # Tiny text heuristic (autosize)
         if st.min_font_pt is not None and st.min_font_pt < 26:
             tiny.append(st.slide)
 
-    # Song-specific TAIL check only.
+    # Song-specific flags: TAIL + ORPHAN_START
     if looks_like_song_deck:
         for i, st in enumerate(slides):
             if st.is_token or st.is_title:
                 continue
+            # Tail: lyric slide with very low content (often 1-2 lines)
+            if st.chars > 0 and (len(st.lines) <= 2 or st.chars < 70):
+                # Don't flag if it's clearly a full-width repeated chorus line (hard to know),
+                # but skip if it is exactly one long line (not really a tail, just sparse heuristic).
+                tail.append(st.slide)
 
-            prev = slides[i - 1] if i > 0 else None
-            prev_is_title = bool(prev and prev.is_title)
+            # Orphan start: begins with conjunction and prior slide didn't "complete" a sentence.
+            if st.lines:
+                first = st.lines[0]
+                if _CONJ_START_RE.match(first):
+                    prev = slides[i-1] if i > 0 else None
+                    prev_text = prev.full if prev else ""
+                    prev_last_line = _split_lines(prev_text)[-1] if prev and _split_lines(prev_text) else ""
+                    if prev and (not prev.is_title) and (not _ends_sentence(prev_last_line)):
+                        orphan_start.append(st.slide)
 
-            # Tail: very short leftover fragment that likely should have been merged.
-            # We intentionally do NOT flag every 2-line slide; songs often use short,
-            # musically natural authored slides.
-            if st.chars > 0:
-                is_short = len(st.lines) <= 2
-                very_short_text = st.chars < 40
-                continuation = False
-
-                if prev and not prev.is_title:
-                    prev_lines = _split_lines(prev.full)
-                    if prev_lines:
-                        last_prev = prev_lines[-1]
-                        continuation = last_prev and last_prev[-1] not in ".!?:;\"”’)",
-
-                if is_short and very_short_text and continuation and not prev_is_title:
-                    tail.append(st.slide)
-
-    flagged_set = set(sparse) | set(crowded) | set(tiny) | set(tail)
+    # Build rich issue bundle (only for slides that were flagged)
+    flagged_set = set(sparse) | set(crowded) | set(tiny) | set(tail) | set(orphan_start)
 
     for st in slides:
         if st.slide not in flagged_set:
             continue
-        prev = slides[st.slide - 2] if st.slide >= 2 else None
+        prev = slides[st.slide-2] if st.slide >= 2 else None
         nxt = slides[st.slide] if st.slide < len(slides) else None
 
         issue_types: List[str] = []
-        if st.slide in sparse:
-            issue_types.append("SPARSE")
-        if st.slide in crowded:
-            issue_types.append("CROWDED")
-        if st.slide in tiny:
-            issue_types.append("TINY_TEXT")
-        if st.slide in tail:
-            issue_types.append("TAIL")
+        if st.slide in sparse: issue_types.append("SPARSE")
+        if st.slide in crowded: issue_types.append("CROWDED")
+        if st.slide in tiny: issue_types.append("TINY_TEXT")
+        if st.slide in tail: issue_types.append("TAIL")
+        if st.slide in orphan_start: issue_types.append("ORPHAN_START")
 
         issues.append(
             {

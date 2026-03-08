@@ -1,4 +1,5 @@
 import json
+import math
 import os
 from pathlib import Path
 from typing import Optional, Tuple, List
@@ -13,22 +14,29 @@ from pptx_utils import (
     TOKEN_LYRICS,
 )
 
+# Pillow is used ONLY for measuring text width/height; PowerPoint still renders.
 from PIL import ImageFont
 
 from debug_tools import DebugSettings, DebugRecorder
 
+
+# Optional: matplotlib does a good job resolving a font *family name* to a real file path on macOS/Windows/Linux.
 try:
     from matplotlib.font_manager import FontProperties, findfont  # type: ignore
-except Exception:
+except Exception:  # pragma: no cover
     FontProperties = None
     findfont = None
 
+
+# NOTE:
+# We intentionally *do not* freeze debug settings at import time.
+# Users may toggle env-vars between runs; we re-read env inside build_deck().
 DEBUG_SETTINGS = DebugSettings.from_env()
 
 EMU_PER_INCH = 914400
 PT_PER_INCH = 72
-MEASURE_DPI = 96
-PX_PER_PT = MEASURE_DPI / PT_PER_INCH
+MEASURE_DPI = 96  # Pillow measures in pixels; use a consistent DPI conversion
+PX_PER_PT = MEASURE_DPI / PT_PER_INCH  # 96/72 = 1.333...
 
 
 def _emu_to_pt(emu: int) -> float:
@@ -36,6 +44,7 @@ def _emu_to_pt(emu: int) -> float:
 
 
 def _find_token_shape(slide, token: str):
+    # Prefer shape name (user convention), then fallback to token-in-text
     for shape in slide.shapes:
         try:
             if getattr(shape, "name", None) == token:
@@ -55,13 +64,16 @@ def _find_token_shape(slide, token: str):
 
 
 def _best_font_size_pts_from_shape(shape) -> float:
+    """Best-effort font size (pts) from the lyric placeholder."""
     try:
         tf = shape.text_frame
         if not tf.paragraphs:
             return 60.0
         p0 = tf.paragraphs[0]
+
         if p0.runs and p0.runs[0].font.size:
             return float(p0.runs[0].font.size.pt)
+
         if p0.font and p0.font.size:
             return float(p0.font.size.pt)
     except Exception:
@@ -70,15 +82,19 @@ def _best_font_size_pts_from_shape(shape) -> float:
 
 
 def _line_spacing_factor_from_shape(shape, font_size_pts: float) -> float:
+    """Return a multiplier for line spacing when possible."""
     try:
         p0 = shape.text_frame.paragraphs[0]
         ls = p0.line_spacing
         if ls is None:
             return 1.10
+
         if isinstance(ls, (float, int)):
+            # If it looks like points, convert to multiplier
             if ls > 3:
                 return float(ls) / max(font_size_pts, 1.0)
             return float(ls)
+
         if hasattr(ls, "pt"):
             return float(ls.pt) / max(font_size_pts, 1.0)
     except Exception:
@@ -87,18 +103,27 @@ def _line_spacing_factor_from_shape(shape, font_size_pts: float) -> float:
 
 
 def _font_family_from_shape(shape) -> Optional[str]:
+    """Best-effort: pull a font family name from the lyric placeholder."""
     if not getattr(shape, "has_text_frame", False):
         return None
+
     try:
         tf = shape.text_frame
         if not tf.paragraphs:
             return None
         p0 = tf.paragraphs[0]
+
+        # Try paragraph-level font
         if p0.font and p0.font.name:
             return str(p0.font.name)
+
+        # Try first run font (common in Keynote exports)
         if p0.runs and p0.runs[0].font and p0.runs[0].font.name:
             return str(p0.runs[0].font.name)
-        el = tf._txBody
+
+        # Try DrawingML default run properties (theme/layout)
+        # python-pptx exposes the underlying lxml element as _txBody.
+        el = tf._txBody  # noqa: SLF001
         latin = el.xpath(
             ".//a:lstStyle//a:lvl1pPr//a:defRPr//a:latin",
             namespaces={"a": "http://schemas.openxmlformats.org/drawingml/2006/main"},
@@ -107,11 +132,19 @@ def _font_family_from_shape(shape) -> Optional[str]:
             return latin[0].attrib.get("typeface") or None
     except Exception:
         return None
+
     return None
 
 
 def _resolve_font_path(font_family: str | None) -> Optional[str]:
+    """Resolve a font *family name* to an installed font file path.
+
+    - If the template provides a family name, try to resolve that.
+    - If the family name is missing/empty, try to get a sensible system default.
+    """
     family = (font_family or "").strip()
+
+    # 1) Use matplotlib if available (best cross-platform resolver)
     if FontProperties is not None and findfont is not None:
         try:
             fp = FontProperties(family=family) if family else FontProperties()
@@ -121,6 +154,7 @@ def _resolve_font_path(font_family: str | None) -> Optional[str]:
         except Exception:
             pass
 
+    # 2) Fallback: macOS common font dirs (best-effort filename match)
     if family:
         needle = family.lower().replace(" ", "")
         for d in (
@@ -138,10 +172,22 @@ def _resolve_font_path(font_family: str | None) -> Optional[str]:
                     p = os.path.join(d, fn)
                     if os.path.exists(p):
                         return p
+
     return None
 
 
+
+
 def _try_load_font(font_path: str | None, size_px: int) -> ImageFont.FreeTypeFont:
+    """Load a TrueType/OpenType font robustly on macOS.
+
+    Pillow raises OSError('cannot open resource') when the font file can't be found/opened.
+    This helper tries:
+      1) the resolved font_path (from the template font name),
+      2) a few common macOS fonts,
+      3) matplotlib's default font (if available),
+      4) Pillow's built-in default font (last resort).
+    """
     candidates: List[str] = []
     if font_path:
         candidates.append(font_path)
@@ -170,25 +216,34 @@ def _try_load_font(font_path: str | None, size_px: int) -> ImageFont.FreeTypeFon
 
     return ImageFont.load_default()
 
-
 def _build_measure_font(template_shape) -> Tuple[ImageFont.FreeTypeFont, float, float, float]:
+    """
+    Returns:
+      (pillow_font, width_px, height_px, line_height_px)
+    """
     width_pts = _emu_to_pt(int(template_shape.width))
     height_pts = _emu_to_pt(int(template_shape.height))
+
     font_size_pts = _best_font_size_pts_from_shape(template_shape)
     line_factor = _line_spacing_factor_from_shape(template_shape, font_size_pts)
+
     font_family = _font_family_from_shape(template_shape) or ""
-    font_path = _resolve_font_path(font_family)
+    font_path = _resolve_font_path(font_family)  # may be None
+
+    # Convert points to pixels for Pillow measurement
     size_px = max(8, int(round(font_size_pts * PX_PER_PT)))
+
     font = _try_load_font(font_path, size_px)
 
     try:
         ascent, descent = font.getmetrics()
     except Exception:
+        # Pillow default font may not expose metrics; approximate.
         ascent = int(size_px * 0.8)
         descent = int(size_px * 0.2)
-
-    raw_line_h = ascent + descent
+    raw_line_h = (ascent + descent)
     line_h = raw_line_h * max(line_factor, 1.0)
+
     return font, width_pts * PX_PER_PT, height_pts * PX_PER_PT, float(line_h)
 
 
@@ -199,6 +254,7 @@ _SMALL_WORDS = {
 
 
 def _text_width_px(font: ImageFont.FreeTypeFont, text: str) -> float:
+    # Pillow >= 8 has getlength; fallback to getbbox
     try:
         return float(font.getlength(text))
     except Exception:
@@ -207,26 +263,41 @@ def _text_width_px(font: ImageFont.FreeTypeFont, text: str) -> float:
 
 
 def _wrap_one_lyric_line_by_width(line: str, font: ImageFont.FreeTypeFont, max_width_px: float, *, dbg: DebugRecorder | None = None, ctx: dict | None = None) -> List[str]:
+    """Wrap a single lyric line by *measured* text width."""
     line = (line or "").strip()
     if not line:
         return []
 
+    # Safety margin: PowerPoint's internal padding/kerning can differ slightly.
     max_w = max_width_px * (dbg.settings.width_safety if (dbg and dbg.settings.enabled) else 0.97)
+
     words = line.split()
+    if dbg and dbg.settings.enabled:
+        dbg.log(f"[WRAP] line={line!r} max_width_px={max_width_px:.1f} max_w={max_w:.1f}")
+    if ctx is not None:
+        ctx.setdefault('wrap', []).append({'input': line, 'max_width_px': max_width_px, 'max_w': max_w, 'steps': []})
 
     out: List[str] = []
     i = 0
+
     while i < len(words):
         cur = words[i]
         j = i + 1
+
         while j < len(words):
             candidate = cur + " " + words[j]
-            if _text_width_px(font, candidate) <= max_w:
+            w = _text_width_px(font, candidate)
+            if dbg and dbg.settings.enabled:
+                dbg.log(f"[WRAP]   try={candidate!r} w={w:.1f}px ok={w <= max_w}")
+            if ctx is not None:
+                ctx['wrap'][-1]['steps'].append({'try': candidate, 'w': w, 'ok': w <= max_w})
+            if w <= max_w:
                 cur = candidate
                 j += 1
             else:
                 break
 
+        # Avoid ending a line with tiny connector words when possible
         parts = cur.split(" ")
         if len(parts) >= 2 and parts[-1].lower() in _SMALL_WORDS and j < len(words):
             parts.pop()
@@ -236,6 +307,7 @@ def _wrap_one_lyric_line_by_width(line: str, font: ImageFont.FreeTypeFont, max_w
         out.append(cur)
         i = j
 
+    # Anti-orphan: avoid 1 short word on its own last line if we can rebalance
     if len(out) >= 2:
         last_words = out[-1].split()
         if len(last_words) == 1 and len(out[-2].split()) >= 3:
@@ -261,10 +333,18 @@ def _pack_lyrics_into_slides_by_height(
     dbg: DebugRecorder | None = None,
     ctx: dict | None = None,
 ) -> List[Tuple[List[str], List[bool]]]:
+    """
+    Returns list of slides.
+    Each slide is (display_lines, lyric_starts):
+      - display_lines: wrapped display lines (no blank lines)
+      - lyric_starts: True for the first display line of an original lyric line
+                      (used to apply paragraph spacing in PPTX without wasting a whole line).
+    """
     slides: List[Tuple[List[str], List[bool]]] = []
     cur_lines: List[str] = []
     cur_flags: List[bool] = []
     used_h = 0.0
+
     gap_px = max(0.0, line_height_px * float(lyric_gap_em))
 
     for lyric in lyric_lines:
@@ -272,16 +352,23 @@ def _pack_lyrics_into_slides_by_height(
         if not wrapped:
             continue
 
+        # Height needed if we add this lyric (including gap before it if not the first paragraph on slide)
         add_gap = gap_px if cur_lines else 0.0
         needed_h = add_gap + (len(wrapped) * line_height_px)
 
         if cur_lines and (used_h + needed_h) > (box_height_px * (dbg.settings.height_safety if (dbg and dbg.settings.enabled) else 0.98)):
+            if dbg and dbg.settings.enabled:
+                dbg.log(f"[PACK] break: used_h={used_h:.1f}px needed_h={needed_h:.1f}px box_h={box_height_px:.1f}px")
+            if ctx is not None:
+                ctx.setdefault('pack', []).append({'event': 'break', 'used_h': used_h, 'needed_h': needed_h, 'box_height_px': box_height_px})
             slides.append((cur_lines, cur_flags))
             cur_lines, cur_flags, used_h = [], [], 0.0
             add_gap = 0.0
             needed_h = len(wrapped) * line_height_px
 
+        # If still too tall for an empty slide, hard-split the wrapped display lines
         if not cur_lines and needed_h > (box_height_px * (dbg.settings.height_safety if (dbg and dbg.settings.enabled) else 0.98)):
+            # Split by how many lines fit vertically
             max_lines = max(1, int((box_height_px * (dbg.settings.height_safety if (dbg and dbg.settings.enabled) else 0.98)) // max(line_height_px, 1.0)))
             i = 0
             while i < len(wrapped):
@@ -291,6 +378,7 @@ def _pack_lyrics_into_slides_by_height(
                 i += max_lines
             continue
 
+        # Apply gap by marking the first line of this lyric as a new paragraph start
         for k, dl in enumerate(wrapped):
             cur_lines.append(dl)
             cur_flags.append(True if k == 0 else False)
@@ -299,10 +387,12 @@ def _pack_lyrics_into_slides_by_height(
 
     if cur_lines:
         slides.append((cur_lines, cur_flags))
+
     return slides
 
 
 def _split_into_lyric_groups(display_lines: List[str], lyric_starts: List[bool]) -> List[Tuple[List[str], List[bool]]]:
+    """Split a slide's (lines, flags) into groups representing original lyric lines."""
     groups: List[Tuple[List[str], List[bool]]] = []
     cur_l: List[str] = []
     cur_f: List[bool] = []
@@ -330,42 +420,79 @@ def _rebalance_single_lyric_slides(
     packed: List[Tuple[List[str], List[bool]]],
     *,
     min_lyrics_per_slide: int = 2,
+    # If previous slide has >= this many lyric groups, we can borrow from it.
+    # We allow borrowing even when prev has exactly 2 groups, as long as the
+    # remaining content on prev is not "too sparse" (see heuristic below).
     min_prev_groups_to_borrow: int = 2,
+    # Consider a slide "lonely" when it has <= this many DISPLAY lines.
     lonely_max_display_lines: int = 2,
     dbg: DebugRecorder | None = None,
 ) -> List[Tuple[List[str], List[bool]]]:
+    """Heuristic: avoid a slide that ends up with only one short lyric group.
+
+    Sometimes packing by height produces a slide with a single short lyric line
+    (e.g., "Oh is free indeed"). This post-pass shifts one lyric group from the
+    end of the previous slide to the *front* of the lonely slide, but only when
+    doing so doesn't make the previous slide look sparse.
+    """
     if len(packed) < 2:
         return packed
 
     out: List[Tuple[List[str], List[bool]]] = [(list(l), list(f)) for (l, f) in packed]
+
     for i in range(1, len(out)):
         cur_lines, cur_flags = out[i]
         prev_lines, prev_flags = out[i - 1]
+
         cur_groups = _split_into_lyric_groups(cur_lines, cur_flags)
         prev_groups = _split_into_lyric_groups(prev_lines, prev_flags)
 
-        if len(cur_groups) >= min_lyrics_per_slide or len(cur_lines) > lonely_max_display_lines or len(prev_groups) < min_prev_groups_to_borrow:
+        # Only worry about slides that have < min_lyrics_per_slide AND are short in display lines.
+        if len(cur_groups) >= min_lyrics_per_slide:
+            continue
+        if len(cur_lines) > lonely_max_display_lines:
             continue
 
+        # Need something to borrow
+        if len(prev_groups) < min_prev_groups_to_borrow:
+            continue
+
+        # Try moving the last group from prev onto current
         moved = prev_groups[-1]
         new_prev_groups = prev_groups[:-1]
         new_cur_groups = [moved] + cur_groups
+
+        # Don't create an empty prev slide
         if not new_prev_groups:
             continue
 
+        # Heuristic: don't make prev "lonely".
         prev_remaining_lines = sum(len(gl) for (gl, _gf) in new_prev_groups)
         if prev_remaining_lines <= lonely_max_display_lines and len(new_prev_groups) < min_lyrics_per_slide:
             continue
 
+        # Apply move
         out[i - 1] = _join_lyric_groups(new_prev_groups)
         out[i] = _join_lyric_groups(new_cur_groups)
+
+        if dbg and dbg.settings.enabled:
+            dbg.log(f"[REBALANCE] moved 1 lyric group from slide {i} -> {i+1} to avoid a lonely slide")
+
     return out
 
-
 def _estimate_slide_height_px(lines: List[str], lyric_starts: List[bool], line_height_px: float, gap_px: float) -> float:
+    """
+    Estimate slide text height based on rendered display lines + paragraph gaps.
+
+    - Each display line consumes line_height_px.
+    - Each lyric group (paragraph) after the first contributes gap_px (derived from lyric_gap_em).
+    """
     if not lines:
         return 0.0
-    para_starts = sum(1 for f in (lyric_starts or []) if f) or 1
+    # Count paragraph starts (True flags). If flags are missing/mismatched, assume 1 paragraph.
+    para_starts = sum(1 for f in (lyric_starts or []) if f)
+    if para_starts <= 0:
+        para_starts = 1
     return (len(lines) * float(line_height_px)) + (max(0, para_starts - 1) * float(gap_px))
 
 
@@ -380,6 +507,18 @@ def _rebalance_tail_slides(
     min_prev_groups_to_borrow: int = 2,
     dbg: DebugRecorder | None = None,
 ) -> List[Tuple[List[str], List[bool]]]:
+    """
+    Reduce 'tail' and 'orphan-start' song slides.
+
+    Strategy (deterministic, geometry-aware):
+      1) If a slide is very short (<= max_tail_display_lines), try MERGE it back into the previous slide
+         if the combined height still fits in the lyric textbox.
+      2) If merge won't fit, try BORROW one lyric group from the end of the previous slide to the front
+         of the short slide, but only if both slides still fit and the previous slide doesn't become lonely.
+
+    This is similar to the verse rebalancing we did, but uses pixel-height estimates so it's stable
+    across templates/font sizes.
+    """
     if len(packed) < 2:
         return packed
 
@@ -391,7 +530,10 @@ def _rebalance_tail_slides(
         return h <= limit
 
     def _is_tail(lines: List[str]) -> bool:
-        if not lines or len(lines) > max_tail_display_lines:
+        # Tail in QA is usually 1–2 display lines with short char count.
+        if not lines:
+            return False
+        if len(lines) > max_tail_display_lines:
             return False
         chars = len(" ".join(lines).strip())
         return 0 < chars < 120
@@ -399,10 +541,12 @@ def _rebalance_tail_slides(
     def _is_lonely(lines: List[str], groups_count: int) -> bool:
         return len(lines) <= lonely_max_display_lines and groups_count < 2
 
+    # Walk from end to start so merges don't skip indices.
     i = len(out) - 1
     while i > 0:
         cur_lines, cur_flags = out[i]
         prev_lines, prev_flags = out[i - 1]
+
         cur_groups = _split_into_lyric_groups(cur_lines, cur_flags)
         prev_groups = _split_into_lyric_groups(prev_lines, prev_flags)
 
@@ -410,61 +554,89 @@ def _rebalance_tail_slides(
             i -= 1
             continue
 
+        # 1) Try merge tail into previous
         merged_lines = prev_lines + cur_lines
         merged_flags = prev_flags + cur_flags
         if _fits(merged_lines, merged_flags):
             out[i - 1] = (merged_lines, merged_flags)
             out.pop(i)
+            if dbg and dbg.settings.enabled:
+                dbg.log(f"[TAIL-MERGE] merged short slide {i+1} into slide {i}")
             i = min(i, len(out) - 1)
             continue
 
+        # 2) If merge doesn't fit, try borrowing last group from prev -> front of cur.
         if len(prev_groups) >= min_prev_groups_to_borrow and len(prev_groups) > 1:
             moved = prev_groups[-1]
             new_prev_groups = prev_groups[:-1]
             new_cur_groups = [moved] + cur_groups
+
+            # Don't leave prev empty
             if not new_prev_groups:
                 i -= 1
                 continue
+
             new_prev = _join_lyric_groups(new_prev_groups)
             new_cur = _join_lyric_groups(new_cur_groups)
-            if not _is_lonely(new_prev[0], len(new_prev_groups)) and _fits(new_prev[0], new_prev[1]) and _fits(new_cur[0], new_cur[1]):
+
+            # Keep prev from becoming lonely AND both must fit
+            new_prev_groups_cnt = len(new_prev_groups)
+            if _is_lonely(new_prev[0], new_prev_groups_cnt):
+                i -= 1
+                continue
+
+            if _fits(new_prev[0], new_prev[1]) and _fits(new_cur[0], new_cur[1]):
                 out[i - 1] = new_prev
                 out[i] = new_cur
+                if dbg and dbg.settings.enabled:
+                    dbg.log(f"[TAIL-BORROW] moved 1 lyric group from slide {i} -> {i+1} to avoid a tail slide")
+                i -= 1
+                continue
+
         i -= 1
 
     return out
 
 
 class SlideBuilder:
-    def __init__(self, template_path: Path, song_fit_preset: str = "normal", lyric_gap_em: float = 0.35):
+    def __init__(
+        self,
+        template_path: Path,
+        song_fit_preset: str = "normal",
+        lyric_gap_em: float = 0.35,
+    ):
+        """
+        Token-only templates. Adapts to template font + lyric textbox size.
+
+        lyric_gap_em: vertical gap between lyric lines, as a fraction of line height.
+                      (0.30-0.45 is a good range)
+        """
         self.template_path = template_path
-        self.song_fit_preset = song_fit_preset
+        self.song_fit_preset = song_fit_preset  # kept for backwards compatibility, currently unused
         self.lyric_gap_em = float(lyric_gap_em)
 
-    def _section_slide_groups(self, section: dict) -> List[List[str]]:
-        # Legacy authored slides: keep each slide boundary intact.
-        if isinstance(section.get("slides"), list) and section.get("slides"):
-            out: List[List[str]] = []
-            for s in section.get("slides", []):
-                lines = [str(line).rstrip() for line in s.get("lines", []) if str(line).strip()]
-                if lines:
-                    out.append(lines)
-            return out
-
-        # Newer schema: whole section is one authored unit.
+    def _section_lines(self, section: dict) -> List[str]:
+        # New format
         if isinstance(section.get("lines"), list):
-            lines = [str(x).rstrip() for x in section.get("lines", []) if str(x).strip()]
-            return [lines] if lines else []
+            return [str(x).rstrip() for x in section.get("lines", []) if str(x).strip()]
 
-        return []
+        # Legacy format: flatten slides
+        out: List[str] = []
+        for s in section.get("slides", []):
+            for line in s.get("lines", []):
+                line = str(line).rstrip()
+                if line.strip():
+                    out.append(line)
+        return out
 
     def build_deck(self, song_files, output_path: Path):
+        # Re-read debug settings every run so users can toggle without reinstalling.
         dbg_settings = DebugSettings.from_env()
         dbg = DebugRecorder(dbg_settings)
         if dbg_settings.enabled:
             dbg.start_run('songs', str(self.template_path), str(output_path))
-
         prs = load_template(self.template_path)
+
         title_tpl_idx = find_template_slide_index(prs, [TOKEN_TITLE])
         lyrics_tpl_idx = find_template_slide_index(prs, [TOKEN_LYRICS])
 
@@ -479,6 +651,9 @@ class SlideBuilder:
         if dbg_settings.enabled:
             family = _font_family_from_shape(lyrics_shape) or ''
             resolved = _resolve_font_path(family) if family else None
+            dbg.log(f"[FONT] family={family!r} resolved_path={resolved!r}")
+            dbg.log(f"[GEOM] box_w_px={box_w_px:.1f} box_h_px={box_h_px:.1f} line_h_px={line_h_px:.1f} lyric_gap_em={self.lyric_gap_em}")
+            # TextFrame margins (EMU); useful for understanding under/over-filling
             try:
                 tf = lyrics_shape.text_frame
                 ml = int(getattr(tf, 'margin_left', 0) or 0)
@@ -487,10 +662,13 @@ class SlideBuilder:
                 mb = int(getattr(tf, 'margin_bottom', 0) or 0)
             except Exception:
                 ml = mr = mt = mb = 0
+            dbg.log(f"[MARGINS] left={ml} right={mr} top={mt} bottom={mb} (EMU)")
             usable_w_emu = max(0, int(lyrics_shape.width) - ml - mr)
             usable_h_emu = max(0, int(lyrics_shape.height) - mt - mb)
             usable_rect_emu = (int(lyrics_shape.left) + ml, int(lyrics_shape.top) + mt, usable_w_emu, usable_h_emu)
 
+
+        # Convert lyric gap to points for PowerPoint paragraph spacing
         lyric_gap_pt = (line_h_px / PX_PER_PT) * self.lyric_gap_em
 
         for song_file in song_files:
@@ -506,58 +684,62 @@ class SlideBuilder:
             add_title_slide_from_template(prs, title_tpl_idx, title)
 
             for section in song["structure"]["sections"]:
-                slide_groups = self._section_slide_groups(section)
-                if not slide_groups:
+                raw_lines = self._section_lines(section)
+                if not raw_lines:
                     continue
 
-                for raw_lines in slide_groups:
-                    ctx = {} if dbg_settings.enabled else None
-                    packed = _pack_lyrics_into_slides_by_height(
-                        raw_lines,
-                        font=font,
-                        box_width_px=box_w_px,
-                        box_height_px=box_h_px,
-                        line_height_px=line_h_px,
-                        lyric_gap_em=self.lyric_gap_em,
-                        dbg=dbg if dbg_settings.enabled else None,
-                        ctx=ctx,
-                    )
+                ctx = {} if dbg_settings.enabled else None
+                packed = _pack_lyrics_into_slides_by_height(
+                    raw_lines,
+                    font=font,
+                    box_width_px=box_w_px,
+                    box_height_px=box_h_px,
+                    line_height_px=line_h_px,
+                    lyric_gap_em=self.lyric_gap_em,
+                    dbg=dbg if dbg_settings.enabled else None,
+                    ctx=ctx,
+                )
 
-                    # Rebalance only within this authored slide group.
-                    packed = _rebalance_single_lyric_slides(
-                        packed,
-                        min_lyrics_per_slide=2,
-                        min_prev_groups_to_borrow=2,
-                        dbg=dbg if dbg_settings.enabled else None,
-                    )
-                    packed = _rebalance_tail_slides(
-                        packed,
-                        box_height_px=box_h_px,
-                        line_height_px=line_h_px,
-                        gap_px=(line_h_px * float(self.lyric_gap_em)),
-                        dbg=dbg if dbg_settings.enabled else None,
-                    )
+                # If packing creates a "lonely" slide with only one short lyric line,
+                # rebalance by pulling one lyric group from the previous slide.
+                packed = _rebalance_single_lyric_slides(
+                    packed,
+                    min_lyrics_per_slide=2,
+                    min_prev_groups_to_borrow=2,
+                    dbg=dbg if dbg_settings.enabled else None,
+                )
 
-                    for display_lines, lyric_starts in packed:
-                        slide = add_lyrics_slide_from_template(
-                            prs,
-                            lyrics_tpl_idx,
-                            display_lines,
-                            lyric_starts=lyric_starts,
-                            lyric_gap_pt=lyric_gap_pt,
-                        )
-                        if dbg_settings.enabled and dbg_settings.draw_guides:
-                            caption = f"{family} | {os.path.basename(resolved) if resolved else 'unresolved'} | fs={_best_font_size_pts_from_shape(lyrics_shape):.1f}pt"
-                            add_debug_guides(slide, _find_token_shape(slide, TOKEN_LYRICS) or slide.shapes[0], usable_rect_emu=usable_rect_emu, caption=caption)
+                # Second pass: merge/borrow to eliminate short 'tail' slides (1–2 lines)
+                packed = _rebalance_tail_slides(
+                    packed,
+                    box_height_px=box_h_px,
+                    line_height_px=line_h_px,
+                    gap_px=(line_h_px * float(self.lyric_gap_em)),
+                    dbg=dbg if dbg_settings.enabled else None,
+                )
 
-                        if dbg_settings.enabled:
-                            dbg.add_slide_record({
-                                'type': 'lyrics',
-                                'lines': display_lines,
-                                'lyric_starts': lyric_starts,
-                                'geom': {'box_w_px': box_w_px, 'box_h_px': box_h_px, 'line_h_px': line_h_px},
-                                'wrap_pack_ctx': ctx,
-                            })
+                for display_lines, lyric_starts in packed:
+                    slide = add_lyrics_slide_from_template(
+                        prs,
+                        lyrics_tpl_idx,
+                        display_lines,
+                        lyric_starts=lyric_starts,
+                        lyric_gap_pt=lyric_gap_pt,
+                    )
+                    if dbg_settings.enabled and dbg_settings.draw_guides:
+                        caption = f"{family} | {os.path.basename(resolved) if resolved else 'unresolved'} | fs={_best_font_size_pts_from_shape(lyrics_shape):.1f}pt"
+                        add_debug_guides(slide, slide.shapes[0] if False else _find_token_shape(slide, TOKEN_LYRICS) or slide.shapes[0], usable_rect_emu=usable_rect_emu, caption=caption)
+
+                    if dbg_settings.enabled:
+                        dbg.add_slide_record({
+                            'type': 'lyrics',
+                            'lines': display_lines,
+                            'lyric_starts': lyric_starts,
+                            'geom': {'box_w_px': box_w_px, 'box_h_px': box_h_px, 'line_h_px': line_h_px},
+                            'wrap_pack_ctx': ctx,
+                        })
+                        # Optional visual guides are added in pptx_utils when enabled
+
 
         prs.save(output_path)
         if dbg_settings.enabled:

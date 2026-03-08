@@ -9,10 +9,11 @@ SECTION_TYPES = ["Title", "Verse", "Chorus", "Bridge", "Outro", "Other"]
 
 
 class SongBuilder(tk.Toplevel):
-    def __init__(self, parent, songs_folder, open_song=None):
+    def __init__(self, parent, songs_folder, open_song=None, draft_song=None):
         super().__init__(parent)
         self.songs_folder = songs_folder
         self.open_song = open_song
+        self.draft_song = draft_song
 
         self.title("Song Builder")
         self.geometry("700x450")
@@ -23,20 +24,25 @@ class SongBuilder(tk.Toplevel):
         self._build_ui()
         if self.open_song:
             self.load_song(self.open_song)
+        elif self.draft_song:
+            self.load_song_data(self.draft_song)
 
     def load_song(self, song_path):
         with open(song_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
+        self.load_song_data(data)
+
+    def load_song_data(self, data):
         # ---- Song metadata ----
         self.title_entry.delete(0, tk.END)
-        self.title_entry.insert(0, data["song"].get("title", ""))
+        self.title_entry.insert(0, data.get("song", {}).get("title", ""))
 
         self.author_entry.delete(0, tk.END)
-        self.author_entry.insert(0, data["song"].get("author", ""))
+        self.author_entry.insert(0, data.get("song", {}).get("author", ""))
 
         # ---- Sections ----
-        self.sections = data["structure"]["sections"]
+        self.sections = list(data.get("structure", {}).get("sections", []))
 
         self.section_listbox.delete(0, tk.END)
         for section in self.sections:
@@ -47,6 +53,10 @@ class SongBuilder(tk.Toplevel):
             self.section_listbox.selection_set(0)
             self.current_section_index = 0
             self._load_section_into_editor(0)
+        else:
+            self.current_section_index = None
+            self.section_label.config(text="No section selected")
+            self.lyrics_text.delete("1.0", tk.END)
 
     def _load_section_into_editor(self, index):
         section = self.sections[index]

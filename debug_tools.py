@@ -31,29 +31,27 @@ class DebugSettings:
 
     @staticmethod
     def from_env() -> "DebugSettings":
-        s = DebugSettings()
-        s.enabled = True  # ← FORCE DEBUG ON
-        s.draw_guides = False  # change to True if you want visual boxes
-        s.write_json_report = True
-        s.print_console = True
-        s.write_text_log = True
-        return s
-        # Toggle all debugging:
-        #   WS_DEBUG=1
-        # Optional:
-        #   WS_DEBUG_GUIDES=1
-        #   WS_DEBUG_JSON=0
-        #   WS_DEBUG_PRINT=0
-        #   WS_DEBUG_LOG=0
+        """
+        Toggle all debugging with:
+            WS_DEBUG=1
+
+        Optional:
+            WS_DEBUG_GUIDES=1
+            WS_DEBUG_JSON=0
+            WS_DEBUG_PRINT=0
+            WS_DEBUG_LOG=0
+        """
         s = DebugSettings()
         s.enabled = _truthy(os.getenv("WS_DEBUG"))
         s.draw_guides = _truthy(os.getenv("WS_DEBUG_GUIDES"))
+
         if os.getenv("WS_DEBUG_JSON") is not None:
             s.write_json_report = _truthy(os.getenv("WS_DEBUG_JSON"))
         if os.getenv("WS_DEBUG_PRINT") is not None:
             s.print_console = _truthy(os.getenv("WS_DEBUG_PRINT"))
         if os.getenv("WS_DEBUG_LOG") is not None:
             s.write_text_log = _truthy(os.getenv("WS_DEBUG_LOG"))
+
         return s
 
 

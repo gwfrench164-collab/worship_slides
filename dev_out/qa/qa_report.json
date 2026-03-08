@@ -1,65 +1,26 @@
 {
   "songs": {
     "pptx": "/Users/george/Church_Slide_Builder/worship_slides/dev_out/decks/songs_test.pptx",
-    "slide_count": 205,
+    "slide_count": 209,
+    "is_song_deck": true,
     "flags": {
-      "SPARSE": [
-        4,
-        21,
-        26,
-        31,
-        36,
-        39,
-        40,
-        52,
-        67,
-        86,
-        102,
-        114,
-        120,
-        125,
-        130,
-        132,
-        135,
-        138,
-        152,
-        173,
-        191
-      ],
-      "TAIL": [
-        4,
-        21,
-        26,
-        31,
-        36,
-        39,
-        40,
-        52,
-        67,
-        86,
-        102,
-        114,
-        120,
-        123,
-        130,
-        138,
-        152,
-        158,
-        164,
-        170,
-        172,
-        173,
-        191
-      ],
-      "ORPHAN_START": [
-        28,
-        167,
-        179,
-        183,
-        191
-      ],
+      "SPARSE": [],
       "CROWDED": [],
-      "TINY_TEXT": []
+      "TINY_TEXT": [],
+      "TAIL": [],
+      "ORPHAN_START": [
+        29,
+        78,
+        82,
+        172,
+        179,
+        180,
+        183,
+        184,
+        187,
+        188,
+        192
+      ]
     },
     "slides": [
       {
@@ -87,1226 +48,3132 @@
         "slide": 4,
         "chars": 10,
         "lines": 1,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "At Calvary",
+        "is_title": true
       },
       {
         "slide": 5,
         "chars": 66,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "At Calvary",
+        "is_title": false
       },
       {
         "slide": 6,
         "chars": 47,
         "lines": 3,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "At Calvary",
+        "is_title": false
       },
       {
         "slide": 7,
         "chars": 75,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "At Calvary",
+        "is_title": false
       },
       {
         "slide": 8,
         "chars": 50,
         "lines": 3,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "There my burdened soul found liberty At Calva \u2014 ry",
+        "is_title": true
       },
       {
         "slide": 9,
         "chars": 77,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "There my burdened soul found liberty At Calva \u2014 ry",
+        "is_title": false
       },
       {
         "slide": 10,
         "chars": 50,
         "lines": 3,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "\u2018Til my guilty soul imploring turned To Calva \u2014 ry",
+        "is_title": true
       },
       {
         "slide": 11,
         "chars": 75,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "\u2018Til my guilty soul imploring turned To Calva \u2014 ry",
+        "is_title": false
       },
       {
         "slide": 12,
         "chars": 50,
         "lines": 3,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "There my burdened soul found liberty At Calva \u2014 ry",
+        "is_title": true
       },
       {
         "slide": 13,
         "chars": 66,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "There my burdened soul found liberty At Calva \u2014 ry",
+        "is_title": false
       },
       {
         "slide": 14,
         "chars": 48,
         "lines": 3,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "There my burdened soul found liberty At Calva \u2014 ry",
+        "is_title": false
       },
       {
         "slide": 15,
         "chars": 75,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "There my burdened soul found liberty At Calva \u2014 ry",
+        "is_title": false
       },
       {
         "slide": 16,
         "chars": 50,
         "lines": 3,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "There my burdened soul found liberty At Calva \u2014 ry",
+        "is_title": true
       },
       {
         "slide": 17,
         "chars": 79,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "There my burdened soul found liberty At Calva \u2014 ry",
+        "is_title": false
       },
       {
         "slide": 18,
         "chars": 50,
         "lines": 3,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "There my burdened soul found liberty At Calva \u2014 ry",
+        "is_title": false
       },
       {
         "slide": 19,
         "chars": 75,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "There my burdened soul found liberty At Calva \u2014 ry",
+        "is_title": false
       },
       {
         "slide": 20,
         "chars": 50,
         "lines": 3,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "There my burdened soul found liberty At Calva \u2014 ry",
+        "is_title": true
       },
       {
         "slide": 21,
         "chars": 15,
         "lines": 1,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Come Jesus Come",
+        "is_title": true
       },
       {
         "slide": 22,
-        "chars": 76,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 55,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "Come Jesus Come",
+        "is_title": false
       },
       {
         "slide": 23,
-        "chars": 83,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 59,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "Come Jesus Come",
+        "is_title": false
       },
       {
         "slide": 24,
-        "chars": 108,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 44,
+        "lines": 2,
+        "min_font_pt": null,
+        "song_title": "But I'm holding on To a hope that won't fade",
+        "is_title": true
       },
       {
         "slide": 25,
-        "chars": 87,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 44,
+        "lines": 2,
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": true
       },
       {
         "slide": 26,
-        "chars": 35,
-        "lines": 2,
-        "min_font_pt": null
+        "chars": 85,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": false
       },
       {
         "slide": 27,
-        "chars": 107,
+        "chars": 101,
         "lines": 5,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": false
       },
       {
         "slide": 28,
-        "chars": 74,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 107,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": false
       },
       {
         "slide": 29,
-        "chars": 108,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 74,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": false
       },
       {
         "slide": 30,
-        "chars": 87,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 44,
+        "lines": 2,
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": true
       },
       {
         "slide": 31,
-        "chars": 35,
-        "lines": 2,
-        "min_font_pt": null
+        "chars": 85,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": false
       },
       {
         "slide": 32,
-        "chars": 119,
+        "chars": 101,
         "lines": 5,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": false
       },
       {
         "slide": 33,
-        "chars": 67,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 97,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": false
       },
       {
         "slide": 34,
-        "chars": 108,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 89,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": false
       },
       {
         "slide": 35,
-        "chars": 87,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 44,
+        "lines": 2,
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": true
       },
       {
         "slide": 36,
-        "chars": 35,
-        "lines": 2,
-        "min_font_pt": null
+        "chars": 85,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": false
       },
       {
         "slide": 37,
-        "chars": 108,
+        "chars": 101,
         "lines": 5,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": false
       },
       {
         "slide": 38,
-        "chars": 87,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 44,
+        "lines": 2,
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": true
       },
       {
         "slide": 39,
-        "chars": 35,
-        "lines": 2,
-        "min_font_pt": null
+        "chars": 85,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": false
       },
       {
         "slide": 40,
-        "chars": 33,
-        "lines": 1,
-        "min_font_pt": null
+        "chars": 101,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": false
       },
       {
         "slide": 41,
-        "chars": 66,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 33,
+        "lines": 1,
+        "min_font_pt": null,
+        "song_title": "Come Thou Fount Of Every Blessing",
+        "is_title": true
       },
       {
         "slide": 42,
-        "chars": 65,
+        "chars": 66,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Come Thou Fount Of Every Blessing",
+        "is_title": false
       },
       {
         "slide": 43,
-        "chars": 62,
+        "chars": 65,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Come Thou Fount Of Every Blessing",
+        "is_title": false
       },
       {
         "slide": 44,
-        "chars": 64,
+        "chars": 62,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Teach me some melodious sonnet, Sung by flaming tongues above.",
+        "is_title": true
       },
       {
         "slide": 45,
-        "chars": 114,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 64,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Teach me some melodious sonnet, Sung by flaming tongues above.",
+        "is_title": false
       },
       {
         "slide": 46,
-        "chars": 74,
+        "chars": 114,
         "lines": 5,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Teach me some melodious sonnet, Sung by flaming tongues above.",
+        "is_title": false
       },
       {
         "slide": 47,
-        "chars": 60,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 74,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": "Teach me some melodious sonnet, Sung by flaming tongues above.",
+        "is_title": false
       },
       {
         "slide": 48,
-        "chars": 91,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 60,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "He, to rescue me from danger, Interposed His precious blood.",
+        "is_title": true
       },
       {
         "slide": 49,
-        "chars": 66,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 91,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": "He, to rescue me from danger, Interposed His precious blood.",
+        "is_title": false
       },
       {
         "slide": 50,
-        "chars": 96,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 66,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "He, to rescue me from danger, Interposed His precious blood.",
+        "is_title": false
       },
       {
         "slide": 51,
-        "chars": 65,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 96,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": "He, to rescue me from danger, Interposed His precious blood.",
+        "is_title": false
       },
       {
         "slide": 52,
-        "chars": 25,
-        "lines": 1,
-        "min_font_pt": null
+        "chars": 65,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "He, to rescue me from danger, Interposed His precious blood.",
+        "is_title": false
       },
       {
         "slide": 53,
-        "chars": 82,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 25,
+        "lines": 1,
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": true
       },
       {
         "slide": 54,
-        "chars": 87,
+        "chars": 82,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 55,
-        "chars": 90,
+        "chars": 87,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 56,
-        "chars": 81,
+        "chars": 90,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 57,
-        "chars": 87,
+        "chars": 81,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 58,
-        "chars": 82,
+        "chars": 87,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 59,
-        "chars": 90,
+        "chars": 82,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 60,
-        "chars": 81,
+        "chars": 90,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 61,
-        "chars": 84,
+        "chars": 81,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 62,
-        "chars": 91,
+        "chars": 84,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 63,
-        "chars": 90,
+        "chars": 91,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 64,
-        "chars": 81,
+        "chars": 90,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 65,
-        "chars": 90,
+        "chars": 81,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 66,
-        "chars": 81,
+        "chars": 90,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 67,
-        "chars": 13,
-        "lines": 1,
-        "min_font_pt": null
+        "chars": 81,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Great Is Thy Faithfulness",
+        "is_title": false
       },
       {
         "slide": 68,
-        "chars": 64,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 13,
+        "lines": 1,
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": true
       },
       {
         "slide": 69,
-        "chars": 73,
+        "chars": 64,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 70,
-        "chars": 65,
+        "chars": 73,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 71,
-        "chars": 70,
+        "chars": 65,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 72,
-        "chars": 66,
+        "chars": 70,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 73,
-        "chars": 74,
+        "chars": 66,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 74,
-        "chars": 65,
+        "chars": 74,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 75,
-        "chars": 70,
+        "chars": 65,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 76,
-        "chars": 66,
+        "chars": 70,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 77,
-        "chars": 75,
+        "chars": 66,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 78,
-        "chars": 65,
+        "chars": 75,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 79,
-        "chars": 70,
+        "chars": 65,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 80,
-        "chars": 67,
+        "chars": 70,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 81,
-        "chars": 79,
+        "chars": 67,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 82,
-        "chars": 65,
+        "chars": 79,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 83,
-        "chars": 70,
+        "chars": 65,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 84,
-        "chars": 65,
+        "chars": 70,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 85,
-        "chars": 70,
+        "chars": 65,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 86,
-        "chars": 20,
-        "lines": 1,
-        "min_font_pt": null
+        "chars": 70,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Higher Ground",
+        "is_title": false
       },
       {
         "slide": 87,
-        "chars": 83,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 20,
+        "lines": 1,
+        "min_font_pt": null,
+        "song_title": "Id Rather Have Jesus",
+        "is_title": true
       },
       {
         "slide": 88,
-        "chars": 85,
+        "chars": 83,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Id Rather Have Jesus",
+        "is_title": false
       },
       {
         "slide": 89,
-        "chars": 68,
+        "chars": 85,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Id Rather Have Jesus",
+        "is_title": false
       },
       {
         "slide": 90,
-        "chars": 60,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 68,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Id Rather Have Jesus",
+        "is_title": false
       },
       {
         "slide": 91,
-        "chars": 84,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 60,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "I'd rather have Jesus than anything This world affords today",
+        "is_title": true
       },
       {
         "slide": 92,
-        "chars": 82,
+        "chars": 84,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "I'd rather have Jesus than anything This world affords today",
+        "is_title": false
       },
       {
         "slide": 93,
-        "chars": 68,
+        "chars": 82,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "I'd rather have Jesus than anything This world affords today",
+        "is_title": false
       },
       {
         "slide": 94,
-        "chars": 60,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 68,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "I'd rather have Jesus than anything This world affords today",
+        "is_title": false
       },
       {
         "slide": 95,
-        "chars": 81,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 60,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "I'd rather have Jesus than anything This world affords today",
+        "is_title": true
       },
       {
         "slide": 96,
-        "chars": 78,
+        "chars": 81,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "I'd rather have Jesus than anything This world affords today",
+        "is_title": false
       },
       {
         "slide": 97,
-        "chars": 68,
+        "chars": 78,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "I'd rather have Jesus than anything This world affords today",
+        "is_title": false
       },
       {
         "slide": 98,
-        "chars": 60,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 68,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "I'd rather have Jesus than anything This world affords today",
+        "is_title": false
       },
       {
         "slide": 99,
-        "chars": 68,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 60,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "I'd rather have Jesus than anything This world affords today",
+        "is_title": true
       },
       {
         "slide": 100,
-        "chars": 60,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 68,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "I'd rather have Jesus than anything This world affords today",
+        "is_title": false
       },
       {
         "slide": 101,
         "chars": 60,
         "lines": 3,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "I'd rather have Jesus than anything This world affords today",
+        "is_title": true
       },
       {
         "slide": 102,
-        "chars": 15,
-        "lines": 1,
-        "min_font_pt": null
+        "chars": 60,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "I'd rather have Jesus than anything This world affords today",
+        "is_title": true
       },
       {
         "slide": 103,
-        "chars": 72,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 15,
+        "lines": 1,
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": true
       },
       {
         "slide": 104,
-        "chars": 81,
+        "chars": 72,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 105,
-        "chars": 89,
+        "chars": 81,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 106,
-        "chars": 65,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 89,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 107,
-        "chars": 68,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 65,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 108,
-        "chars": 73,
+        "chars": 68,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 109,
-        "chars": 66,
+        "chars": 73,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 110,
-        "chars": 67,
+        "chars": 66,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 111,
-        "chars": 72,
+        "chars": 67,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 112,
-        "chars": 99,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 72,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 113,
-        "chars": 66,
+        "chars": 70,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 114,
-        "chars": 41,
-        "lines": 2,
-        "min_font_pt": null
+        "chars": 65,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 115,
-        "chars": 70,
+        "chars": 71,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 116,
-        "chars": 66,
+        "chars": 70,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 117,
-        "chars": 68,
+        "chars": 66,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 118,
-        "chars": 74,
+        "chars": 68,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 119,
         "chars": 74,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 120,
-        "chars": 14,
-        "lines": 1,
-        "min_font_pt": null
+        "chars": 74,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "In Christ Alone",
+        "is_title": false
       },
       {
         "slide": 121,
-        "chars": 78,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 14,
+        "lines": 1,
+        "min_font_pt": null,
+        "song_title": "Man Of Sorrows",
+        "is_title": true
       },
       {
         "slide": 122,
-        "chars": 75,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 46,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "Man of sorrows Lamb of God By His own betrayed",
+        "is_title": true
       },
       {
         "slide": 123,
-        "chars": 53,
-        "lines": 2,
-        "min_font_pt": null
+        "chars": 81,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Man of sorrows Lamb of God By His own betrayed",
+        "is_title": false
       },
       {
         "slide": 124,
-        "chars": 90,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 79,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Man of sorrows Lamb of God By His own betrayed",
+        "is_title": false
       },
       {
         "slide": 125,
-        "chars": 38,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 90,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": "Man of sorrows Lamb of God By His own betrayed",
+        "is_title": false
       },
       {
         "slide": 126,
-        "chars": 107,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 38,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "Hallelujah Praise and honour unto Thee",
+        "is_title": true
       },
       {
         "slide": 127,
-        "chars": 90,
+        "chars": 107,
         "lines": 5,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Hallelujah Praise and honour unto Thee",
+        "is_title": false
       },
       {
         "slide": 128,
-        "chars": 77,
+        "chars": 90,
         "lines": 5,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Hallelujah Praise and honour unto Thee",
+        "is_title": false
       },
       {
         "slide": 129,
-        "chars": 82,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 77,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": "Hallelujah Praise and honour unto Thee",
+        "is_title": false
       },
       {
         "slide": 130,
-        "chars": 40,
-        "lines": 2,
-        "min_font_pt": null
+        "chars": 64,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "Hallelujah Praise and honour unto Thee",
+        "is_title": false
       },
       {
         "slide": 131,
-        "chars": 90,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 58,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "Hallelujah Praise and honour unto Thee",
+        "is_title": false
       },
       {
         "slide": 132,
-        "chars": 38,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 90,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": "Hallelujah Praise and honour unto Thee",
+        "is_title": false
       },
       {
         "slide": 133,
-        "chars": 102,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 38,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "Hallelujah Praise and honour unto Thee",
+        "is_title": true
       },
       {
         "slide": 134,
-        "chars": 90,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 102,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Hallelujah Praise and honour unto Thee",
+        "is_title": false
       },
       {
         "slide": 135,
-        "chars": 38,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 90,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": "Hallelujah Praise and honour unto Thee",
+        "is_title": false
       },
       {
         "slide": 136,
-        "chars": 90,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 38,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "Hallelujah Praise and honour unto Thee",
+        "is_title": true
       },
       {
         "slide": 137,
-        "chars": 66,
+        "chars": 90,
         "lines": 5,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Hallelujah Praise and honour unto Thee",
+        "is_title": false
       },
       {
         "slide": 138,
-        "chars": 22,
-        "lines": 1,
-        "min_font_pt": null
+        "chars": 66,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": "Hallelujah Praise and honour unto Thee",
+        "is_title": false
       },
       {
         "slide": 139,
-        "chars": 90,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 22,
+        "lines": 1,
+        "min_font_pt": null,
+        "song_title": "The Lily Of The Valley",
+        "is_title": true
       },
       {
         "slide": 140,
-        "chars": 88,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 52,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "The Lily Of The Valley",
+        "is_title": false
       },
       {
         "slide": 141,
-        "chars": 88,
+        "chars": 80,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Lily Of The Valley",
+        "is_title": false
       },
       {
         "slide": 142,
-        "chars": 93,
+        "chars": 96,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Lily Of The Valley",
+        "is_title": false
       },
       {
         "slide": 143,
-        "chars": 100,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 37,
+        "lines": 2,
+        "min_font_pt": null,
+        "song_title": "He tells me every care on Him to roll",
+        "is_title": true
       },
       {
         "slide": 144,
-        "chars": 98,
+        "chars": 93,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "He tells me every care on Him to roll",
+        "is_title": false
       },
       {
         "slide": 145,
-        "chars": 99,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 53,
+        "lines": 2,
+        "min_font_pt": null,
+        "song_title": "He tells me every care on Him to roll",
+        "is_title": false
       },
       {
         "slide": 146,
-        "chars": 93,
+        "chars": 97,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "He tells me every care on Him to roll",
+        "is_title": false
       },
       {
         "slide": 147,
-        "chars": 100,
+        "chars": 104,
         "lines": 5,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "He tells me every care on Him to roll",
+        "is_title": false
       },
       {
         "slide": 148,
-        "chars": 93,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 42,
+        "lines": 2,
+        "min_font_pt": null,
+        "song_title": "Though Jesus I shall safely reach the goal",
+        "is_title": true
       },
       {
         "slide": 149,
-        "chars": 89,
+        "chars": 93,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Though Jesus I shall safely reach the goal",
+        "is_title": false
       },
       {
         "slide": 150,
-        "chars": 93,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 54,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "Though Jesus I shall safely reach the goal",
+        "is_title": false
       },
       {
         "slide": 151,
-        "chars": 93,
+        "chars": 95,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Though Jesus I shall safely reach the goal",
+        "is_title": false
       },
       {
         "slide": 152,
-        "chars": 30,
-        "lines": 1,
-        "min_font_pt": null
+        "chars": 93,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Though Jesus I shall safely reach the goal",
+        "is_title": false
       },
       {
         "slide": 153,
-        "chars": 63,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 39,
+        "lines": 2,
+        "min_font_pt": null,
+        "song_title": "Where rivers of delight shall ever roll",
+        "is_title": true
       },
       {
         "slide": 154,
-        "chars": 62,
+        "chars": 93,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "Where rivers of delight shall ever roll",
+        "is_title": false
       },
       {
         "slide": 155,
-        "chars": 61,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 93,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Where rivers of delight shall ever roll",
+        "is_title": false
       },
       {
         "slide": 156,
-        "chars": 56,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 30,
+        "lines": 1,
+        "min_font_pt": null,
+        "song_title": "The Love Of God Is Greater Far",
+        "is_title": true
       },
       {
         "slide": 157,
-        "chars": 61,
+        "chars": 63,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Love Of God Is Greater Far",
+        "is_title": false
       },
       {
         "slide": 158,
-        "chars": 56,
-        "lines": 2,
-        "min_font_pt": null
+        "chars": 62,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "The Love Of God Is Greater Far",
+        "is_title": false
       },
       {
         "slide": 159,
-        "chars": 69,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 61,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "The Love Of God Is Greater Far",
+        "is_title": false
       },
       {
         "slide": 160,
-        "chars": 70,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 56,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "His erring child He reconciled And pardoned from his sin",
+        "is_title": true
       },
       {
         "slide": 161,
-        "chars": 65,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 61,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "His erring child He reconciled And pardoned from his sin",
+        "is_title": false
       },
       {
         "slide": 162,
-        "chars": 59,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 56,
+        "lines": 2,
+        "min_font_pt": null,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": true
       },
       {
         "slide": 163,
-        "chars": 61,
+        "chars": 69,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": false
       },
       {
         "slide": 164,
-        "chars": 56,
-        "lines": 2,
-        "min_font_pt": null
+        "chars": 70,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": false
       },
       {
         "slide": 165,
-        "chars": 69,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 65,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": false
       },
       {
         "slide": 166,
-        "chars": 66,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 59,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "Redeeming grace to Adam's race The saints' and angels' song",
+        "is_title": true
       },
       {
         "slide": 167,
-        "chars": 56,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 61,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "Redeeming grace to Adam's race The saints' and angels' song",
+        "is_title": false
       },
       {
         "slide": 168,
-        "chars": 71,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 56,
+        "lines": 2,
+        "min_font_pt": null,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": true
       },
       {
         "slide": 169,
-        "chars": 61,
+        "chars": 69,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": false
       },
       {
         "slide": 170,
-        "chars": 56,
-        "lines": 2,
-        "min_font_pt": null
+        "chars": 66,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": false
       },
       {
         "slide": 171,
-        "chars": 61,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 56,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": false
       },
       {
         "slide": 172,
-        "chars": 56,
-        "lines": 2,
-        "min_font_pt": null
+        "chars": 71,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": false
       },
       {
         "slide": 173,
-        "chars": 20,
-        "lines": 1,
-        "min_font_pt": null
+        "chars": 61,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": false
       },
       {
         "slide": 174,
-        "chars": 78,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 56,
+        "lines": 2,
+        "min_font_pt": null,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": true
       },
       {
         "slide": 175,
-        "chars": 90,
+        "chars": 61,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": false
       },
       {
         "slide": 176,
-        "chars": 72,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 56,
+        "lines": 2,
+        "min_font_pt": null,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": true
       },
       {
         "slide": 177,
-        "chars": 73,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 20,
+        "lines": 1,
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": true
       },
       {
         "slide": 178,
-        "chars": 83,
+        "chars": 78,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 179,
-        "chars": 72,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 90,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 180,
         "chars": 72,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 181,
         "chars": 73,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 182,
-        "chars": 79,
-        "lines": 3,
-        "min_font_pt": null
+        "chars": 83,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 183,
-        "chars": 78,
+        "chars": 72,
         "lines": 3,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 184,
         "chars": 72,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 185,
         "chars": 73,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 186,
-        "chars": 78,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 79,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 187,
-        "chars": 82,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 78,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 188,
-        "chars": 73,
+        "chars": 72,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 189,
         "chars": 73,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 190,
-        "chars": 73,
+        "chars": 78,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 191,
-        "chars": 19,
-        "lines": 1,
-        "min_font_pt": null
+        "chars": 82,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 192,
-        "chars": 94,
+        "chars": 73,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 193,
-        "chars": 86,
+        "chars": 73,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 194,
-        "chars": 121,
-        "lines": 6,
-        "min_font_pt": null
+        "chars": 73,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false
       },
       {
         "slide": 195,
-        "chars": 96,
-        "lines": 4,
-        "min_font_pt": null
+        "chars": 19,
+        "lines": 1,
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": true
       },
       {
         "slide": 196,
-        "chars": 84,
+        "chars": 94,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
       },
       {
         "slide": 197,
-        "chars": 80,
+        "chars": 86,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
       },
       {
         "slide": 198,
         "chars": 121,
         "lines": 6,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
       },
       {
         "slide": 199,
         "chars": 96,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
       },
       {
         "slide": 200,
-        "chars": 105,
-        "lines": 5,
-        "min_font_pt": null
+        "chars": 84,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
       },
       {
         "slide": 201,
-        "chars": 87,
+        "chars": 80,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
       },
       {
         "slide": 202,
         "chars": 121,
         "lines": 6,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
       },
       {
         "slide": 203,
         "chars": 96,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
       },
       {
         "slide": 204,
-        "chars": 121,
-        "lines": 6,
-        "min_font_pt": null
+        "chars": 105,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
       },
       {
         "slide": 205,
+        "chars": 87,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
+      },
+      {
+        "slide": 206,
+        "chars": 121,
+        "lines": 6,
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
+      },
+      {
+        "slide": 207,
         "chars": 96,
         "lines": 4,
-        "min_font_pt": null
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
+      },
+      {
+        "slide": 208,
+        "chars": 121,
+        "lines": 6,
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
+      },
+      {
+        "slide": 209,
+        "chars": 96,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": "To God Be The Glory",
+        "is_title": false
+      }
+    ],
+    "issues": [
+      {
+        "slide": 29,
+        "song_title": "Come, Jesus, come We've been waiting so long",
+        "is_title": false,
+        "types": [
+          "ORPHAN_START"
+        ],
+        "text": "And the strong just the same\nAnd all will believe\nIn the power of His name",
+        "prev_text": "There'll be no war,\nand there'll be no chains\nWhen Jesus comes\nLet today be the day\nHe'll come for the weak",
+        "next_text": "Come, Jesus, come\nWe've been waiting so long"
+      },
+      {
+        "slide": 78,
+        "song_title": "Higher Ground",
+        "is_title": false,
+        "types": [
+          "ORPHAN_START"
+        ],
+        "text": "For faith has caught\nthis joyful sound\nThe song of saints on\nhigher ground.",
+        "prev_text": "I want to live above\nthe world\nTho' satan's darts at me\nare hurled",
+        "next_text": "Lord, lift me up and let\nme stand\nBy faith on heaven's\ntable land"
+      },
+      {
+        "slide": 82,
+        "song_title": "Higher Ground",
+        "is_title": false,
+        "types": [
+          "ORPHAN_START"
+        ],
+        "text": "But still I'll pray till heaven\nI've found\n\"Lord, lead me on to\nhigher ground.\"",
+        "prev_text": "I want to scale the\nutmost height\nAnd catch a gleam of\nglory bright",
+        "next_text": "Lord, lift me up and let\nme stand\nBy faith on heaven's\ntable land"
+      },
+      {
+        "slide": 172,
+        "song_title": "It shall forevermore endure The saints' and angels' song",
+        "is_title": false,
+        "types": [
+          "ORPHAN_START"
+        ],
+        "text": "Nor could the scroll contain\nthe whole\nThough stretched from sky\nto sky",
+        "prev_text": "To write the love of\nGod above\nWould drain the ocean dry",
+        "next_text": "Oh, love of God, how rich\nand pure\nHow measureless\nand strong"
+      },
+      {
+        "slide": 179,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false,
+        "types": [
+          "ORPHAN_START"
+        ],
+        "text": "And I love that old cross\nwhere the dearest and best\nFor a world of lost sinners\nwas slain",
+        "prev_text": "On a hill far away stood\nan old rugged cross\nThe emblem of suffering\nand shame",
+        "next_text": "So I'll cherish the old\nrugged cross\nTill my trophies at last I\nlay down"
+      },
+      {
+        "slide": 180,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false,
+        "types": [
+          "ORPHAN_START"
+        ],
+        "text": "So I'll cherish the old\nrugged cross\nTill my trophies at last I\nlay down",
+        "prev_text": "And I love that old cross\nwhere the dearest and best\nFor a world of lost sinners\nwas slain",
+        "next_text": "I will cling to the old\nrugged cross\nAnd exchange it some day\nfor a crown"
+      },
+      {
+        "slide": 183,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false,
+        "types": [
+          "ORPHAN_START"
+        ],
+        "text": "For the dear Lamb of God\nleft His glory above\nTo bear it to dark Calvary",
+        "prev_text": "Oh that old rugged cross,\nso despised by the World\nHas a wondrous attraction\nfor me",
+        "next_text": "So I'll cherish the old\nrugged cross\nTill my trophies at last I\nlay down"
+      },
+      {
+        "slide": 184,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false,
+        "types": [
+          "ORPHAN_START"
+        ],
+        "text": "So I'll cherish the old\nrugged cross\nTill my trophies at last I\nlay down",
+        "prev_text": "For the dear Lamb of God\nleft His glory above\nTo bear it to dark Calvary",
+        "next_text": "I will cling to the old\nrugged cross\nAnd exchange it some day\nfor a crown"
+      },
+      {
+        "slide": 187,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false,
+        "types": [
+          "ORPHAN_START"
+        ],
+        "text": "For \u2018twas on that old cross,\nJesus suffered and died\nTo pardon and sanctify me",
+        "prev_text": "In that old rugged cross,\nstained with blood so divine\nA wonderous beauty I see",
+        "next_text": "So I'll cherish the old\nrugged cross\nTill my trophies at last I\nlay down"
+      },
+      {
+        "slide": 188,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false,
+        "types": [
+          "ORPHAN_START"
+        ],
+        "text": "So I'll cherish the old\nrugged cross\nTill my trophies at last I\nlay down",
+        "prev_text": "For \u2018twas on that old cross,\nJesus suffered and died\nTo pardon and sanctify me",
+        "next_text": "I will cling to the old\nrugged cross\nAnd exchange it some day\nfor a crown"
+      },
+      {
+        "slide": 192,
+        "song_title": "The Old Rugged Cross",
+        "is_title": false,
+        "types": [
+          "ORPHAN_START"
+        ],
+        "text": "And I'll cherish the old\nrugged cross\nTill my trophies at last I\nlay down",
+        "prev_text": "Then he'll call me some day\nto my home far away\nWhere his glory forever\nI'll share",
+        "next_text": "I will cling to the old\nrugged cross\nAnd exchange it some day\nfor a crown"
       }
     ]
   },
   "verses": {
     "pptx": "/Users/george/Church_Slide_Builder/worship_slides/dev_out/decks/verses_test.pptx",
-    "slide_count": 0,
+    "slide_count": 168,
+    "is_song_deck": false,
     "flags": {
       "SPARSE": [],
-      "TAIL": [],
-      "ORPHAN_START": [],
       "CROWDED": [],
-      "TINY_TEXT": []
+      "TINY_TEXT": [],
+      "TAIL": [],
+      "ORPHAN_START": []
     },
-    "slides": []
+    "slides": [
+      {
+        "slide": 1,
+        "chars": 132,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 2,
+        "chars": 114,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 3,
+        "chars": 118,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 4,
+        "chars": 132,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 5,
+        "chars": 122,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 6,
+        "chars": 139,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 7,
+        "chars": 88,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 8,
+        "chars": 107,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 9,
+        "chars": 107,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 10,
+        "chars": 96,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 11,
+        "chars": 63,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 12,
+        "chars": 144,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 13,
+        "chars": 92,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 14,
+        "chars": 129,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 15,
+        "chars": 130,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 16,
+        "chars": 108,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 17,
+        "chars": 137,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 18,
+        "chars": 95,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 19,
+        "chars": 80,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 20,
+        "chars": 75,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 21,
+        "chars": 107,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 22,
+        "chars": 113,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 23,
+        "chars": 91,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 24,
+        "chars": 100,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 25,
+        "chars": 137,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 26,
+        "chars": 143,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 27,
+        "chars": 76,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 28,
+        "chars": 111,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 29,
+        "chars": 120,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 30,
+        "chars": 125,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 31,
+        "chars": 111,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 32,
+        "chars": 92,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 33,
+        "chars": 108,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 34,
+        "chars": 137,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 35,
+        "chars": 85,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 36,
+        "chars": 84,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 37,
+        "chars": 132,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 38,
+        "chars": 115,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 39,
+        "chars": 132,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 40,
+        "chars": 122,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 41,
+        "chars": 139,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 42,
+        "chars": 88,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 43,
+        "chars": 129,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 44,
+        "chars": 131,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 45,
+        "chars": 115,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 46,
+        "chars": 132,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 47,
+        "chars": 63,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 48,
+        "chars": 88,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 49,
+        "chars": 147,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 50,
+        "chars": 113,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 51,
+        "chars": 141,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 52,
+        "chars": 135,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 53,
+        "chars": 114,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 54,
+        "chars": 87,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 55,
+        "chars": 83,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 56,
+        "chars": 99,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 57,
+        "chars": 107,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 58,
+        "chars": 72,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 59,
+        "chars": 105,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 60,
+        "chars": 59,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 61,
+        "chars": 98,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 62,
+        "chars": 119,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 63,
+        "chars": 53,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 64,
+        "chars": 128,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 65,
+        "chars": 101,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 66,
+        "chars": 138,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 67,
+        "chars": 138,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 68,
+        "chars": 134,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 69,
+        "chars": 118,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 70,
+        "chars": 143,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 71,
+        "chars": 74,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 72,
+        "chars": 96,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 73,
+        "chars": 142,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 74,
+        "chars": 90,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 75,
+        "chars": 111,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 76,
+        "chars": 100,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 77,
+        "chars": 54,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 78,
+        "chars": 97,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 79,
+        "chars": 116,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 80,
+        "chars": 86,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 81,
+        "chars": 138,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 82,
+        "chars": 104,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 83,
+        "chars": 109,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 84,
+        "chars": 133,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 85,
+        "chars": 117,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 86,
+        "chars": 110,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 87,
+        "chars": 144,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 88,
+        "chars": 142,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 89,
+        "chars": 139,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 90,
+        "chars": 128,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 91,
+        "chars": 144,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 92,
+        "chars": 123,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 93,
+        "chars": 120,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 94,
+        "chars": 142,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 95,
+        "chars": 134,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 96,
+        "chars": 143,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 97,
+        "chars": 138,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 98,
+        "chars": 137,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 99,
+        "chars": 123,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 100,
+        "chars": 120,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 101,
+        "chars": 118,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 102,
+        "chars": 128,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 103,
+        "chars": 136,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 104,
+        "chars": 117,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 105,
+        "chars": 120,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 106,
+        "chars": 141,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 107,
+        "chars": 141,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 108,
+        "chars": 146,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 109,
+        "chars": 131,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 110,
+        "chars": 132,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 111,
+        "chars": 134,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 112,
+        "chars": 132,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 113,
+        "chars": 116,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 114,
+        "chars": 137,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 115,
+        "chars": 134,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 116,
+        "chars": 126,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 117,
+        "chars": 138,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 118,
+        "chars": 117,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 119,
+        "chars": 90,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 120,
+        "chars": 107,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 121,
+        "chars": 131,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 122,
+        "chars": 135,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 123,
+        "chars": 131,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 124,
+        "chars": 121,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 125,
+        "chars": 130,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 126,
+        "chars": 117,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 127,
+        "chars": 104,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 128,
+        "chars": 130,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 129,
+        "chars": 143,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 130,
+        "chars": 87,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 131,
+        "chars": 117,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 132,
+        "chars": 133,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 133,
+        "chars": 116,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 134,
+        "chars": 143,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 135,
+        "chars": 143,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 136,
+        "chars": 114,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 137,
+        "chars": 93,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 138,
+        "chars": 66,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 139,
+        "chars": 53,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 140,
+        "chars": 112,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 141,
+        "chars": 132,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 142,
+        "chars": 140,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 143,
+        "chars": 54,
+        "lines": 3,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 144,
+        "chars": 115,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 145,
+        "chars": 94,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 146,
+        "chars": 108,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 147,
+        "chars": 132,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 148,
+        "chars": 116,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 149,
+        "chars": 109,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 150,
+        "chars": 143,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 151,
+        "chars": 141,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 152,
+        "chars": 108,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 153,
+        "chars": 132,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 154,
+        "chars": 136,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 155,
+        "chars": 132,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 156,
+        "chars": 122,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 157,
+        "chars": 131,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 158,
+        "chars": 118,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 159,
+        "chars": 144,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 160,
+        "chars": 103,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 161,
+        "chars": 142,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 162,
+        "chars": 139,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 163,
+        "chars": 140,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 164,
+        "chars": 108,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 165,
+        "chars": 141,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 166,
+        "chars": 126,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 167,
+        "chars": 92,
+        "lines": 4,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      },
+      {
+        "slide": 168,
+        "chars": 110,
+        "lines": 5,
+        "min_font_pt": null,
+        "song_title": null,
+        "is_title": false
+      }
+    ],
+    "issues": []
   }
 }

@@ -1,12 +1,10 @@
 from pathlib import Path
-import json
 import pytesseract
 from pdf2image import convert_from_path
-import pytesseract
+import re
 
 pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
 
-import re
 
 def normalize_line(line: str) -> str:
     # normalize whitespace and common OCR artifacts
@@ -29,6 +27,7 @@ def is_junk_line(line: str) -> bool:
 
     return False
 
+
 def is_chord_line(line: str) -> bool:
     """
     Detect lines that are mostly chord symbols:
@@ -42,6 +41,7 @@ def is_chord_line(line: str) -> bool:
 
     matches = sum(1 for t in tokens if chord_pattern.match(t))
     return matches / len(tokens) > 0.6
+
 
 def is_metadata_line(line: str) -> bool:
     lower = line.lower()
@@ -66,6 +66,7 @@ def is_metadata_line(line: str) -> bool:
 
     return False
 
+
 def is_mostly_non_lyric(line: str) -> bool:
     """
     Remove lines that contain very few actual words.
@@ -73,9 +74,11 @@ def is_mostly_non_lyric(line: str) -> bool:
     letters = sum(c.isalpha() for c in line)
     return letters < 5
 
+
 def is_symbol_heavy(line: str) -> bool:
     symbols = sum(not c.isalnum() and not c.isspace() for c in line)
     return symbols > len(line) * 0.3
+
 
 def extract_text_via_ocr(pdf_path: Path) -> list[str]:
     lines = []
@@ -96,6 +99,7 @@ def extract_text_via_ocr(pdf_path: Path) -> list[str]:
             lines.append(line)
 
     return lines
+
 
 def clean_ocr_lines(lines):
     cleaned = []
@@ -121,6 +125,7 @@ def clean_ocr_lines(lines):
         cleaned.append(line)
 
     return cleaned
+
 
 def group_lines_into_sections(lines):
     sections = []
@@ -193,10 +198,12 @@ def group_lines_into_sections(lines):
 
     return sections
 
-def chunk_lines(lines, size=4):
-    return [lines[i:i+size] for i in range(0, len(lines), size)]
 
-def build_song_json(title: str, sections, output_path: Path):
+def chunk_lines(lines, size=4):
+    return [lines[i:i + size] for i in range(0, len(lines), size)]
+
+
+def build_song_json(title: str, sections) -> dict:
     json_sections = []
 
     for sec in sections:
@@ -209,7 +216,7 @@ def build_song_json(title: str, sections, output_path: Path):
             "lines": sec.get("lines", [])
         })
 
-    song = {
+    return {
         "schema_version": "1.0",
         "song": {
             "title": title,
@@ -227,12 +234,8 @@ def build_song_json(title: str, sections, output_path: Path):
         }
     }
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(song, f, indent=2, ensure_ascii=False)
-
-def import_song_from_pdf(pdf_path: Path, songs_folder: Path) -> Path:
+def import_song_from_pdf(pdf_path: Path) -> dict:
     raw_lines = extract_text_via_ocr(pdf_path)
     cleaned = clean_ocr_lines(raw_lines)
     sections = group_lines_into_sections(cleaned)
@@ -247,28 +250,10 @@ def import_song_from_pdf(pdf_path: Path, songs_folder: Path) -> Path:
         }]
 
     title = pdf_path.stem.replace("_", " ").title()
-    output_path = songs_folder / f"{pdf_path.stem.lower()}.json"
-
-    build_song_json(title, sections, output_path)
-    return output_path
+    return build_song_json(title, sections)
 
 
 if __name__ == "__main__":
     pdf = Path(
         "/Users/george/Documents/Spiritual/Church/WorshipSlides/SongPDFs/Come_Jesus_Come.pdf"
     )
-
-    raw_lines = extract_text_via_ocr(pdf)
-    print(f"RAW OCR LINES: {len(raw_lines)}")
-
-    cleaned = clean_ocr_lines(raw_lines)
-    print(f"CLEANED LINES: {len(cleaned)}")
-
-    sections = group_lines_into_sections(cleaned)
-
-    output = Path(
-        "/Users/george/Documents/Spiritual/Church/WorshipSlides/songs/come_jesus_come.json"
-    )
-
-    build_song_json("Come Jesus Come", sections, output)
-    print(f"Song JSON created: {output}")
