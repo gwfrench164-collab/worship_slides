@@ -1,0 +1,14 @@
+MAC RELEASE CHECKLIST
+
+1. Remove machine-specific hard-coded paths
+2. Bundle app with PyInstaller
+3. Bundle OCR tools:
+   - tesseract
+   - tessdata
+   - poppler
+4. Bundle app data:
+   - kjv.json
+   - starter template(s)
+5. Make first launch create user folders
+6. Test on a second Mac
+7. Later: code sign and notarize

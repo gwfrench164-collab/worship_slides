@@ -1,9 +1,31 @@
 from pathlib import Path
-import pytesseract
-from pdf2image import convert_from_path
+import os
 import re
+import sys
 
-pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
+import fitz
+import pytesseract
+from PIL import Image
+
+
+def get_bundled_path(*parts):
+    """
+    Return path inside the bundled resources folder.
+    Works in development now, and is ready for packaged-app support later.
+    """
+    base = Path(__file__).resolve().parent
+    if hasattr(sys, "_MEIPASS"):
+        base = Path(sys._MEIPASS)
+    return base / "bundled" / Path(*parts)
+
+
+pytesseract.pytesseract.tesseract_cmd = str(
+    get_bundled_path("macos", "tesseract", "tesseract")
+)
+
+os.environ["TESSDATA_PREFIX"] = str(
+    get_bundled_path("macos", "tessdata")
+)
 
 
 def normalize_line(line: str) -> str:
@@ -83,20 +105,21 @@ def is_symbol_heavy(line: str) -> bool:
 def extract_text_via_ocr(pdf_path: Path) -> list[str]:
     lines = []
 
-    images = convert_from_path(
-        pdf_path,
-        dpi=300,
-        poppler_path="/opt/homebrew/bin"
-    )
+    doc = fitz.open(pdf_path)
+    try:
+        for page_num, page in enumerate(doc, start=1):
+            pix = page.get_pixmap(dpi=300, alpha=False)
 
-    for page_num, image in enumerate(images, start=1):
-        text = pytesseract.image_to_string(image)
+            image = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+            text = pytesseract.image_to_string(image)
 
-        for raw_line in text.splitlines():
-            line = raw_line.strip()
-            if not line:
-                continue
-            lines.append(line)
+            for raw_line in text.splitlines():
+                line = raw_line.strip()
+                if not line:
+                    continue
+                lines.append(line)
+    finally:
+        doc.close()
 
     return lines
 
