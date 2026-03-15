@@ -5,7 +5,7 @@ from pathlib import Path
 
 from bible_extractor import extract_ordered_refs, fetch_verse_text, load_bible_json
 from build_window import BuildWindow
-from config import auto_find_kjv_json, load_bible_json_path, load_data_root, save_bible_json_path
+from config import auto_find_kjv_json, load_bible_json_path, load_data_root, save_bible_json_path, load_ccli_number, save_ccli_number
 from library_window import LibraryWindow
 from notes_reader import read_notes_text
 from pdf_importer_ocr import import_song_from_pdf
@@ -64,6 +64,10 @@ class MainWindow(tk.Tk):
         library_menu.add_command(label="Manage Songs", command=self.open_library_window)
         library_menu.add_command(label="Manage Templates", command=self.not_implemented)
         menubar.add_cascade(label="Library", menu=library_menu)
+
+        settings_menu = tk.Menu(menubar, tearoff=0)
+        settings_menu.add_command(label="Set Church CCLI Number...", command=self.set_ccli_number)
+        menubar.add_cascade(label="Settings", menu=settings_menu)
 
         help_menu = tk.Menu(menubar, tearoff=0)
         help_menu.add_command(label="About", command=self.show_about)
@@ -124,6 +128,43 @@ class MainWindow(tk.Tk):
             "About",
             "Worship Slides\nVersion 0.1\n\nCreate worship song slides quickly.",
         )
+
+    def set_ccli_number(self):
+        """Prompt user to set the church CCLI number."""
+        current = ""
+        try:
+            current = load_ccli_number() or ""
+        except Exception:
+            pass
+
+        dialog = tk.Toplevel(self)
+        dialog.title("Set Church CCLI Number")
+        dialog.resizable(False, False)
+
+        frame = ttk.Frame(dialog, padding=16)
+        frame.pack(fill="both", expand=True)
+
+        ttk.Label(frame, text="Enter your church CCLI number:").pack(anchor="w")
+
+        entry_var = tk.StringVar(value=current)
+        entry = ttk.Entry(frame, textvariable=entry_var, width=30)
+        entry.pack(fill="x", pady=(6, 12))
+        entry.focus_set()
+
+        def save():
+            value = entry_var.get().strip()
+            try:
+                save_ccli_number(value)
+                self.set_status("CCLI number saved.")
+                dialog.destroy()
+            except Exception as e:
+                messagebox.showerror("Error", str(e))
+
+        buttons = ttk.Frame(frame)
+        buttons.pack(fill="x")
+
+        ttk.Button(buttons, text="Cancel", command=dialog.destroy).pack(side="right", padx=4)
+        ttk.Button(buttons, text="Save", command=save).pack(side="right")
 
     def open_song_builder(self):
         self.set_status("Opening Song Builder...")

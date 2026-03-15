@@ -17,6 +17,7 @@ from pptx_utils import (
 from PIL import ImageFont
 
 from debug_tools import DebugSettings, DebugRecorder
+from config import load_ccli_number
 
 try:
     from matplotlib.font_manager import FontProperties, findfont  # type: ignore
@@ -527,7 +528,18 @@ class SlideBuilder:
                 continue
 
             title = song["song"]["title"]
-            add_title_slide_from_template(prs, title_tpl_idx, title)
+            author = str(song.get("song", {}).get("author", "") or "").strip()
+
+            raw_ccli = str(load_ccli_number() or "").strip()
+            ccli_text = f"CCLI #{raw_ccli}" if raw_ccli else ""
+
+            add_title_slide_from_template(
+                prs,
+                title_tpl_idx,
+                title,
+                author_text=author,
+                ccli_text=ccli_text,
+            )
 
             for section in song["structure"]["sections"]:
                 slide_groups = self._section_slide_groups(section)

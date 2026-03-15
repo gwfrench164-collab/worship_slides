@@ -25,6 +25,17 @@ def save_data_root(path):
     data["data_root"] = str(path)
     _save_config(data)
 
+
+def load_ccli_number():
+    data = _load_config()
+    return data.get("ccli_number", "")
+
+
+def save_ccli_number(ccli_number):
+    data = _load_config()
+    data["ccli_number"] = str(ccli_number).strip()
+    _save_config(data)
+
 def load_build_prefs():
     cfg = _load_config()
     return {
@@ -53,7 +64,6 @@ def ensure_data_root_structure(data_root: str | None) -> None:
     for name in REQUIRED_FOLDERS:
         (root / name).mkdir(parents=True, exist_ok=True)
 
-from pathlib import Path
 
 def load_bible_json_path():
     data = _load_config()

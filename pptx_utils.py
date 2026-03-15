@@ -492,15 +492,28 @@ def _replace_token_text_with_bracket_italics(slide, token: str, new_text: str) -
 # -------------------------
 
 TOKEN_TITLE = "{{TITLE}}"
+TOKEN_AUTHOR = "{{AUTHOR}}"
+TOKEN_CCLI = "{{CCLI}}"
 TOKEN_LYRICS = "{{LYRICS}}"
 TOKEN_VERSE_REF = "{{VERSE REF}}"
 TOKEN_VERSE_TXT = "{{VERSE TXT}}"
 
 
-def add_title_slide_from_template(prs, template_slide_index: int, title_text: str):
+def add_title_slide_from_template(
+    prs,
+    template_slide_index: int,
+    title_text: str,
+    author_text: str = "",
+    ccli_text: str = "",
+):
     slide = duplicate_slide(prs, template_slide_index)
     if not _replace_token_text(slide, TOKEN_TITLE, title_text):
         raise RuntimeError("Template title slide missing {{TITLE}} token.")
+
+    # These are optional. If the template contains the token, replace it.
+    # If the value is blank, leave the textbox blank.
+    _replace_token_text(slide, TOKEN_AUTHOR, author_text or "")
+    _replace_token_text(slide, TOKEN_CCLI, ccli_text or "")
     return slide
 
 from pptx.util import Pt
