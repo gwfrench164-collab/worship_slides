@@ -1,8 +1,9 @@
 import json
 import tkinter as tk
-from tkinter import messagebox, simpledialog
+from tkinter import messagebox, simpledialog, ttk
 from pathlib import Path
 import re
+from typing import Optional
 
 
 SECTION_TYPES = ["Title", "Verse", "Chorus", "Bridge", "Outro", "Other"]
@@ -136,16 +137,10 @@ class SongBuilder(tk.Toplevel):
         # Save current section lyrics BEFORE switching
         self._save_current_lyrics()
 
-        section_type = simpledialog.askstring(
-            "Add Section",
-            "Section type (Title, Verse, Chorus, Bridge, Outro, Other):"
-        )
+        # Use a drop-down selection instead of free text entry.
+        section_type = self.prompt_section_type()
         if not section_type:
-            return
-
-        section_type = section_type.strip().title()
-        if section_type not in SECTION_TYPES:
-            messagebox.showerror("Error", "Invalid section type.")
+            # user cancelled the dialog
             return
 
         label = self._generate_label(section_type)
@@ -166,6 +161,43 @@ class SongBuilder(tk.Toplevel):
         self.section_listbox.select_clear(0, tk.END)
         self.section_listbox.select_set(index)
         self.section_listbox.event_generate("<<ListboxSelect>>")
+
+    def prompt_section_type(self) -> Optional[str]:
+        """
+        Display a modal dialog with a dropdown to select the section type.
+        Returns the selected section type (Title, Verse, etc.) or None if cancelled.
+        """
+        dialog = tk.Toplevel(self)
+        dialog.title("Add Section")
+        dialog.transient(self)
+        dialog.grab_set()
+
+        tk.Label(dialog, text="Select section type:").pack(padx=10, pady=(10, 0))
+        # Default to the first entry for convenience
+        var = tk.StringVar(value=SECTION_TYPES[0])
+        combo = ttk.Combobox(dialog, textvariable=var, values=SECTION_TYPES, state="readonly")
+        combo.pack(padx=10, pady=5)
+
+        result = {"value": None}
+
+        def on_ok():
+            result["value"] = var.get()
+            dialog.destroy()
+
+        def on_cancel():
+            dialog.destroy()
+
+        btn_frame = tk.Frame(dialog)
+        btn_frame.pack(pady=10)
+        ok_btn = tk.Button(btn_frame, text="OK", command=on_ok, width=10)
+        ok_btn.pack(side="left", padx=5)
+        cancel_btn = tk.Button(btn_frame, text="Cancel", command=on_cancel, width=10)
+        cancel_btn.pack(side="right", padx=5)
+
+        combo.focus_set()
+        # Wait until the dialog is closed
+        self.wait_window(dialog)
+        return result["value"]
 
     def remove_section(self):
         index = self.section_listbox.curselection()
