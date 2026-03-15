@@ -1,12 +1,69 @@
 import json
 import tkinter as tk
-from tkinter import messagebox, simpledialog, ttk
+from tkinter import messagebox, ttk
 from pathlib import Path
 import re
-from typing import Optional
 
 
 SECTION_TYPES = ["Title", "Verse", "Chorus", "Bridge", "Outro", "Other"]
+
+
+class SectionTypeDialog(tk.Toplevel):
+    def __init__(self, parent, section_types=None):
+        super().__init__(parent)
+        self.title("Add Section")
+        self.transient(parent)
+        self.grab_set()
+        self.resizable(False, False)
+
+        self.result = None
+        self.section_types = section_types or SECTION_TYPES
+        self.section_var = tk.StringVar(value=self.section_types[0])
+
+        container = ttk.Frame(self, padding=14)
+        container.pack(fill="both", expand=True)
+
+        ttk.Label(container, text="Select section type", style="SB.SectionHeader.TLabel").pack(anchor="w")
+        ttk.Label(
+            container,
+            text="Choose the type of section you want to add.",
+            style="SB.Subtle.TLabel",
+        ).pack(anchor="w", pady=(2, 10))
+
+        self.combo = ttk.Combobox(
+            container,
+            textvariable=self.section_var,
+            values=self.section_types,
+            state="readonly",
+            width=24,
+        )
+        self.combo.pack(fill="x")
+        self.combo.focus_set()
+
+        buttons = ttk.Frame(container)
+        buttons.pack(fill="x", pady=(14, 0))
+        ttk.Button(buttons, text="Cancel", command=self._cancel).pack(side="right")
+        ttk.Button(buttons, text="Add Section", command=self._ok, style="Accent.TButton").pack(side="right", padx=(0, 8))
+
+        self.bind("<Return>", lambda _e: self._ok())
+        self.bind("<Escape>", lambda _e: self._cancel())
+
+        self.update_idletasks()
+        parent_x = parent.winfo_rootx()
+        parent_y = parent.winfo_rooty()
+        parent_w = parent.winfo_width()
+        parent_h = parent.winfo_height()
+        x = parent_x + max(20, (parent_w - self.winfo_width()) // 2)
+        y = parent_y + max(20, (parent_h - self.winfo_height()) // 2)
+        self.geometry(f"+{x}+{y}")
+
+    def _ok(self):
+        self.result = self.section_var.get()
+        self.destroy()
+
+    def _cancel(self):
+        self.result = None
+        self.destroy()
 
 
 class SongBuilder(tk.Toplevel):
@@ -17,62 +74,76 @@ class SongBuilder(tk.Toplevel):
         self.draft_song = draft_song
 
         self.title("Song Builder")
-        self.geometry("700x450")
+        self.geometry("860x560")
+        self.minsize(760, 500)
 
         self.sections = []
         self.current_section_index = None
 
+        self._configure_styles()
         self._build_ui()
+
         if self.open_song:
             self.load_song(self.open_song)
+            self.set_status("Loaded saved song.")
         elif self.draft_song:
             self.load_song_data(self.draft_song)
+            self.set_status("Loaded imported draft. Review and save when ready.")
+        else:
+            self.set_status("Ready to create a new song.")
+
+    def _configure_styles(self):
+        style = ttk.Style(self)
+        try:
+            style.theme_use("clam")
+        except Exception:
+            pass
+
+        base_font = ("TkDefaultFont", 10)
+        heading_font = ("TkDefaultFont", 12, "bold")
+        subheading_font = ("TkDefaultFont", 10, "bold")
+
+        style.configure("SB.Title.TLabel", font=heading_font)
+        style.configure("SB.SectionHeader.TLabel", font=subheading_font)
+        style.configure("SB.Subtle.TLabel", foreground="#555555")
+        style.configure("SB.Status.TLabel", padding=(8, 4))
+        style.configure("SB.Toolbar.TFrame", padding=(10, 8))
+        style.configure("SB.Content.TFrame", padding=(10, 10))
+        style.configure("SB.Side.TLabelframe", padding=(8, 8))
+        style.configure("SB.Editor.TLabelframe", padding=(10, 10))
+        style.configure("Accent.TButton", padding=(12, 6))
+        style.configure("TButton", padding=(10, 6))
+        style.configure("TLabel", font=base_font)
+        style.configure("TEntry", padding=4)
 
     def load_song(self, song_path):
         with open(song_path, "r", encoding="utf-8") as f:
             data = json.load(f)
-
         self.load_song_data(data)
 
     def load_song_data(self, data):
-        # ---- Song metadata ----
         self.title_entry.delete(0, tk.END)
         self.title_entry.insert(0, data.get("song", {}).get("title", ""))
 
         self.author_entry.delete(0, tk.END)
         self.author_entry.insert(0, data.get("song", {}).get("author", ""))
 
-        # ---- Sections ----
         self.sections = list(data.get("structure", {}).get("sections", []))
 
         self.section_listbox.delete(0, tk.END)
         for section in self.sections:
             self.section_listbox.insert(tk.END, section.get("label", "Section"))
 
-        # ---- Auto-select first section ----
         if self.sections:
             self.section_listbox.selection_set(0)
             self.current_section_index = 0
             self._load_section_into_editor(0)
         else:
             self.current_section_index = None
-            self.section_label.config(text="No section selected")
+            self.section_label_var.set("No section selected")
             self.lyrics_text.delete("1.0", tk.END)
 
-    def _load_section_into_editor(self, index):
-        section = self.sections[index]
-
-        self.section_label.config(text=section.get("label", ""))
-
-        self.lyrics_text.delete("1.0", tk.END)
-
-        # New format: section["lines"] is the source of truth.
-        # Backward compatible: if the section still has "slides", we flatten them.
-        lines = self._get_section_lines(section)
-        self.lyrics_text.insert(tk.END, "\n".join(lines))
-
     def _get_section_lines(self, section: dict) -> list[str]:
-        """Return raw lyric lines for a section (new or legacy format)."""
         if isinstance(section.get("lines"), list):
             return [str(x) for x in section.get("lines", [])]
 
@@ -82,160 +153,169 @@ class SongBuilder(tk.Toplevel):
                 out.append(str(line))
         return out
 
-    # ---------------- UI ----------------
-
     def _build_ui(self):
-        top = tk.Frame(self)
-        top.pack(fill="x", padx=10, pady=5)
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(1, weight=1)
 
-        tk.Label(top, text="Title *").grid(row=0, column=0, sticky="w")
-        self.title_entry = tk.Entry(top, width=40)
-        self.title_entry.grid(row=0, column=1, sticky="w")
+        header = ttk.Frame(self, style="SB.Toolbar.TFrame")
+        header.grid(row=0, column=0, sticky="ew")
+        header.columnconfigure(0, weight=1)
 
-        tk.Label(top, text="Author").grid(row=1, column=0, sticky="w")
-        self.author_entry = tk.Entry(top, width=40)
-        self.author_entry.grid(row=1, column=1, sticky="w")
+        ttk.Label(header, text="Song Builder", style="SB.Title.TLabel").grid(row=0, column=0, sticky="w")
+        ttk.Label(
+            header,
+            text="Create or edit song sections, then save the song JSON to your library.",
+            style="SB.Subtle.TLabel",
+        ).grid(row=1, column=0, sticky="w", pady=(2, 0))
 
-        main = tk.Frame(self)
-        main.pack(fill="both", expand=True, padx=10, pady=5)
+        content = ttk.Frame(self, style="SB.Content.TFrame")
+        content.grid(row=1, column=0, sticky="nsew")
+        content.columnconfigure(1, weight=1)
+        content.rowconfigure(1, weight=1)
 
-        # Sections list
-        left = tk.Frame(main)
-        left.pack(side="left", fill="y")
+        meta = ttk.Frame(content)
+        meta.grid(row=0, column=0, columnspan=2, sticky="ew", pady=(0, 10))
+        meta.columnconfigure(1, weight=1)
+        meta.columnconfigure(3, weight=1)
 
-        tk.Label(left, text="Sections").pack()
+        ttk.Label(meta, text="Title *").grid(row=0, column=0, sticky="w", padx=(0, 8))
+        self.title_entry = ttk.Entry(meta)
+        self.title_entry.grid(row=0, column=1, sticky="ew", padx=(0, 16))
 
-        self.section_listbox = tk.Listbox(left, width=20)
-        self.section_listbox.pack(fill="y", expand=True)
+        ttk.Label(meta, text="Author").grid(row=0, column=2, sticky="w", padx=(0, 8))
+        self.author_entry = ttk.Entry(meta)
+        self.author_entry.grid(row=0, column=3, sticky="ew")
+
+        side = ttk.LabelFrame(content, text="Sections", style="SB.Side.TLabelframe")
+        side.grid(row=1, column=0, sticky="nsw", padx=(0, 12))
+        side.columnconfigure(0, weight=1)
+        side.rowconfigure(1, weight=1)
+
+        ttk.Label(side, text="Select a section to edit.", style="SB.Subtle.TLabel").grid(row=0, column=0, sticky="w", pady=(0, 6))
+
+        self.section_listbox = tk.Listbox(side, width=22, height=16, exportselection=False)
+        self.section_listbox.grid(row=1, column=0, sticky="nsew")
         self.section_listbox.bind("<<ListboxSelect>>", self.on_section_select)
 
-        tk.Button(left, text="+ Add", command=self.add_section).pack(fill="x", pady=2)
-        tk.Button(left, text="− Remove", command=self.remove_section).pack(fill="x", pady=2)
+        side_buttons = ttk.Frame(side)
+        side_buttons.grid(row=2, column=0, sticky="ew", pady=(8, 0))
+        side_buttons.columnconfigure(0, weight=1)
+        side_buttons.columnconfigure(1, weight=1)
+        ttk.Button(side_buttons, text="Add Section", command=self.add_section, style="Accent.TButton").grid(row=0, column=0, sticky="ew", padx=(0, 4))
+        ttk.Button(side_buttons, text="Remove", command=self.remove_section).grid(row=0, column=1, sticky="ew", padx=(4, 0))
 
-        # Lyrics editor
-        right = tk.Frame(main)
-        right.pack(side="left", fill="both", expand=True, padx=10)
+        editor = ttk.LabelFrame(content, text="Lyrics Editor", style="SB.Editor.TLabelframe")
+        editor.grid(row=1, column=1, sticky="nsew")
+        editor.columnconfigure(0, weight=1)
+        editor.rowconfigure(2, weight=1)
 
-        self.section_label = tk.Label(right, text="No section selected")
-        self.section_label.pack(anchor="w")
+        self.section_label_var = tk.StringVar(value="No section selected")
+        ttk.Label(editor, textvariable=self.section_label_var, style="SB.SectionHeader.TLabel").grid(row=0, column=0, sticky="w")
+        ttk.Label(
+            editor,
+            text="Enter one lyric line per line. Blank lines are removed when the section is saved.",
+            style="SB.Subtle.TLabel",
+        ).grid(row=1, column=0, sticky="w", pady=(2, 8))
 
-        tk.Label(right, text="Lyrics (one line per line):").pack(anchor="w")
+        text_frame = ttk.Frame(editor)
+        text_frame.grid(row=2, column=0, sticky="nsew")
+        text_frame.columnconfigure(0, weight=1)
+        text_frame.rowconfigure(0, weight=1)
 
-        self.lyrics_text = tk.Text(right, height=10)
-        self.lyrics_text.pack(fill="both", expand=True)
+        self.lyrics_text = tk.Text(text_frame, height=16, wrap="word", undo=True)
+        self.lyrics_text.grid(row=0, column=0, sticky="nsew")
+        yscroll = ttk.Scrollbar(text_frame, orient="vertical", command=self.lyrics_text.yview)
+        yscroll.grid(row=0, column=1, sticky="ns")
+        self.lyrics_text.configure(yscrollcommand=yscroll.set)
 
-        # Bottom buttons
-        bottom = tk.Frame(self)
-        bottom.pack(pady=10)
+        bottom = ttk.Frame(self, padding=(10, 0, 10, 8))
+        bottom.grid(row=2, column=0, sticky="ew")
+        bottom.columnconfigure(0, weight=1)
 
-        tk.Button(bottom, text="Cancel", command=self.destroy).pack(side="left", padx=5)
-        tk.Button(bottom, text="Save Song", command=self.save_song).pack(side="left", padx=5)
+        actions = ttk.Frame(bottom)
+        actions.grid(row=0, column=1, sticky="e")
+        ttk.Button(actions, text="Cancel", command=self.destroy).pack(side="left", padx=(0, 8))
+        ttk.Button(actions, text="Save Song", command=self.save_song, style="Accent.TButton").pack(side="left")
 
-    # ---------------- Sections ----------------
+        self.status_var = tk.StringVar(value="Ready")
+        status = ttk.Label(self, textvariable=self.status_var, anchor="w", relief="sunken", style="SB.Status.TLabel")
+        status.grid(row=3, column=0, sticky="ew")
+
+    def set_status(self, message: str):
+        self.status_var.set(message)
+        self.update_idletasks()
+
+    def _load_section_into_editor(self, index):
+        section = self.sections[index]
+        self.section_label_var.set(section.get("label", ""))
+        self.lyrics_text.delete("1.0", tk.END)
+        lines = self._get_section_lines(section)
+        self.lyrics_text.insert(tk.END, "\n".join(lines))
+        self.set_status(f"Editing {section.get('label', 'section')}.")
+
+    def prompt_section_type(self):
+        dialog = SectionTypeDialog(self)
+        self.wait_window(dialog)
+        return dialog.result
 
     def add_section(self):
-        # Save current section lyrics BEFORE switching
         self._save_current_lyrics()
 
-        # Use a drop-down selection instead of free text entry.
         section_type = self.prompt_section_type()
         if not section_type:
-            # user cancelled the dialog
+            self.set_status("Add section cancelled.")
             return
 
         label = self._generate_label(section_type)
-
         section = {
             "id": self._make_id(label),
             "label": label,
             "type": section_type.lower(),
-            # New format: store raw lines only. SlideBuilder decides chunking.
-            "lines": []
+            "lines": [],
         }
 
         self.sections.append(section)
         self.section_listbox.insert(tk.END, label)
 
-        # Auto-select the new section
         index = len(self.sections) - 1
         self.section_listbox.select_clear(0, tk.END)
         self.section_listbox.select_set(index)
         self.section_listbox.event_generate("<<ListboxSelect>>")
-
-    def prompt_section_type(self) -> Optional[str]:
-        """
-        Display a modal dialog with a dropdown to select the section type.
-        Returns the selected section type (Title, Verse, etc.) or None if cancelled.
-        """
-        dialog = tk.Toplevel(self)
-        dialog.title("Add Section")
-        dialog.transient(self)
-        dialog.grab_set()
-
-        tk.Label(dialog, text="Select section type:").pack(padx=10, pady=(10, 0))
-        # Default to the first entry for convenience
-        var = tk.StringVar(value=SECTION_TYPES[0])
-        combo = ttk.Combobox(dialog, textvariable=var, values=SECTION_TYPES, state="readonly")
-        combo.pack(padx=10, pady=5)
-
-        result = {"value": None}
-
-        def on_ok():
-            result["value"] = var.get()
-            dialog.destroy()
-
-        def on_cancel():
-            dialog.destroy()
-
-        btn_frame = tk.Frame(dialog)
-        btn_frame.pack(pady=10)
-        ok_btn = tk.Button(btn_frame, text="OK", command=on_ok, width=10)
-        ok_btn.pack(side="left", padx=5)
-        cancel_btn = tk.Button(btn_frame, text="Cancel", command=on_cancel, width=10)
-        cancel_btn.pack(side="right", padx=5)
-
-        combo.focus_set()
-        # Wait until the dialog is closed
-        self.wait_window(dialog)
-        return result["value"]
+        self.set_status(f"Added {label}.")
 
     def remove_section(self):
         index = self.section_listbox.curselection()
         if not index:
+            self.set_status("Select a section to remove.")
             return
 
         i = index[0]
+        removed_label = self.sections[i].get("label", "Section")
         del self.sections[i]
         self.section_listbox.delete(i)
         self.lyrics_text.delete("1.0", tk.END)
-        self.section_label.config(text="No section selected")
+        self.section_label_var.set("No section selected")
         self.current_section_index = None
+        self.set_status(f"Removed {removed_label}.")
 
-    def on_section_select(self, event):
-        # Save current section before switching
+    def on_section_select(self, _event):
         self._save_current_lyrics()
-
         selection = self.section_listbox.curselection()
         if not selection:
             return
-
         index = selection[0]
         self.current_section_index = index
         self._load_section_into_editor(index)
-
-    # ---------------- Helpers ----------------
 
     def _save_current_lyrics(self):
         if self.current_section_index is None:
             return
 
         raw_lines = self.lyrics_text.get("1.0", tk.END).splitlines()
-        # Preserve line breaks; remove totally blank lines.
         lines = [ln.rstrip() for ln in raw_lines if ln.strip()]
 
         section = self.sections[self.current_section_index]
         section["lines"] = lines
-        # If this section came from the old schema, remove legacy "slides".
         section.pop("slides", None)
 
     def _generate_label(self, section_type):
@@ -247,18 +327,18 @@ class SongBuilder(tk.Toplevel):
     def _make_id(self, label):
         return re.sub(r"[^a-z0-9]", "", label.lower())
 
-    # ---------------- Save ----------------
-
     def save_song(self):
         self._save_current_lyrics()
 
         title = self.title_entry.get().strip()
         if not title:
             messagebox.showerror("Error", "Song title is required.")
+            self.set_status("Save failed: title is required.")
             return
 
         if not self.sections:
             messagebox.showerror("Error", "Add at least one section.")
+            self.set_status("Save failed: add at least one section.")
             return
 
         song_data = {
@@ -268,33 +348,26 @@ class SongBuilder(tk.Toplevel):
                 "author": self.author_entry.get().strip(),
                 "copyright": "",
                 "ccli_number": "",
-                "notes": ""
+                "notes": "",
             },
-            "structure": {
-                "sections": self.sections
-            },
-            "chords": {
-                "enabled": False,
-                "sections": {}
-            }
+            "structure": {"sections": self.sections},
+            "chords": {"enabled": False, "sections": {}},
         }
 
         filename = title.lower().replace(" ", "_") + ".json"
         path = self.songs_folder / filename
 
         if path.exists():
-            if not messagebox.askyesno(
-                "Overwrite?",
-                f"{filename} already exists. Replace it?"
-            ):
+            if not messagebox.askyesno("Overwrite?", f"{filename} already exists. Replace it?"):
+                self.set_status("Save cancelled.")
                 return
 
         try:
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(song_data, f, indent=2, ensure_ascii=False)
-
             messagebox.showinfo("Saved", f"Song saved:\n{filename}")
+            self.set_status(f"Saved {filename}.")
             self.destroy()
-
         except Exception as e:
             messagebox.showerror("Error", str(e))
+            self.set_status("Save failed.")
