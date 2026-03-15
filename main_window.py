@@ -11,7 +11,157 @@ from notes_reader import read_notes_text
 from pdf_importer_ocr import import_song_from_pdf
 from pptx_utils import merge_presentations
 from song_builder import SongBuilder
+
 from verse_slide_builder import build_verse_deck
+
+
+class VerseSlidesWindow(tk.Toplevel):
+    def __init__(self, parent, data_root):
+        super().__init__(parent)
+        self.parent = parent
+        self.data_root = Path(data_root)
+
+        self.title("Create Verse Slides from Sermon Notes")
+        self.geometry("640x420")
+        self.minsize(640, 420)
+        self.resizable(True, True)
+
+        self.notes_var = tk.StringVar()
+        self.template_var = tk.StringVar()
+        self.output_var = tk.StringVar()
+        self.status_var = tk.StringVar(value="Step 1: Select sermon notes.")
+
+        self._build_ui()
+
+    def _build_ui(self):
+        outer = ttk.Frame(self, padding=16)
+        outer.pack(fill="both", expand=True)
+
+        ttk.Label(outer, text="Create Verse Slides from Sermon Notes", style="Header.TLabel").pack(anchor="w")
+        ttk.Label(
+            outer,
+            text=(
+                "This tool scans sermon notes for Bible references, then creates scripture slides.\n"
+                "Steps: 1) Select notes  2) Select a verse template  3) Choose where to save  4) Build slides"
+            ),
+            style="Subheader.TLabel",
+            justify="left",
+        ).pack(anchor="w", pady=(4, 14))
+
+        form = ttk.LabelFrame(outer, text="Verse Slide Inputs", style="Card.TLabelframe")
+        form.pack(fill="x", pady=(0, 12))
+        form.columnconfigure(1, weight=1)
+
+        ttk.Label(form, text="Sermon notes").grid(row=0, column=0, sticky="w", padx=(0, 8), pady=6)
+        ttk.Entry(form, textvariable=self.notes_var).grid(row=0, column=1, sticky="ew", pady=6)
+        ttk.Button(form, text="Browse...", command=self._browse_notes).grid(row=0, column=2, sticky="ew", padx=(8, 0), pady=6)
+
+        ttk.Label(form, text="Verse template").grid(row=1, column=0, sticky="w", padx=(0, 8), pady=6)
+        ttk.Entry(form, textvariable=self.template_var).grid(row=1, column=1, sticky="ew", pady=6)
+        ttk.Button(form, text="Browse...", command=self._browse_template).grid(row=1, column=2, sticky="ew", padx=(8, 0), pady=6)
+
+        ttk.Label(form, text="Save verse slides as").grid(row=2, column=0, sticky="w", padx=(0, 8), pady=6)
+        ttk.Entry(form, textvariable=self.output_var).grid(row=2, column=1, sticky="ew", pady=6)
+        ttk.Button(form, text="Browse...", command=self._browse_output).grid(row=2, column=2, sticky="ew", padx=(8, 0), pady=6)
+
+        tips = ttk.LabelFrame(outer, text="What this does", style="Card.TLabelframe")
+        tips.pack(fill="both", expand=True)
+        ttk.Label(
+            tips,
+            text=(
+                "• Finds Bible references like John 3:16 or Romans 8:28 in your notes\n"
+                "• Looks up the verse text from your configured Bible JSON\n"
+                "• Builds a PowerPoint deck using your verse slide template"
+            ),
+            justify="left",
+        ).pack(anchor="w")
+
+        buttons = ttk.Frame(outer)
+        buttons.pack(fill="x", pady=(12, 0))
+        ttk.Button(buttons, text="Cancel", command=self.destroy).pack(side="right")
+        ttk.Button(buttons, text="Build Verse Slides", command=self._build).pack(side="right", padx=(0, 8))
+
+        ttk.Label(self, textvariable=self.status_var, style="Status.TLabel", anchor="w", relief="sunken").pack(fill="x", side="bottom")
+
+    def _browse_notes(self):
+        path = filedialog.askopenfilename(
+            title="Select Sermon Notes",
+            filetypes=[("Pages", "*.pages"), ("Word", "*.docx"), ("Text", "*.txt"), ("All files", "*.*")],
+        )
+        if not path:
+            return
+        self.notes_var.set(path)
+        if not self.output_var.get().strip():
+            suggested = Path(path).with_name(f"{Path(path).stem}_verses.pptx")
+            self.output_var.set(str(suggested))
+        self.status_var.set("Step 2: Select a verse slide template.")
+
+    def _browse_template(self):
+        templates_folder = self.data_root / "templates"
+        path = filedialog.askopenfilename(
+            title="Select Verse Slide Template",
+            initialdir=templates_folder,
+            filetypes=[("PowerPoint", "*.pptx")],
+        )
+        if not path:
+            return
+        self.template_var.set(path)
+        self.status_var.set("Step 3: Choose where to save the finished PowerPoint.")
+
+    def _browse_output(self):
+        initial_name = self.output_var.get().strip() or "sermon_notes_verses.pptx"
+        path = filedialog.asksaveasfilename(
+            title="Save Verse Slides As",
+            defaultextension=".pptx",
+            initialfile=Path(initial_name).name,
+            filetypes=[("PowerPoint", "*.pptx")],
+        )
+        if not path:
+            return
+        self.output_var.set(path)
+        self.status_var.set("Ready to build verse slides.")
+
+    def _build(self):
+        notes_file = self.notes_var.get().strip()
+        template_file = self.template_var.get().strip()
+        output_file = self.output_var.get().strip()
+
+        if not notes_file:
+            messagebox.showerror("Missing notes", "Please select sermon notes first.")
+            self.status_var.set("Step 1: Select sermon notes.")
+            return
+        if not template_file:
+            messagebox.showerror("Missing template", "Please select a verse slide template.")
+            self.status_var.set("Step 2: Select a verse slide template.")
+            return
+        if not output_file:
+            messagebox.showerror("Missing output file", "Please choose where to save the verse slides.")
+            self.status_var.set("Step 3: Choose where to save the finished PowerPoint.")
+            return
+
+        self.status_var.set("Building verse slides...")
+        self.parent.set_status("Building verse slides from sermon notes...")
+        self.update_idletasks()
+
+        try:
+            text = read_notes_text(Path(notes_file))
+            refs = extract_ordered_refs(text)
+            if not refs:
+                self.status_var.set("No Bible references were found in the selected notes.")
+                messagebox.showinfo("No verses found", "No verse references were detected in the selected notes.")
+                return
+
+            bible = self.parent._get_bible()
+            refs_and_texts = [(r, fetch_verse_text(r, bible)) for r in refs]
+            build_verse_deck(Path(template_file), refs_and_texts, Path(output_file), fit_preset="normal")
+
+            self.status_var.set(f"Done: created {Path(output_file).name}")
+            self.parent.set_status(f"Verse slides created: {Path(output_file).name}")
+            messagebox.showinfo("Done", f"Created:\n{Path(output_file).name}")
+        except Exception as e:
+            self.status_var.set("Verse slide build failed.")
+            self.parent.set_status("Verse slide build failed.")
+            messagebox.showerror("Build failed", str(e))
 
 
 class MainWindow(tk.Tk):
@@ -53,7 +203,7 @@ class MainWindow(tk.Tk):
         file_menu.add_separator()
         file_menu.add_command(label="Build Slides", command=self.open_build_window)
         file_menu.add_separator()
-        file_menu.add_command(label="Build Verse Slides from Notes", command=self.build_verse_slides_from_notes)
+        file_menu.add_command(label="Create Verse Slides from Sermon Notes", command=self.build_verse_slides_from_notes)
         file_menu.add_command(label="Extract Verse List from Notes", command=self.extract_verse_list_from_notes)
         file_menu.add_command(label="Merge Song + Verse Decks", command=self.merge_song_and_verse_decks)
         file_menu.add_separator()
@@ -96,7 +246,7 @@ class MainWindow(tk.Tk):
             ("Manage Library", self.open_library_window),
             ("Build Slides", self.open_build_window),
             # ("Extract Verse List from Notes", self.extract_verse_list_from_notes),  # Removed as per instructions
-            ("Build Verse Slides from Notes", self.build_verse_slides_from_notes),
+            ("Create Verse Slides from Sermon Notes", self.build_verse_slides_from_notes),
             ("Merge Song + Verse Decks", self.merge_song_and_verse_decks),
         ]
 
@@ -331,58 +481,15 @@ class MainWindow(tk.Tk):
         messagebox.showinfo("Saved", f"Found {len(refs)} references.\nSaved:\n{out_path.name}")
 
     def build_verse_slides_from_notes(self):
-        self.set_status("Select notes to build verse slides.")
+        self.set_status("Opening Create Verse Slides from Sermon Notes...")
         data_root = load_data_root()
         if not data_root:
             self.set_status("Data folder not set.")
             messagebox.showerror("Error", "Data folder not set.")
             return
 
-        notes_file = filedialog.askopenfilename(
-            title="Select Notes File",
-            filetypes=[("Pages", "*.pages"), ("Word", "*.docx"), ("Text", "*.txt"), ("All files", "*.*")],
-        )
-        if not notes_file:
-            self.set_status("Verse slide build cancelled.")
-            return
-
-        try:
-            text = read_notes_text(Path(notes_file))
-            refs = extract_ordered_refs(text)
-            if not refs:
-                self.set_status("No verses found in notes.")
-                messagebox.showinfo("No verses found", "No verse references were detected.")
-                return
-
-            bible = self._get_bible()
-            templates_folder = Path(data_root) / "templates"
-            template_file = filedialog.askopenfilename(
-                title="Select PPTX Template",
-                initialdir=templates_folder,
-                filetypes=[("PowerPoint", "*.pptx")],
-            )
-            if not template_file:
-                self.set_status("Verse slide build cancelled.")
-                return
-
-            output_file = filedialog.asksaveasfilename(
-                title="Save Verse Slides As",
-                defaultextension=".pptx",
-                initialfile=f"{Path(notes_file).stem}_verses.pptx",
-                filetypes=[("PowerPoint", "*.pptx")],
-            )
-            if not output_file:
-                self.set_status("Verse slide build cancelled.")
-                return
-
-            refs_and_texts = [(r, fetch_verse_text(r, bible)) for r in refs]
-            build_verse_deck(Path(template_file), refs_and_texts, Path(output_file), fit_preset="normal")
-
-            self.set_status(f"Verse slides created: {Path(output_file).name}")
-            messagebox.showinfo("Done", f"Created:\n{Path(output_file).name}")
-        except Exception as e:
-            self.set_status("Verse slide build failed.")
-            messagebox.showerror("Build failed", str(e))
+        VerseSlidesWindow(self, data_root)
+        self.set_status("Verse slides window opened.")
 
     def import_song_from_pdf(self):
         self.set_status("Select a PDF to import.")
