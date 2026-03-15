@@ -95,7 +95,7 @@ class MainWindow(tk.Tk):
             ("Import Song from PDF", self.import_song_from_pdf),
             ("Manage Library", self.open_library_window),
             ("Build Slides", self.open_build_window),
-            ("Extract Verse List from Notes", self.extract_verse_list_from_notes),
+            # ("Extract Verse List from Notes", self.extract_verse_list_from_notes),  # Removed as per instructions
             ("Build Verse Slides from Notes", self.build_verse_slides_from_notes),
             ("Merge Song + Verse Decks", self.merge_song_and_verse_decks),
         ]
