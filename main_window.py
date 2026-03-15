@@ -1,25 +1,47 @@
+import json
 import tkinter as tk
-from tkinter import messagebox, filedialog
-from config import load_data_root
-from song_builder import SongBuilder
-from build_window import BuildWindow
+from tkinter import filedialog, messagebox, ttk
 from pathlib import Path
-from pdf_importer_ocr import import_song_from_pdf
+
+from bible_extractor import extract_ordered_refs, fetch_verse_text, load_bible_json
+from build_window import BuildWindow
+from config import auto_find_kjv_json, load_bible_json_path, load_data_root, save_bible_json_path
 from library_window import LibraryWindow
 from notes_reader import read_notes_text
-from bible_extractor import extract_ordered_refs, load_bible_json, fetch_verse_text
-from verse_slide_builder import build_verse_deck
+from pdf_importer_ocr import import_song_from_pdf
 from pptx_utils import merge_presentations
-from config import load_bible_json_path, save_bible_json_path, auto_find_kjv_json
+from song_builder import SongBuilder
+from verse_slide_builder import build_verse_deck
+
 
 class MainWindow(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Worship Slides")
-        self.geometry("400x380")
+        self.geometry("560x430")
+        self.minsize(560, 430)
 
+        self.status_var = tk.StringVar(value="Ready")
+
+        self._configure_style()
         self._build_menu()
         self._build_main_buttons()
+
+    def _configure_style(self):
+        style = ttk.Style(self)
+        try:
+            style.theme_use("clam")
+        except Exception:
+            pass
+
+        style.configure("Header.TLabel", font=("TkDefaultFont", 16, "bold"))
+        style.configure("Subheader.TLabel", font=("TkDefaultFont", 10))
+        style.configure("TButton", padding=(12, 8))
+        style.configure("Card.TLabelframe", padding=10)
+        style.configure("Status.TLabel", padding=(10, 6))
+
+    def set_status(self, text: str):
+        self.status_var.set(text)
 
     def _build_menu(self):
         menubar = tk.Menu(self)
@@ -36,8 +58,6 @@ class MainWindow(tk.Tk):
         file_menu.add_command(label="Merge Song + Verse Decks", command=self.merge_song_and_verse_decks)
         file_menu.add_separator()
         file_menu.add_command(label="Exit", command=self.quit)
-
-
         menubar.add_cascade(label="File", menu=file_menu)
 
         library_menu = tk.Menu(menubar, tearoff=0)
@@ -52,48 +72,88 @@ class MainWindow(tk.Tk):
         self.config(menu=menubar)
 
     def _build_main_buttons(self):
-        frame = tk.Frame(self)
-        frame.pack(expand=True)
+        outer = ttk.Frame(self, padding=18)
+        outer.pack(fill="both", expand=True)
 
-        tk.Button(frame, text="Create New Song", width=25, command=self.open_song_builder).pack(pady=5)
-        tk.Button(frame, text="Open Existing Song", width=25, command=self.open_existing_song).pack(pady=5)
-        tk.Button(frame, text="Import Song from PDF", width=25, command=self.import_song_from_pdf).pack(pady=5)
-        tk.Button(frame, text="Manage Library", width=25, command=self.open_library_window).pack(pady=5)
-        tk.Button(frame, text="Build Slides", width=25, command=self.open_build_window).pack(pady=5)
-        tk.Button(frame, text="Extract Verse List from Notes", width=25, command=self.extract_verse_list_from_notes).pack(pady=5)
-        tk.Button(frame, text="Build Verse Slides from Notes", width=25, command=self.build_verse_slides_from_notes).pack(pady=5)
-        tk.Button(frame, text="Merge Song + Verse Decks", width=25, command=self.merge_song_and_verse_decks).pack(pady=5)
+        ttk.Label(outer, text="Worship Slides", style="Header.TLabel").pack(anchor="w")
+        ttk.Label(
+            outer,
+            text="Create song slides, verse slides, and merged service decks.",
+            style="Subheader.TLabel",
+        ).pack(anchor="w", pady=(4, 16))
+
+        actions = ttk.LabelFrame(outer, text="Main Actions", style="Card.TLabelframe")
+        actions.pack(fill="both", expand=True)
+
+        button_specs = [
+            ("Create New Song", self.open_song_builder),
+            ("Open Existing Song", self.open_existing_song),
+            ("Import Song from PDF", self.import_song_from_pdf),
+            ("Manage Library", self.open_library_window),
+            ("Build Slides", self.open_build_window),
+            ("Extract Verse List from Notes", self.extract_verse_list_from_notes),
+            ("Build Verse Slides from Notes", self.build_verse_slides_from_notes),
+            ("Merge Song + Verse Decks", self.merge_song_and_verse_decks),
+        ]
+
+        for col in range(2):
+            actions.columnconfigure(col, weight=1)
+
+        for i, (label, command) in enumerate(button_specs):
+            row = i // 2
+            col = i % 2
+            ttk.Button(actions, text=label, command=command).grid(
+                row=row,
+                column=col,
+                sticky="ew",
+                padx=6,
+                pady=6,
+            )
+
+        ttk.Label(self, textvariable=self.status_var, style="Status.TLabel", anchor="w", relief="sunken").pack(
+            fill="x", side="bottom"
+        )
 
     def not_implemented(self):
+        self.set_status("This feature is not implemented yet.")
         messagebox.showinfo("Not implemented", "This feature is not implemented yet.")
 
     def show_about(self):
+        self.set_status("Viewed About window.")
         messagebox.showinfo(
             "About",
-            "Worship Slides\nVersion 0.1\n\nCreate worship song slides quickly."
+            "Worship Slides\nVersion 0.1\n\nCreate worship song slides quickly.",
         )
 
     def open_song_builder(self):
+        self.set_status("Opening Song Builder...")
         data_root = load_data_root()
         if not data_root:
+            self.set_status("Data folder not set.")
             messagebox.showerror("Error", "Data folder not set.")
             return
 
         songs_folder = Path(data_root) / "songs"
         SongBuilder(self, songs_folder)
+        self.set_status("Song Builder opened.")
 
     def open_library_window(self):
+        self.set_status("Opening Song Library...")
         data_root = load_data_root()
         if not data_root:
+            self.set_status("Data folder not set.")
             messagebox.showerror("Error", "Data folder not set.")
             return
 
         songs_folder = Path(data_root) / "songs"
         LibraryWindow(self, songs_folder)
+        self.set_status("Song Library opened.")
 
     def open_existing_song(self):
+        self.set_status("Select a song to open.")
         data_root = load_data_root()
         if not data_root:
+            self.set_status("Data folder not set.")
             messagebox.showerror("Error", "Data folder not set.")
             return
 
@@ -101,20 +161,26 @@ class MainWindow(tk.Tk):
         song_path = filedialog.askopenfilename(
             title="Open Song JSON",
             initialdir=songs_folder,
-            filetypes=[("Song JSON", "*.json")]
+            filetypes=[("Song JSON", "*.json")],
         )
 
         if not song_path:
+            self.set_status("Open song cancelled.")
             return
 
         SongBuilder(self, songs_folder, open_song=Path(song_path))
+        self.set_status(f"Opened song: {Path(song_path).name}")
 
     def open_build_window(self):
+        self.set_status("Opening Build Slides window...")
         BuildWindow(self)
+        self.set_status("Build Slides window opened.")
 
     def merge_song_and_verse_decks(self):
+        self.set_status("Preparing deck merge...")
         data_root = load_data_root()
         if not data_root:
+            self.set_status("Data folder not set.")
             messagebox.showerror("Error", "Data folder not set.")
             return
 
@@ -124,17 +190,19 @@ class MainWindow(tk.Tk):
         song_deck = filedialog.askopenfilename(
             title="Select Song Slide Deck",
             initialdir=output_folder,
-            filetypes=[("PowerPoint", "*.pptx")]
+            filetypes=[("PowerPoint", "*.pptx")],
         )
         if not song_deck:
+            self.set_status("Deck merge cancelled.")
             return
 
         verse_deck = filedialog.askopenfilename(
             title="Select Verse Slide Deck",
             initialdir=output_folder,
-            filetypes=[("PowerPoint", "*.pptx")]
+            filetypes=[("PowerPoint", "*.pptx")],
         )
         if not verse_deck:
+            self.set_status("Deck merge cancelled.")
             return
 
         default_name = f"{Path(song_deck).stem}_with_verses.pptx"
@@ -143,35 +211,35 @@ class MainWindow(tk.Tk):
             initialdir=output_folder,
             defaultextension=".pptx",
             initialfile=default_name,
-            filetypes=[("PowerPoint", "*.pptx")]
+            filetypes=[("PowerPoint", "*.pptx")],
         )
         if not output_path:
+            self.set_status("Deck merge cancelled.")
             return
 
         try:
             merge_presentations(song_deck, verse_deck, output_path)
         except Exception as e:
+            self.set_status("Deck merge failed.")
             messagebox.showerror("Merge failed", str(e))
             return
 
+        self.set_status(f"Merged deck saved: {Path(output_path).name}")
         messagebox.showinfo("Merge complete", f"Created:\n{Path(output_path).name}")
 
     def _get_bible(self):
-        # 1) from config
         p = load_bible_json_path()
         if p and Path(p).exists():
             return load_bible_json(p)
 
-        # 2) auto-find (since you put kjv.json in repo)
         auto = auto_find_kjv_json()
         if auto and Path(auto).exists():
             save_bible_json_path(auto)
             return load_bible_json(auto)
 
-        # 3) ask user once
         pick = filedialog.askopenfilename(
             title="Select kjv.json",
-            filetypes=[("JSON files", "*.json")]
+            filetypes=[("JSON files", "*.json")],
         )
         if not pick:
             raise RuntimeError("kjv.json not selected.")
@@ -179,26 +247,31 @@ class MainWindow(tk.Tk):
         return load_bible_json(pick)
 
     def extract_verse_list_from_notes(self):
+        self.set_status("Select notes to extract verses.")
         data_root = load_data_root()
         if not data_root:
+            self.set_status("Data folder not set.")
             messagebox.showerror("Error", "Data folder not set.")
             return
 
         notes_file = filedialog.askopenfilename(
             title="Select Notes File",
-            filetypes=[("Pages", "*.pages"), ("Word", "*.docx"), ("Text", "*.txt"), ("All files", "*.*")]
+            filetypes=[("Pages", "*.pages"), ("Word", "*.docx"), ("Text", "*.txt"), ("All files", "*.*")],
         )
         if not notes_file:
+            self.set_status("Verse extraction cancelled.")
             return
 
         try:
             text = read_notes_text(Path(notes_file))
             refs = extract_ordered_refs(text)
         except Exception as e:
+            self.set_status("Verse extraction failed.")
             messagebox.showerror("Failed", str(e))
             return
 
         if not refs:
+            self.set_status("No verses found in notes.")
             messagebox.showinfo("No verses found", "No verse references were detected.")
             return
 
@@ -209,95 +282,95 @@ class MainWindow(tk.Tk):
         payload = {
             "schema_version": "1.0",
             "source": {"notes_file": Path(notes_file).name},
-            "verses": refs
+            "verses": refs,
         }
-
-        import json
         out_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
+        self.set_status(f"Saved verse list: {out_path.name}")
         messagebox.showinfo("Saved", f"Found {len(refs)} references.\nSaved:\n{out_path.name}")
 
     def build_verse_slides_from_notes(self):
+        self.set_status("Select notes to build verse slides.")
         data_root = load_data_root()
         if not data_root:
+            self.set_status("Data folder not set.")
             messagebox.showerror("Error", "Data folder not set.")
             return
 
         notes_file = filedialog.askopenfilename(
             title="Select Notes File",
-            filetypes=[("Pages", "*.pages"), ("Word", "*.docx"), ("Text", "*.txt"), ("All files", "*.*")]
+            filetypes=[("Pages", "*.pages"), ("Word", "*.docx"), ("Text", "*.txt"), ("All files", "*.*")],
         )
         if not notes_file:
+            self.set_status("Verse slide build cancelled.")
             return
 
         try:
             text = read_notes_text(Path(notes_file))
             refs = extract_ordered_refs(text)
             if not refs:
+                self.set_status("No verses found in notes.")
                 messagebox.showinfo("No verses found", "No verse references were detected.")
                 return
 
             bible = self._get_bible()
-
-            # choose template
             templates_folder = Path(data_root) / "templates"
             template_file = filedialog.askopenfilename(
                 title="Select PPTX Template",
                 initialdir=templates_folder,
-                filetypes=[("PowerPoint", "*.pptx")]
+                filetypes=[("PowerPoint", "*.pptx")],
             )
             if not template_file:
+                self.set_status("Verse slide build cancelled.")
                 return
 
             output_file = filedialog.asksaveasfilename(
                 title="Save Verse Slides As",
                 defaultextension=".pptx",
                 initialfile=f"{Path(notes_file).stem}_verses.pptx",
-                filetypes=[("PowerPoint", "*.pptx")]
+                filetypes=[("PowerPoint", "*.pptx")],
             )
             if not output_file:
+                self.set_status("Verse slide build cancelled.")
                 return
 
             refs_and_texts = [(r, fetch_verse_text(r, bible)) for r in refs]
+            build_verse_deck(Path(template_file), refs_and_texts, Path(output_file), fit_preset="normal")
 
-            build_verse_deck(
-                Path(template_file),
-                refs_and_texts,
-                Path(output_file),
-                fit_preset="normal",  # or "normal" / "loose"
-            )
-
+            self.set_status(f"Verse slides created: {Path(output_file).name}")
             messagebox.showinfo("Done", f"Created:\n{Path(output_file).name}")
-
         except Exception as e:
+            self.set_status("Verse slide build failed.")
             messagebox.showerror("Build failed", str(e))
 
     def import_song_from_pdf(self):
+        self.set_status("Select a PDF to import.")
         data_root = load_data_root()
         if not data_root:
+            self.set_status("Data folder not set.")
             messagebox.showerror("Error", "Data folder not set.")
             return
 
         pdf_path = filedialog.askopenfilename(
             title="Select Song PDF",
-            filetypes=[("PDF files", "*.pdf")]
+            filetypes=[("PDF files", "*.pdf")],
         )
-
         if not pdf_path:
+            self.set_status("PDF import cancelled.")
             return
 
         songs_folder = Path(data_root) / "songs"
-
         try:
             song_data = import_song_from_pdf(Path(pdf_path))
         except Exception as e:
+            self.set_status("PDF import failed.")
             messagebox.showerror("Import failed", str(e))
             return
 
         messagebox.showinfo(
             "Import complete",
-            "OCR import complete. Review the draft and click Save Song when ready."
+            "OCR import complete. Review the draft and click Save Song when ready.",
         )
 
-        # Open the Song Builder with the unsaved draft song
         SongBuilder(self, songs_folder, draft_song=song_data)
+        self.set_status("PDF imported into draft song.")
