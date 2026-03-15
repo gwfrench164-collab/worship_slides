@@ -22,8 +22,8 @@ class VerseSlidesWindow(tk.Toplevel):
         self.data_root = Path(data_root)
 
         self.title("Create Verse Slides from Sermon Notes")
-        self.geometry("640x420")
-        self.minsize(640, 420)
+        self.geometry("760x490")
+        self.minsize(760, 490)
         self.resizable(True, True)
 
         self.notes_var = tk.StringVar()
